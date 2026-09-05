@@ -2,3 +2,4 @@
 /.nb-gradle/
 /nbproject/private/
 *.class
+/data/
