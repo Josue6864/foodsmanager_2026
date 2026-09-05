@@ -13,7 +13,6 @@ public class Producto {
     private double precio;
     private boolean disponible;
 
-
     public Producto(
             int idProducto,
             int idRestaurante,
@@ -30,9 +29,9 @@ public class Producto {
     }
 
     /**
-     * Construye un producto nuevo que todavia no ha sido guardado.
-     * El identificador cero representa que la base de datos aun no le ha
-     * asignado una llave primaria.
+     * Construye un producto nuevo que todavia no ha sido guardado. El
+     * identificador cero representa que la base de datos aun no le ha asignado
+     * una llave primaria.
      */
     public Producto(
             int idRestaurante,
@@ -109,13 +108,13 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "idProducto=" + idProducto +
-                ", idRestaurante=" + idRestaurante +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
-                ", disponible=" + disponible +
-                '}';
+        return "Producto{"
+                + "idProducto=" + idProducto
+                + ", idRestaurante=" + idRestaurante
+                + ", nombre='" + nombre + '\''
+                + ", descripcion='" + descripcion + '\''
+                + ", precio=" + precio
+                + ", disponible=" + disponible
+                + '}';
     }
 }
