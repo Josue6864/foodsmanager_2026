@@ -1,6 +1,10 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS restaurante (
     id_restaurante INTEGER PRIMARY KEY,
     nombre TEXT NOT NULL
+        COLLATE NOCASE
+        UNIQUE
         CHECK (length(trim(nombre)) > 0),
     ubicacion TEXT NOT NULL DEFAULT ''
 );
@@ -26,11 +30,27 @@ CREATE TABLE IF NOT EXISTS producto (
     disponible INTEGER NOT NULL DEFAULT 1
         CHECK (disponible IN (0, 1)),
 
-    FOREIGN KEY (id_restaurante)
+    CONSTRAINT fk_producto_restaurante
+        FOREIGN KEY (id_restaurante)
         REFERENCES restaurante(id_restaurante)
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
 
-CREATE INDEX IF NOT EXISTS idx_producto_restaurante
-    ON producto(id_restaurante);
+CREATE INDEX IF NOT EXISTS idx_producto_restaurante_nombre
+    ON producto(id_restaurante, nombre COLLATE NOCASE);
+
+
+/*
+  Aca creamos los restaurantes iniciales.
+  INSERT OR IGNORE evita duplicarlos cuando se vuelve
+  a ejecutar el inicializador.
+ */
+INSERT OR IGNORE INTO restaurante (
+    id_restaurante,
+    nombre,
+    ubicacion
+) VALUES
+    (1, 'Sabor Chapín', 'Zona 1'),
+    (2, 'Pizzería Central', 'Zona 4'),
+    (3, 'Burger House', 'Zona 10');
