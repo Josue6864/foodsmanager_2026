@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS restaurante (
         COLLATE NOCASE
         UNIQUE
         CHECK (length(trim(nombre)) > 0),
-    ubicacion TEXT NOT NULL DEFAULT ''
+    ubicacion TEXT NOT NULL
+        CHECK (length(trim(ubicacion)) > 0)
 );
 
 CREATE TABLE IF NOT EXISTS administrador (

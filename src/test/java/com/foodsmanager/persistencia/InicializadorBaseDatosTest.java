@@ -35,9 +35,7 @@ class InicializadorBaseDatosTest {
                   )
                 """;
 
-        try (Connection conexion = ConexionSQLite.abrirConexion();
-             Statement sentencia = conexion.createStatement();
-             ResultSet resultado = sentencia.executeQuery(sql)) {
+        try (Connection conexion = ConexionSQLite.abrirConexion(); Statement sentencia = conexion.createStatement(); ResultSet resultado = sentencia.executeQuery(sql)) {
 
             while (resultado.next()) {
                 tablasEncontradas.add(resultado.getString("name"));
@@ -55,13 +53,53 @@ class InicializadorBaseDatosTest {
 
     @Test
     void debeActivarLasLlavesForaneas() throws SQLException {
-        try (Connection conexion = ConexionSQLite.abrirConexion();
-             Statement sentencia = conexion.createStatement();
-             ResultSet resultado =
-                     sentencia.executeQuery("PRAGMA foreign_keys")) {
+        try (Connection conexion = ConexionSQLite.abrirConexion(); Statement sentencia = conexion.createStatement(); ResultSet resultado
+                = sentencia.executeQuery("PRAGMA foreign_keys")) {
 
             assertTrue(resultado.next());
             assertEquals(1, resultado.getInt(1));
         }
+    }
+
+    @Test
+    void debeCrearLosRestaurantesInicialesSinDuplicarlos()
+            throws SQLException {
+
+        // Volvemos a inicializar para comprobar que no se duplican.
+        InicializadorBaseDatos.inicializar();
+        InicializadorBaseDatos.inicializar();
+
+        Set<String> restaurantesEncontrados = new HashSet<>();
+
+        String sql = """
+            SELECT id_restaurante, nombre, ubicacion
+            FROM restaurante
+            WHERE id_restaurante IN (1, 2, 3)
+            ORDER BY id_restaurante
+            """;
+
+        try (Connection conexion = ConexionSQLite.abrirConexion(); Statement sentencia = conexion.createStatement(); ResultSet resultado = sentencia.executeQuery(sql)) {
+
+            while (resultado.next()) {
+                restaurantesEncontrados.add(
+                        resultado.getInt("id_restaurante")
+                        + "|"
+                        + resultado.getString("nombre")
+                        + "|"
+                        + resultado.getString("ubicacion")
+                );
+            }
+        }
+
+        Set<String> restaurantesEsperados = Set.of(
+                "1|Sabor Chapín|Zona 1",
+                "2|Pizzería Central|Zona 4",
+                "3|Burger House|Zona 10"
+        );
+
+        assertEquals(
+                restaurantesEsperados,
+                restaurantesEncontrados
+        );
     }
 }
