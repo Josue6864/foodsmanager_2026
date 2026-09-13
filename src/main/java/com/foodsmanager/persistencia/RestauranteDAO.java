@@ -17,12 +17,12 @@ public class RestauranteDAO {
             ORDER BY nombre COLLATE NOCASE
             """;
 
-    /*
+    /**
       Obtiene todos los restaurantes registrados.
      
       @return lista de restaurantes ordenada por nombre
       @throws SQLException si ocurre un error al consultar SQLite
-     */
+     **/
     public List<Restaurante> listarTodos() throws SQLException {
         List<Restaurante> restaurantes = new ArrayList<>();
 

@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/*
+/**
   Gestiona la persistencia de productos en SQLite.
- */
+ **/
 public class ProductoDAO {
 
     private static final String SQL_INSERTAR = """
@@ -35,9 +35,9 @@ public class ProductoDAO {
             WHERE id_producto = ?
             """;
 
-    /*
+    /**
      Inserta un producto nuevo y devuelve el identificador generado.
-     */
+     **/
     public int insertar(Producto producto) throws SQLException {
         if (producto == null) {
             throw new IllegalArgumentException(
@@ -97,11 +97,11 @@ public class ProductoDAO {
         }
     }
 
-    /*
+    /**
       Busca un producto mediante su identificador.
      
       @return el producto encontrado o null si no existe
-     */
+     **/
     public Producto buscarPorId(int idProducto)
             throws SQLException {
 

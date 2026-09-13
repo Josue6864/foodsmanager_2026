@@ -1,9 +1,5 @@
 package com.foodsmanager.modelo;
 
-/**
- *
- * @author david_oavv7c4
- */
 public class Producto {
 
     private int idProducto;
@@ -29,9 +25,9 @@ public class Producto {
     }
 
     /**
-     * Construye un producto nuevo que todavia no ha sido guardado. El
-     * identificador cero representa que la base de datos aun no le ha asignado
-     * una llave primaria.
+     Construye un producto nuevo que todavia no ha sido guardado. El
+     identificador cero representa que la base de datos aun no le ha asignado
+     una llave primaria.
      */
     public Producto(
             int idRestaurante,
