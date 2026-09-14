@@ -3,6 +3,10 @@
     -fx-font-family: "Segoe UI";
 }
 
+.label {
+    -fx-text-fill: #263238;
+}
+
 .titulo {
     -fx-font-size: 22px;
     -fx-font-weight: bold;
@@ -13,16 +17,17 @@
     -fx-text-fill: #5F6368;
 }
 
-.label {
-    -fx-text-fill: #263238;
-}
-
 .text-field,
 .text-area,
 .combo-box {
     -fx-background-color: white;
     -fx-border-color: #D8CBB8;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.text-area .content {
+    -fx-background-color: white;
     -fx-background-radius: 5px;
 }
 

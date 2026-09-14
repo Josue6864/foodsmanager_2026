@@ -10,7 +10,7 @@
         prefWidth="650.0"
         spacing="16.0"
         styleClass="contenedor-principal"
-        stylesheets="@administrador.css"
+        stylesheets="@tema.css"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.foodsmanager.controlador.ControladorProducto">
 
