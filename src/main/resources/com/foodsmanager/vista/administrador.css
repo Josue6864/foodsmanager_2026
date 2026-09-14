@@ -1,0 +1,57 @@
+.contenedor-principal {
+    -fx-background-color: #FFF8EF;
+    -fx-font-family: "Segoe UI";
+}
+
+.titulo {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2F5D50;
+}
+
+.subtitulo {
+    -fx-text-fill: #5F6368;
+}
+
+.label {
+    -fx-text-fill: #263238;
+}
+
+.text-field,
+.text-area,
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.text-field:focused,
+.text-area:focused,
+.combo-box:focused {
+    -fx-border-color: #D97706;
+    -fx-border-width: 2px;
+}
+
+.boton-principal {
+    -fx-background-color: #2F5D50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 9px 18px;
+    -fx-cursor: hand;
+}
+
+.boton-principal:hover {
+    -fx-background-color: #244A40;
+}
+
+.mensaje-exito {
+    -fx-text-fill: #2E7D32;
+    -fx-font-weight: bold;
+}
+
+.mensaje-error {
+    -fx-text-fill: #B3261E;
+    -fx-font-weight: bold;
+}

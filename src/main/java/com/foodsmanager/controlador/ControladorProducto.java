@@ -9,17 +9,45 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
 /**
-  Coordina las operaciones relacionadas con los productos.
+ * Coordina las operaciones relacionadas con los productos y el formulario
+ * administrativo de registro.
  */
 public class ControladorProducto {
 
     private final ProductoDAO productoDAO;
     private final RestauranteDAO restauranteDAO;
 
-    /**
-      Constructor utilizado normalmente por la aplicación.
-     */
+    @FXML
+    private ComboBox<Restaurante> comboRestaurante;
+
+    @FXML
+    private TextField campoNombre;
+
+    @FXML
+    private TextArea campoDescripcion;
+
+    @FXML
+    private TextField campoPrecio;
+
+    @FXML
+    private CheckBox campoDisponible;
+
+    @FXML
+    private Button botonRegistrar;
+
+    @FXML
+    private Label etiquetaMensaje;
+
     public ControladorProducto() {
         this(
                 new ProductoDAO(),
@@ -27,10 +55,6 @@ public class ControladorProducto {
         );
     }
 
-    /**
-      Constructor que permite proporcionar los DAO.
-      Será útil para pruebas y futuras ampliaciones.
-     */
     public ControladorProducto(
             ProductoDAO productoDAO,
             RestauranteDAO restauranteDAO) {
@@ -47,19 +71,20 @@ public class ControladorProducto {
     }
 
     /**
-      Obtiene los restaurantes que pueden seleccionarse
-      al registrar un producto.
+     * Se ejecuta automáticamente después de cargar el FXML.
      */
+    @FXML
+    private void initialize() {
+        campoDisponible.setSelected(true);
+        cargarRestaurantes();
+    }
+
     public List<Restaurante> listarRestaurantes()
             throws SQLException {
 
         return restauranteDAO.listarTodos();
     }
 
-    /**
-      Registra un producto convirtiendo el precio ingresado
-      desde el formulario.
-     */
     public Producto registrarProducto(
             int idRestaurante,
             String nombre,
@@ -78,9 +103,6 @@ public class ControladorProducto {
         );
     }
 
-    /**
-      Registra un producto cuando el precio ya fue convertido.
-     */
     public Producto registrarProducto(
             int idRestaurante,
             String nombre,
@@ -101,13 +123,78 @@ public class ControladorProducto {
         return producto;
     }
 
-    /**
-      Convierte el precio ingresado en el formulario.
-     
-      Acepta punto o coma como separador decimal.
-     */
+    @FXML
+    private void registrarDesdeFormulario() {
+        Restaurante restaurante
+                = comboRestaurante.getValue();
+
+        if (restaurante == null) {
+            mostrarError(
+                    "Debe seleccionar un restaurante.");
+            return;
+        }
+
+        try {
+            Producto producto = registrarProducto(
+                    restaurante.getIdRestaurante(),
+                    campoNombre.getText(),
+                    campoDescripcion.getText(),
+                    campoPrecio.getText(),
+                    campoDisponible.isSelected()
+            );
+
+            mostrarExito(
+                    "Producto registrado correctamente. ID: "
+                    + producto.getIdProducto()
+            );
+
+            limpiarFormulario();
+        } catch (IllegalArgumentException excepcion) {
+            mostrarError(excepcion.getMessage());
+        } catch (SQLException excepcion) {
+            mostrarError(
+                    "No se pudo registrar el producto en la base de datos."
+            );
+
+            excepcion.printStackTrace();
+        }
+    }
+
+    private void cargarRestaurantes() {
+        try {
+            List<Restaurante> restaurantes
+                    = listarRestaurantes();
+
+            comboRestaurante.setItems(
+                    FXCollections.observableArrayList(
+                            restaurantes
+                    )
+            );
+
+            if (restaurantes.isEmpty()) {
+                botonRegistrar.setDisable(true);
+                mostrarError(
+                        "No existen restaurantes disponibles.");
+            } else {
+                comboRestaurante
+                        .getSelectionModel()
+                        .selectFirst();
+            }
+        } catch (SQLException excepcion) {
+            botonRegistrar.setDisable(true);
+
+            mostrarError(
+                    "No se pudieron cargar los restaurantes."
+            );
+
+            excepcion.printStackTrace();
+        }
+    }
+
     private double convertirPrecio(String precioTexto) {
-        if (precioTexto == null || precioTexto.trim().isEmpty()) {
+        if (precioTexto == null
+                || precioTexto.trim().isEmpty()) {
+
             throw new IllegalArgumentException(
                     "El precio del producto es obligatorio.");
         }
@@ -117,7 +204,8 @@ public class ControladorProducto {
                 .replace(',', '.');
 
         try {
-            double precio = Double.parseDouble(precioNormalizado);
+            double precio
+                    = Double.parseDouble(precioNormalizado);
 
             if (!Double.isFinite(precio) || precio < 0) {
                 throw new IllegalArgumentException(
@@ -131,5 +219,25 @@ public class ControladorProducto {
                     excepcion
             );
         }
+    }
+
+    private void limpiarFormulario() {
+        campoNombre.clear();
+        campoDescripcion.clear();
+        campoPrecio.clear();
+        campoDisponible.setSelected(true);
+        campoNombre.requestFocus();
+    }
+
+    private void mostrarExito(String mensaje) {
+        etiquetaMensaje.setStyle(
+                "-fx-text-fill: #157347;");
+        etiquetaMensaje.setText(mensaje);
+    }
+
+    private void mostrarError(String mensaje) {
+        etiquetaMensaje.setStyle(
+                "-fx-text-fill: #b02a37;");
+        etiquetaMensaje.setText(mensaje);
     }
 }
