@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane
+        prefHeight="600.0"
+        prefWidth="950.0"
+        styleClass="pantalla-login"
+        stylesheets="@tema.css"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.foodsmanager.controlador.ControladorAdministrador">
+
+    <padding>
+        <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+    </padding>
+
+    <VBox
+            alignment="TOP_CENTER"
+            maxWidth="460.0"
+            spacing="18.0"
+            styleClass="tarjeta-login">
+
+        <Label
+                text="FoodsManager"
+                styleClass="marca-login"/>
+
+        <Label
+                text="Acceso administrativo"
+                styleClass="titulo-login"/>
+
+        <Label
+                text="Ingresa tus credenciales para gestionar los productos."
+                alignment="CENTER"
+                styleClass="subtitulo"
+                textAlignment="CENTER"
+                wrapText="true"/>
+
+        <Separator/>
+
+        <VBox spacing="7.0">
+            <Label
+                    text="Usuario"
+                    styleClass="etiqueta-formulario"/>
+
+            <TextField
+                    fx:id="campoUsuario"
+                    maxWidth="Infinity"
+                    promptText="Ingresa tu usuario"
+                    styleClass="campo-login"/>
+        </VBox>
+
+        <VBox spacing="7.0">
+            <Label
+                    text="Contraseña"
+                    styleClass="etiqueta-formulario"/>
+
+            <PasswordField
+                    fx:id="campoContrasena"
+                    maxWidth="Infinity"
+                    promptText="Ingresa tu contraseña"
+                    styleClass="campo-login"/>
+        </VBox>
+
+        <Label
+                fx:id="etiquetaMensaje"
+                alignment="CENTER"
+                minHeight="28.0"
+                textAlignment="CENTER"
+                wrapText="true"/>
+
+        <HBox
+                alignment="CENTER_RIGHT"
+                spacing="12.0">
+
+            <Button
+                    fx:id="botonRegresar"
+                    onAction="#regresarARestaurantes"
+                    text="Regresar"
+                    styleClass="boton-regresar"/>
+
+            <Button
+                    fx:id="botonIniciarSesion"
+                    defaultButton="true"
+                    text="Iniciar sesión"
+                    styleClass="boton-principal"/>
+        </HBox>
+
+        <Separator/>
+
+        <Label
+                text="Acceso exclusivo para administradores autorizados."
+                alignment="CENTER"
+                styleClass="nota-seguridad"
+                textAlignment="CENTER"
+                wrapText="true"/>
+
+    </VBox>
+
+</StackPane>

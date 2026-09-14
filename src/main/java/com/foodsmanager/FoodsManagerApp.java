@@ -23,21 +23,19 @@ public class FoodsManagerApp extends Application {
             InicializadorBaseDatos.inicializar();
 
             URL rutaFXML = FoodsManagerApp.class.getResource(
-                    "/com/foodsmanager/vista/administrador.fxml"
+                    "/com/foodsmanager/vista/restaurantes.fxml"
             );
 
             if (rutaFXML == null) {
                 throw new IOException(
-                        "No se encontró administrador.fxml."
+                        "No se encontró la vista principal"
                 );
             }
 
             Parent raiz = FXMLLoader.load(rutaFXML);
             Scene escena = new Scene(raiz);
 
-            escenario.setTitle(
-                    "FoodsManager - Registrar producto"
-            );
+            escenario.setTitle("FoodsManager - Restaurantes");
             escenario.setScene(escena);
             escenario.setMinWidth(650);
             escenario.setMinHeight(450);

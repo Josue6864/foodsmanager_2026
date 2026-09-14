@@ -60,3 +60,161 @@
     -fx-text-fill: #B3261E;
     -fx-font-weight: bold;
 }
+
+
+.pantalla-principal {
+    -fx-background-color: #FFF8EF;
+    -fx-font-family: "Segoe UI";
+}
+
+.barra-superior {
+    -fx-background-color: #2F5D50;
+}
+
+.marca {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.boton-secundario {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+}
+
+.boton-secundario:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.scroll-transparente,
+.scroll-transparente > .viewport {
+    -fx-background-color: transparent;
+}
+
+.seccion-restaurantes {
+    -fx-background-color: #FFF8EF;
+}
+
+.titulo-principal {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2F5D50;
+}
+
+.tarjeta-restaurante {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 10px;
+    -fx-padding: 22px;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(38, 50, 56, 0.15),
+        12,
+        0.15,
+        0,
+        4
+    );
+}
+
+.tarjeta-restaurante:hover {
+    -fx-border-color: #D97706;
+    -fx-border-width: 2px;
+}
+
+.nombre-restaurante {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2F5D50;
+}
+
+.ubicacion-restaurante {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D97706;
+}
+
+.descripcion-restaurante {
+    -fx-text-fill: #5F6368;
+}
+
+.pie-pagina {
+    -fx-background-color: #F1E8DB;
+}
+
+.pie-pagina .label {
+    -fx-text-fill: #5F6368;
+}
+
+
+.pantalla-login {
+    -fx-background-color: linear-gradient(
+        to bottom right,
+        #FFF8EF,
+        #F1E8DB
+    );
+    -fx-font-family: "Segoe UI";
+}
+
+.tarjeta-login {
+    -fx-background-color: white;
+    -fx-background-radius: 14px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 14px;
+    -fx-padding: 34px;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(38, 50, 56, 0.18),
+        18,
+        0.18,
+        0,
+        6
+    );
+}
+
+.marca-login {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D97706;
+}
+
+.titulo-login {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2F5D50;
+}
+
+.etiqueta-formulario {
+    -fx-font-weight: bold;
+    -fx-text-fill: #263238;
+}
+
+.campo-login {
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 11px;
+}
+
+.boton-regresar {
+    -fx-background-color: transparent;
+    -fx-border-color: #2F5D50;
+    -fx-border-radius: 6px;
+    -fx-text-fill: #2F5D50;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 18px;
+    -fx-cursor: hand;
+}
+
+.boton-regresar:hover {
+    -fx-background-color: #E7F0EC;
+}
+
+.nota-seguridad {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6C757D;
+}

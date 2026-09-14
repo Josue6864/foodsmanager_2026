@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+        prefHeight="600.0"
+        prefWidth="950.0"
+        styleClass="pantalla-principal"
+        stylesheets="@tema.css"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.foodsmanager.controlador.ControladorRestaurante">
+
+    <top>
+        <HBox
+                alignment="CENTER_LEFT"
+                spacing="16.0"
+                styleClass="barra-superior">
+
+            <padding>
+                <Insets top="16.0" right="24.0" bottom="16.0" left="24.0"/>
+            </padding>
+
+            <Label
+                    text="FoodsManager"
+                    styleClass="marca"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button
+                    fx:id="botonIniciarSesion"
+                    onAction="#abrirLogin"
+                    text="Iniciar sesión como administrador"
+                    styleClass="boton-secundario"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane
+                fitToWidth="true"
+                hbarPolicy="NEVER"
+                styleClass="scroll-transparente">
+
+            <content>
+                <VBox
+                        alignment="TOP_CENTER"
+                        spacing="24.0"
+                        styleClass="seccion-restaurantes">
+
+                    <padding>
+                        <Insets top="38.0" right="35.0" bottom="38.0" left="35.0"/>
+                    </padding>
+
+                    <Label
+                            text="Restaurantes disponibles"
+                            styleClass="titulo-principal"/>
+
+                    <Label
+                            text="Selecciona un restaurante para consultar sus productos."
+                            styleClass="subtitulo"
+                            wrapText="true"/>
+
+
+                    <TilePane
+                            fx:id="contenedorRestaurantes"
+                            alignment="CENTER"
+                            hgap="22.0"
+                            prefColumns="3"
+                            vgap="22.0">
+
+                        <VBox
+                                prefHeight="230.0"
+                                prefWidth="250.0"
+                                spacing="14.0"
+                                styleClass="tarjeta-restaurante">
+
+                            <Label
+                                    text="Sabor Chapín"
+                                    styleClass="nombre-restaurante"/>
+
+                            <Label
+                                    text="Zona 1"
+                                    styleClass="ubicacion-restaurante"/>
+
+                            <Label
+                                    text="Comida tradicional guatemalteca."
+                                    styleClass="descripcion-restaurante"
+                                    wrapText="true"/>
+
+                            <Region VBox.vgrow="ALWAYS"/>
+
+                            <Button
+                                    maxWidth="Infinity"
+                                    text="Ver productos"
+                                    styleClass="boton-principal"/>
+                        </VBox>
+
+                        <VBox
+                                prefHeight="230.0"
+                                prefWidth="250.0"
+                                spacing="14.0"
+                                styleClass="tarjeta-restaurante">
+
+                            <Label
+                                    text="Pizzería Central"
+                                    styleClass="nombre-restaurante"/>
+
+                            <Label
+                                    text="Zona 4"
+                                    styleClass="ubicacion-restaurante"/>
+
+                            <Label
+                                    text="Pizzas y especialidades para compartir."
+                                    styleClass="descripcion-restaurante"
+                                    wrapText="true"/>
+
+                            <Region VBox.vgrow="ALWAYS"/>
+
+                            <Button
+                                    maxWidth="Infinity"
+                                    text="Ver productos"
+                                    styleClass="boton-principal"/>
+                        </VBox>
+
+                        <VBox
+                                prefHeight="230.0"
+                                prefWidth="250.0"
+                                spacing="14.0"
+                                styleClass="tarjeta-restaurante">
+
+                            <Label
+                                    text="Burger House"
+                                    styleClass="nombre-restaurante"/>
+
+                            <Label
+                                    text="Zona 10"
+                                    styleClass="ubicacion-restaurante"/>
+
+                            <Label
+                                    text="Hamburguesas, acompañamientos y bebidas."
+                                    styleClass="descripcion-restaurante"
+                                    wrapText="true"/>
+
+                            <Region VBox.vgrow="ALWAYS"/>
+
+                            <Button
+                                    maxWidth="Infinity"
+                                    text="Ver productos"
+                                    styleClass="boton-principal"/>
+                        </VBox>
+
+                    </TilePane>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox
+                alignment="CENTER"
+                styleClass="pie-pagina">
+
+            <padding>
+                <Insets top="14.0" right="20.0" bottom="14.0" left="20.0"/>
+            </padding>
+
+            <Label text="FoodsManager 2026"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
