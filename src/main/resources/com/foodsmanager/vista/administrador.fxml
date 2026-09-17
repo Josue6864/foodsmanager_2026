@@ -12,7 +12,7 @@
         styleClass="contenedor-principal"
         stylesheets="@tema.css"
         xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.foodsmanager.controlador.ControladorProducto">
+        fx:controller="com.foodsmanager.controlador.ControladorGestionProductos">
 
     <padding>
         <Insets top="24.0" right="24.0" bottom="24.0" left="24.0"/>
