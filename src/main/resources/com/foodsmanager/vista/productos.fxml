@@ -1,11 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
+<BorderPane
+        prefHeight="600.0"
+        prefWidth="950.0"
+        styleClass="pantalla-principal"
+        stylesheets="@tema.css"
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.foodsmanager.controlador.ControladorProducto">
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26">
-   <children>
-      <ButtonBar layoutX="148.0" layoutY="70.0" prefHeight="40.0" prefWidth="200.0" />
-   </children>
-</AnchorPane>
+    <top>
+        <HBox
+                alignment="CENTER_LEFT"
+                spacing="16.0"
+                styleClass="barra-superior">
+
+            <padding>
+                <Insets
+                        top="16.0"
+                        right="24.0"
+                        bottom="16.0"
+                        left="24.0"/>
+            </padding>
+
+            <Label
+                    text="FoodsManager"
+                    styleClass="marca"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button
+                    text="Volver a restaurantes"
+                    onAction="#volverRestaurantes"
+                    styleClass="boton-secundario"/>
+
+        </HBox>
+    </top>
+
+    <center>
+
+        <ScrollPane
+                fitToWidth="true"
+                hbarPolicy="NEVER"
+                styleClass="scroll-transparente">
+
+            <content>
+
+                <VBox
+                        alignment="TOP_CENTER"
+                        spacing="24.0">
+
+                    <padding>
+                        <Insets
+                                top="38.0"
+                                right="35.0"
+                                bottom="38.0"
+                                left="35.0"/>
+                    </padding>
+
+                    <Label
+                            fx:id="etiquetaRestaurante"
+                            text="Productos"
+                            styleClass="titulo-principal"/>
+
+                    <Label
+                            text="Productos disponibles del restaurante seleccionado."
+                            styleClass="subtitulo"
+                            wrapText="true"/>
+
+                    <Label
+                            fx:id="etiquetaSinProductos"
+                            text="Este restaurante no tiene productos disponibles."
+                            visible="false"
+                            managed="false"
+                            styleClass="subtitulo"/>
+
+                    <FlowPane
+                            fx:id="contenedorProductos"
+                            alignment="TOP_CENTER"
+                            hgap="22.0"
+                            vgap="22.0"
+                            prefWrapLength="800.0"/>
+
+                </VBox>
+
+            </content>
+
+        </ScrollPane>
+
+    </center>
+
+    <bottom>
+
+        <HBox
+                alignment="CENTER"
+                styleClass="pie-pagina">
+
+            <padding>
+                <Insets
+                        top="14.0"
+                        right="20.0"
+                        bottom="14.0"
+                        left="20.0"/>
+            </padding>
+
+            <Label text="FoodsManager 2026"/>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>

@@ -61,7 +61,6 @@
                             styleClass="subtitulo"
                             wrapText="true"/>
 
-
                     <TilePane
                             fx:id="contenedorRestaurantes"
                             alignment="CENTER"
@@ -93,6 +92,7 @@
                             <Button
                                     maxWidth="Infinity"
                                     text="Ver productos"
+                                    onAction="#verProductosSaborChapin"
                                     styleClass="boton-principal"/>
                         </VBox>
 
@@ -120,6 +120,7 @@
                             <Button
                                     maxWidth="Infinity"
                                     text="Ver productos"
+                                    onAction="#verProductosPizzeriaCentral"
                                     styleClass="boton-principal"/>
                         </VBox>
 
@@ -147,6 +148,7 @@
                             <Button
                                     maxWidth="Infinity"
                                     text="Ver productos"
+                                    onAction="#verProductosBurgerHouse"
                                     styleClass="boton-principal"/>
                         </VBox>
 
