@@ -1,243 +1,230 @@
 package com.foodsmanager.controlador;
 
 import com.foodsmanager.modelo.Producto;
-import com.foodsmanager.modelo.Restaurante;
 import com.foodsmanager.persistencia.ProductoDAO;
-import com.foodsmanager.persistencia.RestauranteDAO;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
-/**
- * Coordina las operaciones relacionadas con los productos y el formulario
- * administrativo de registro.
- */
 public class ControladorProducto {
 
     private final ProductoDAO productoDAO;
-    private final RestauranteDAO restauranteDAO;
 
     @FXML
-    private ComboBox<Restaurante> comboRestaurante;
+    private Label etiquetaRestaurante;
 
     @FXML
-    private TextField campoNombre;
+    private Label etiquetaSinProductos;
 
     @FXML
-    private TextArea campoDescripcion;
+    private FlowPane contenedorProductos;
 
-    @FXML
-    private TextField campoPrecio;
-
-    @FXML
-    private CheckBox campoDisponible;
-
-    @FXML
-    private Button botonRegistrar;
-
-    @FXML
-    private Label etiquetaMensaje;
+    private int idRestauranteActual;
 
     public ControladorProducto() {
-        this(
-                new ProductoDAO(),
-                new RestauranteDAO()
-        );
+        this(new ProductoDAO());
     }
 
-    public ControladorProducto(
-            ProductoDAO productoDAO,
-            RestauranteDAO restauranteDAO) {
-
+    public ControladorProducto(ProductoDAO productoDAO) {
         this.productoDAO = Objects.requireNonNull(
                 productoDAO,
                 "ProductoDAO es obligatorio."
         );
-
-        this.restauranteDAO = Objects.requireNonNull(
-                restauranteDAO,
-                "RestauranteDAO es obligatorio."
-        );
     }
 
-    /**
-     * Se ejecuta automáticamente después de cargar el FXML.
-     */
-    @FXML
-    private void initialize() {
-        campoDisponible.setSelected(true);
-        cargarRestaurantes();
+    public List<Producto> listarProductosPorRestaurante(
+            int idRestaurante) throws SQLException {
+
+        if (idRestaurante <= 0) {
+            throw new IllegalArgumentException(
+                    "El id del restaurante debe ser mayor que cero."
+            );
+        }
+
+        return productoDAO.listarPorRestaurante(idRestaurante);
     }
 
-    public List<Restaurante> listarRestaurantes()
-            throws SQLException {
+    public void cargarProductosPorRestaurante(int idRestaurante) {
 
-        return restauranteDAO.listarTodos();
-    }
-
-    public Producto registrarProducto(
-            int idRestaurante,
-            String nombre,
-            String descripcion,
-            String precioTexto,
-            boolean disponible) throws SQLException {
-
-        double precio = convertirPrecio(precioTexto);
-
-        return registrarProducto(
-                idRestaurante,
-                nombre,
-                descripcion,
-                precio,
-                disponible
-        );
-    }
-
-    public Producto registrarProducto(
-            int idRestaurante,
-            String nombre,
-            String descripcion,
-            double precio,
-            boolean disponible) throws SQLException {
-
-        Producto producto = new Producto(
-                idRestaurante,
-                nombre,
-                descripcion,
-                precio,
-                disponible
-        );
-
-        productoDAO.insertar(producto);
-
-        return producto;
-    }
-
-    @FXML
-    private void registrarDesdeFormulario() {
-        Restaurante restaurante
-                = comboRestaurante.getValue();
-
-        if (restaurante == null) {
-            mostrarError(
-                    "Debe seleccionar un restaurante.");
+        if (idRestaurante <= 0) {
+            mostrarSinProductos(
+                    "El restaurante seleccionado no es válido."
+            );
             return;
         }
 
+        idRestauranteActual = idRestaurante;
+
+        colocarNombreRestaurante(idRestaurante);
+
+        contenedorProductos.getChildren().clear();
+
         try {
-            Producto producto = registrarProducto(
-                    restaurante.getIdRestaurante(),
-                    campoNombre.getText(),
-                    campoDescripcion.getText(),
-                    campoPrecio.getText(),
-                    campoDisponible.isSelected()
-            );
 
-            mostrarExito(
-                    "Producto registrado correctamente. ID: "
-                    + producto.getIdProducto()
-            );
+            List<Producto> productos =
+                    listarProductosPorRestaurante(idRestaurante);
 
-            limpiarFormulario();
-        } catch (IllegalArgumentException excepcion) {
-            mostrarError(excepcion.getMessage());
+            if (productos.isEmpty()) {
+                mostrarSinProductos(
+                        "Este restaurante no tiene productos disponibles."
+                );
+                return;
+            }
+
+            etiquetaSinProductos.setVisible(false);
+            etiquetaSinProductos.setManaged(false);
+
+            for (Producto producto : productos) {
+                contenedorProductos
+                        .getChildren()
+                        .add(crearTarjetaProducto(producto));
+            }
+
         } catch (SQLException excepcion) {
-            mostrarError(
-                    "No se pudo registrar el producto en la base de datos."
+
+            mostrarSinProductos(
+                    "No se pudieron cargar los productos."
             );
 
             excepcion.printStackTrace();
         }
     }
 
-    private void cargarRestaurantes() {
-        try {
-            List<Restaurante> restaurantes
-                    = listarRestaurantes();
+    private VBox crearTarjetaProducto(Producto producto) {
 
-            comboRestaurante.setItems(
-                    FXCollections.observableArrayList(
-                            restaurantes
-                    )
-            );
+        Label nombre = new Label(
+                producto.getNombre()
+        );
 
-            if (restaurantes.isEmpty()) {
-                botonRegistrar.setDisable(true);
-                mostrarError(
-                        "No existen restaurantes disponibles.");
-            } else {
-                comboRestaurante
-                        .getSelectionModel()
-                        .selectFirst();
-            }
-        } catch (SQLException excepcion) {
-            botonRegistrar.setDisable(true);
+        nombre.setStyle(
+                "-fx-font-size: 18px;"
+                        + "-fx-font-weight: bold;"
+        );
 
-            mostrarError(
-                    "No se pudieron cargar los restaurantes."
-            );
+        Label descripcion = new Label(
+                producto.getDescripcion()
+        );
 
-            excepcion.printStackTrace();
+        descripcion.setWrapText(true);
+
+        Label precio = new Label(
+                String.format(
+                        "Q %.2f",
+                        producto.getPrecio()
+                )
+        );
+
+        precio.setStyle(
+                "-fx-font-size: 16px;"
+                        + "-fx-font-weight: bold;"
+        );
+
+        Label disponibilidad = new Label(
+                producto.isDisponible()
+                        ? "Disponible"
+                        : "No disponible"
+        );
+
+        VBox tarjeta = new VBox(
+                12,
+                nombre,
+                descripcion,
+                precio,
+                disponibilidad
+        );
+
+        tarjeta.setPadding(
+                new Insets(20)
+        );
+
+        tarjeta.setPrefWidth(250);
+        tarjeta.setMinHeight(190);
+
+        tarjeta.setStyle(
+                "-fx-background-color: white;"
+                        + "-fx-background-radius: 12;"
+                        + "-fx-border-color: #dddddd;"
+                        + "-fx-border-radius: 12;"
+                        + "-fx-border-width: 1;"
+        );
+
+        Region espacio = new Region();
+
+        return tarjeta;
+    }
+
+    private void colocarNombreRestaurante(
+            int idRestaurante) {
+
+        switch (idRestaurante) {
+
+            case 1:
+                etiquetaRestaurante.setText(
+                        "Productos - Sabor Chapín"
+                );
+                break;
+
+            case 2:
+                etiquetaRestaurante.setText(
+                        "Productos - Pizzería Central"
+                );
+                break;
+
+            case 3:
+                etiquetaRestaurante.setText(
+                        "Productos - Burger House"
+                );
+                break;
+
+            default:
+                etiquetaRestaurante.setText(
+                        "Productos"
+                );
+                break;
         }
     }
 
-    private double convertirPrecio(String precioTexto) {
-        if (precioTexto == null
-                || precioTexto.trim().isEmpty()) {
+    private void mostrarSinProductos(
+            String mensaje) {
 
-            throw new IllegalArgumentException(
-                    "El precio del producto es obligatorio.");
-        }
+        contenedorProductos
+                .getChildren()
+                .clear();
 
-        String precioNormalizado = precioTexto
-                .trim()
-                .replace(',', '.');
+        etiquetaSinProductos.setText(
+                mensaje
+        );
 
-        try {
-            double precio
-                    = Double.parseDouble(precioNormalizado);
+        etiquetaSinProductos.setVisible(
+                true
+        );
 
-            if (!Double.isFinite(precio) || precio < 0) {
-                throw new IllegalArgumentException(
-                        "El precio debe ser un número mayor o igual a cero.");
-            }
-
-            return precio;
-        } catch (NumberFormatException excepcion) {
-            throw new IllegalArgumentException(
-                    "El precio ingresado no es válido.",
-                    excepcion
-            );
-        }
+        etiquetaSinProductos.setManaged(
+                true
+        );
     }
 
-    private void limpiarFormulario() {
-        campoNombre.clear();
-        campoDescripcion.clear();
-        campoPrecio.clear();
-        campoDisponible.setSelected(true);
-        campoNombre.requestFocus();
+    @FXML
+    private void volverRestaurantes(
+            ActionEvent evento) {
+
+        NavegadorVistas.cambiarVista(
+                evento,
+                "/com/foodsmanager/vista/restaurantes.fxml",
+                "FoodsManager - Restaurantes"
+        );
     }
 
-    private void mostrarExito(String mensaje) {
-        etiquetaMensaje.setStyle(
-                "-fx-text-fill: #157347;");
-        etiquetaMensaje.setText(mensaje);
-    }
-
-    private void mostrarError(String mensaje) {
-        etiquetaMensaje.setStyle(
-                "-fx-text-fill: #b02a37;");
-        etiquetaMensaje.setText(mensaje);
+    public int getIdRestauranteActual() {
+        return idRestauranteActual;
     }
 }
