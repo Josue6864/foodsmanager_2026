@@ -2,6 +2,8 @@ package com.foodsmanager.controlador;
 
 import com.foodsmanager.modelo.Producto;
 import com.foodsmanager.modelo.Restaurante;
+import com.foodsmanager.seguridad.SesionAdministrador;
+import javafx.event.ActionEvent;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,9 +19,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 /**
- * Controla únicamente el formulario de administrador.fxml.
- * Delega las operaciones de datos a la API de ControladorProducto
- * para conservar las llamadas existentes del proyecto.
+ * Controla únicamente el formulario de administrador.fxml. Delega las
+ * operaciones de datos a la API de ControladorProducto para conservar las
+ * llamadas existentes del proyecto.
  */
 public class ControladorGestionProductos {
 
@@ -60,13 +62,16 @@ public class ControladorGestionProductos {
 
     @FXML
     private void initialize() {
+        if (!comprobarSesion()) {
+            return;
+        }
         // Mostrar solo el nombre, sin depender de Restaurante.toString().
         comboRestaurante.setCellFactory(lista -> crearCeldaRestaurante());
         comboRestaurante.setButtonCell(crearCeldaRestaurante());
 
         try {
-            List<Restaurante> restaurantes =
-                    controladorProducto.listarRestaurantesParaRegistro();
+            List<Restaurante> restaurantes
+                    = controladorProducto.listarRestaurantesParaRegistro();
 
             comboRestaurante.getItems().setAll(restaurantes);
             boolean sinRestaurantes = restaurantes.isEmpty();
@@ -105,7 +110,11 @@ public class ControladorGestionProductos {
 
     @FXML
     private void registrarDesdeFormulario() {
+        if (!comprobarSesion()) {
+            return;
+        }
         try {
+
             Restaurante restaurante = comboRestaurante.getValue();
 
             if (restaurante == null) {
@@ -129,7 +138,7 @@ public class ControladorGestionProductos {
 
             mostrarMensaje(
                     "Producto registrado correctamente. Id: "
-                            + producto.getIdProducto(),
+                    + producto.getIdProducto(),
                     false
             );
             campoNombre.requestFocus();
@@ -143,6 +152,42 @@ public class ControladorGestionProductos {
             );
             excepcion.printStackTrace();
         }
+    }
+
+    private boolean comprobarSesion() {
+        if (SesionAdministrador.haySesionActiva()) {
+            return true;
+        }
+
+        bloquearFormulario();
+
+        mostrarMensaje(
+                "Debe iniciar sesión como administrador.",
+                true
+        );
+
+        return false;
+    }
+
+    private void bloquearFormulario() {
+        comboRestaurante.setDisable(true);
+        campoNombre.setDisable(true);
+        campoDescripcion.setDisable(true);
+        campoPrecio.setDisable(true);
+        campoDisponible.setDisable(true);
+        botonRegistrar.setDisable(true);
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent evento) {
+        SesionAdministrador.cerrar();
+        bloquearFormulario();
+
+        NavegadorVistas.cambiarVista(
+                evento,
+                "/com/foodsmanager/vista/login.fxml",
+                "FoodsManager - Acceso administrativo"
+        );
     }
 
     private void mostrarMensaje(String mensaje, boolean error) {

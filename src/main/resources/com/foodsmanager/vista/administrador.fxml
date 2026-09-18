@@ -95,14 +95,21 @@
 
     </GridPane>
 
-    <HBox alignment="CENTER_RIGHT">
+        <HBox alignment="CENTER_RIGHT" spacing="12.0">
+
+        <Button
+                text="Cerrar sesión"
+                onAction="#cerrarSesion"
+                styleClass="boton-regresar"/>
+
         <Button
                 fx:id="botonRegistrar"
                 defaultButton="true"
                 onAction="#registrarDesdeFormulario"
                 styleClass="boton-principal"
                 text="Registrar producto"/>
-    </HBox>
+
+        </HBox>
 
     <Label
             fx:id="etiquetaMensaje"

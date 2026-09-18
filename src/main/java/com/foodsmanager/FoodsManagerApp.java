@@ -2,6 +2,7 @@ package com.foodsmanager;
 
 import com.foodsmanager.persistencia.ConexionSQLite;
 import com.foodsmanager.persistencia.InicializadorBaseDatos;
+import com.foodsmanager.persistencia.AdministradorDAO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,27 @@ public class FoodsManagerApp extends Application {
         try {
             InicializadorBaseDatos.inicializar();
 
+            AdministradorDAO administradorDAO = new AdministradorDAO();
+
+            administradorDAO.crearSiNoExiste(
+                    "josue",
+                    "JosueDemo2026!"
+            );
+
+            administradorDAO.crearSiNoExiste(
+                    "cesar",
+                    "CesarDemo2026!"
+            );
+
+            administradorDAO.crearSiNoExiste(
+                    "obed",
+                    "ObedDemo2026!"
+            );
+
+            administradorDAO.crearSiNoExiste(
+                    "santiago",
+                    "SantiagoDemo2026!"
+            );
             URL rutaFXML = FoodsManagerApp.class.getResource(
                     "/com/foodsmanager/vista/restaurantes.fxml"
             );

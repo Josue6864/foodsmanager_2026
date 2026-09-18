@@ -1,6 +1,7 @@
 package com.foodsmanager.persistencia;
 
 import com.foodsmanager.modelo.Administrador;
+import com.foodsmanager.persistencia.ConexionSQLite;
 import com.foodsmanager.seguridad.Contrasenas;
 
 import java.sql.Connection;
