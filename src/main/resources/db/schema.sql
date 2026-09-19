@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS administrador (
 
 CREATE TABLE IF NOT EXISTS restaurante (
     id_restaurante INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL
+    nombre TEXT NOT NULL,
+    ubicacion TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS producto (
@@ -27,11 +28,44 @@ CREATE TABLE IF NOT EXISTS producto (
 
 INSERT OR IGNORE INTO restaurante (
     id_restaurante,
-    nombre
+    nombre,
+    ubicacion
 ) VALUES
-    (1, 'Comida guatemalteca'),
-    (2, 'Pizzería'),
-    (3, 'Hamburguesería');
+    (1, 'Sabor Chapín', 'Zona 1'),
+    (2, 'Pizzería Central', 'Zona 4'),
+    (3, 'Burger House', 'Zona 10');
+
+-- Alinea los registros iniciales reconocidos con las pantallas y pruebas.
+-- Conserva las ubicaciones existentes cuando ya contienen información.
+UPDATE restaurante
+SET nombre = 'Sabor Chapín',
+    ubicacion = CASE
+        WHEN trim(ubicacion) = '' OR ubicacion = 'Ubicación pendiente'
+        THEN 'Zona 1'
+        ELSE ubicacion
+    END
+WHERE id_restaurante = 1
+  AND nombre IN ('Comida guatemalteca', 'Sabor Chapín');
+
+UPDATE restaurante
+SET nombre = 'Pizzería Central',
+    ubicacion = CASE
+        WHEN trim(ubicacion) = '' OR ubicacion = 'Ubicación pendiente'
+        THEN 'Zona 4'
+        ELSE ubicacion
+    END
+WHERE id_restaurante = 2
+  AND nombre IN ('Pizzería', 'Pizzería Central');
+
+UPDATE restaurante
+SET nombre = 'Burger House',
+    ubicacion = CASE
+        WHEN trim(ubicacion) = '' OR ubicacion = 'Ubicación pendiente'
+        THEN 'Zona 10'
+        ELSE ubicacion
+    END
+WHERE id_restaurante = 3
+  AND nombre IN ('Hamburguesería', 'Burger House');
 
 INSERT OR IGNORE INTO producto (
     id_producto,
