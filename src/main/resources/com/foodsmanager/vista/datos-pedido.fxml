@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="806.0" styleClass="contenedor-principal" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.foodsmanager.controlador.DatosPedidoController">
+   <center>
+      <StackPane prefHeight="646.0" prefWidth="809.0" styleClass="pantalla-login" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="551.0" prefWidth="610.0" spacing="18.0" styleClass="tarjeta-login">
+               <children>
+                  <Label styleClass="marca-login" text="FoodsManager" />
+                  <VBox prefHeight="405.0" prefWidth="540.0">
+                     <children>
+                        <Label styleClass="etiqueta-formulario" text="Datos para recoger el pedido" />
+                        <Label styleClass="subtitulo" text="No necesitas crear una cuenta" />
+                        <Separator prefHeight="24.0" prefWidth="530.0" />
+                        <Label prefHeight="28.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Nombre" />
+                        <TextField fx:id="txtNombre" promptText="Nombre completo:" styleClass="campo-login" stylesheets="@tema.css" />
+                        <Label prefHeight="34.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Teléfono" />
+                        <TextField fx:id="txtTelefono" promptText="Teléfono:" styleClass="campo-login" />
+                        <Label prefHeight="30.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Nombre de quien recogerá" />
+                        <TextField fx:id="txtPersonaRecoge" promptText="Nombre de quien recogerá:" styleClass="campo-login" />
+                        <Label prefHeight="30.0" prefWidth="184.0" styleClass="etiqueta-formulario" text="Hora aprocimada de recogida" />
+                        <ComboBox fx:id="cmbHoraRecogida" prefHeight="25.0" prefWidth="242.0" promptText="hora aproximada de recogida" />
+                        <Label prefHeight="27.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Indicaciones adicionales" />
+                        <TextArea fx:id="txtIndicaciones" prefHeight="187.0" prefWidth="540.0" promptText="Indicaciones adicionales" styleClass="campo-login" />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="42.0" prefWidth="530.0">
+                     <children>
+                        <Region prefHeight="102.0" prefWidth="222.0" />
+                        <Button fx:id="btnRegresarCarrito" mnemonicParsing="false" onAction="#volverCarrito" styleClass="boton-regresar" text="Regresar al carrito" />
+                        <Region prefHeight="102.0" prefWidth="27.0" />
+                        <Button fx:id="btnConfirmarPago" mnemonicParsing="false" onAction="#confirmarPedido" styleClass="boton-pagar" stylesheets="@tema.css" text="Confirmar Pago" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

@@ -218,3 +218,340 @@
     -fx-font-size: 12px;
     -fx-text-fill: #6C757D;
 }
+
+.carrito-fondo {
+    -fx-background-color: #f4f1eb;
+}
+
+.encabezado-carrito {
+    -fx-background-color: #123b32;
+    -fx-padding: 22px 35px;
+}
+
+.titulo-carrito {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #173c32;
+}
+
+.total-carrito {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #173c32;
+}
+
+.card-carrito {
+    -fx-background-color: #FFF8EF;
+    -fx-font-family: "Segoe UI";
+    -fx-background-radius: 16px;
+    -fx-border-color: #ddd8cf;
+    -fx-border-radius: 16px;
+    -fx-padding: 18px;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0, 0, 0, 0.10),
+        12,
+        0,
+        0,
+        4
+    );
+}
+
+.boton-cantidad {
+    -fx-background-color: #173c32;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-min-width: 35px;
+    -fx-min-height: 35px;
+    -fx-cursor: hand;
+}
+
+.boton-eliminar {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b3261e;
+    -fx-border-color: #b3261e;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.boton-pagar {
+    -fx-background-color: #173c32;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 9px;
+    -fx-padding: 11px 25px;
+    -fx-cursor: hand;
+}
+
+.tarjeta-pedido {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 10px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(38, 50, 56, 0.15),
+        12,
+        0.15,
+        0,
+        4
+    );
+}
+
+.carrito-fondo {
+    -fx-background-color: #FFF8EF;
+    -fx-font-family: "Segoe UI";
+}
+
+/* Scroll del carrito */
+.scroll-carrito {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-carrito > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-carrito > .corner {
+    -fx-background-color: transparent;
+}
+
+/* Contenedor: 3 columnas y 2 filas visibles */
+.contenedor-cards-carrito {
+    -fx-background-color: #FFF8EF;
+    -fx-padding: 20px;
+
+    -fx-hgap: 18px;
+    -fx-vgap: 18px;
+
+    -fx-pref-columns: 3;
+    -fx-pref-rows: 2;
+
+    -fx-pref-tile-width: 310px;
+    -fx-pref-tile-height: 240px;
+
+    -fx-alignment: top-center;
+    -fx-tile-alignment: center;
+}
+
+/* Tarjeta individual */
+.card-carrito {
+    -fx-background-color: white;
+    -fx-font-family: "Segoe UI";
+
+    -fx-background-radius: 14px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+
+    -fx-padding: 16px;
+    -fx-spacing: 10px;
+
+    -fx-min-width: 240px;
+    -fx-pref-width: 310px;
+    -fx-max-width: Infinity;
+
+    -fx-min-height: 220px;
+    -fx-pref-height: 240px;
+    -fx-max-height: 240px;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(38, 50, 56, 0.13),
+        12,
+        0.15,
+        0,
+        4
+    );
+}
+
+.card-carrito:hover {
+    -fx-border-color: #D97706;
+    -fx-border-width: 2px;
+}
+
+/* Imagen del producto */
+.imagen-card-carrito {
+    -fx-background-radius: 10px;
+}
+
+/* Nombre del producto */
+.nombre-producto-carrito {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2F5D50;
+}
+
+/* Descripción */
+.descripcion-producto-carrito {
+    -fx-font-size: 13px;
+    -fx-text-fill: #5F6368;
+}
+
+/* Precio unitario */
+.precio-producto-carrito {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #263238;
+}
+
+/* Subtotal de la tarjeta */
+.subtotal-producto-carrito {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D97706;
+}
+
+/* Contenedor de los botones de cantidad */
+.selector-cantidad {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+/* Botones + y - */
+.boton-cantidad {
+    -fx-background-color: #2F5D50;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 18px;
+
+    -fx-min-width: 34px;
+    -fx-pref-width: 34px;
+    -fx-max-width: 34px;
+
+    -fx-min-height: 34px;
+    -fx-pref-height: 34px;
+    -fx-max-height: 34px;
+
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.boton-cantidad:hover {
+    -fx-background-color: #244A40;
+}
+
+.boton-cantidad:disabled {
+    -fx-opacity: 0.45;
+}
+
+/* Número de unidades */
+.cantidad-producto {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #263238;
+    -fx-alignment: center;
+    -fx-min-width: 30px;
+}
+
+/* Eliminar completamente el producto */
+.boton-eliminar {
+    -fx-background-color: transparent;
+    -fx-text-fill: #B3261E;
+    -fx-border-color: #B3261E;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 12px;
+    -fx-cursor: hand;
+}
+
+.boton-eliminar:hover {
+    -fx-background-color: #FCE8E6;
+}
+
+.combo-navegacion {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-pref-width: 220px;
+    -fx-pref-height: 38px;
+
+    -fx-cursor: hand;
+}
+
+/* Texto seleccionado o Prompt Text */
+.combo-navegacion .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2F5D50;
+    -fx-padding: 7px 12px;
+}
+
+/* Botón derecho que contiene la flecha */
+.combo-navegacion .arrow-button {
+    -fx-background-color: #D97706;
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-padding: 0 12px;
+}
+
+/* Flecha del ComboBox */
+.combo-navegacion .arrow {
+    -fx-background-color: white;
+    -fx-padding: 4px;
+}
+
+/* Al pasar el mouse */
+.combo-navegacion:hover {
+    -fx-border-color: #D97706;
+    -fx-border-width: 2px;
+}
+
+/* Cuando el ComboBox tiene el foco */
+.combo-navegacion:focused {
+    -fx-border-color: #D97706;
+    -fx-border-width: 2px;
+}
+
+/* Ventana desplegable */
+.combo-navegacion .combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 8px;
+    -fx-padding: 4px;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(38, 50, 56, 0.18),
+        12,
+        0.15,
+        0,
+        4
+    );
+}
+
+/* Opciones del menú */
+.combo-navegacion .combo-box-popup .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #263238;
+    -fx-font-weight: normal;
+    -fx-padding: 10px 14px;
+}
+
+/* Opción al pasar el mouse */
+.combo-navegacion .combo-box-popup .list-cell:hover {
+    -fx-background-color: #F1E8DB;
+    -fx-text-fill: #2F5D50;
+}
+
+/* Opción seleccionada */
+.combo-navegacion .combo-box-popup .list-cell:selected {
+    -fx-background-color: #2F5D50;
+    -fx-text-fill: white;
+}

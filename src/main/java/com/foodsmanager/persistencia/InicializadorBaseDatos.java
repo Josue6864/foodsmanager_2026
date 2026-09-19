@@ -18,17 +18,31 @@ public final class InicializadorBaseDatos {
     public static void inicializar() throws SQLException {
         String esquema = leerEsquema();
 
-        try (Connection conexion = ConexionSQLite.abrirConexion();
-             Statement sentencia = conexion.createStatement()) {
+        try (Connection conexion = ConexionSQLite.abrirConexion(); Statement sentencia = conexion.createStatement()) {
 
             conexion.setAutoCommit(false);
 
             try {
+                int numeroInstruccion = 0;
+
                 for (String instruccion : esquema.split(";")) {
                     String sql = instruccion.trim();
 
                     if (!sql.isEmpty()) {
-                        sentencia.execute(sql);
+                        numeroInstruccion++;
+
+                        try {
+                            System.out.println(
+                                    "Ejecutando instrucción #" + numeroInstruccion + ":\n" + sql
+                            );
+
+                            sentencia.execute(sql);
+                        } catch (SQLException excepcion) {
+                            System.err.println(
+                                    "Falló la instrucción #" + numeroInstruccion + ":\n" + sql
+                            );
+                            throw excepcion;
+                        }
                     }
                 }
 
@@ -41,25 +55,25 @@ public final class InicializadorBaseDatos {
     }
 
     private static String leerEsquema() throws SQLException {
-        try (InputStream entrada =
-                     InicializadorBaseDatos.class
-                             .getResourceAsStream(RUTA_ESQUEMA)) {
+        try (InputStream entrada
+                = InicializadorBaseDatos.class
+                        .getResourceAsStream(RUTA_ESQUEMA)) {
 
-            if (entrada == null) {
-                throw new SQLException(
-                        "No se encontró el archivo " + RUTA_ESQUEMA
-                );
-            }
+                    if (entrada == null) {
+                        throw new SQLException(
+                                "No se encontró el archivo " + RUTA_ESQUEMA
+                        );
+                    }
 
-            return new String(
-                    entrada.readAllBytes(),
-                    StandardCharsets.UTF_8
-            );
-        } catch (IOException excepcion) {
-            throw new SQLException(
-                    "No se pudo leer el esquema de la base de datos.",
-                    excepcion
-            );
-        }
+                    return new String(
+                            entrada.readAllBytes(),
+                            StandardCharsets.UTF_8
+                    );
+                } catch (IOException excepcion) {
+                    throw new SQLException(
+                            "No se pudo leer el esquema de la base de datos.",
+                            excepcion
+                    );
+                }
     }
 }

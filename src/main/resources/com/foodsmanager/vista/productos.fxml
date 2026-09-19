@@ -10,87 +10,44 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane
-        prefHeight="600.0"
-        prefWidth="950.0"
-        styleClass="pantalla-principal"
-        stylesheets="@tema.css"
-        xmlns="http://javafx.com/javafx"
-        xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.foodsmanager.controlador.ControladorProducto">
+<BorderPane prefHeight="600.0" prefWidth="950.0" styleClass="pantalla-principal" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.foodsmanager.controlador.ControladorProducto">
 
     <top>
-        <HBox
-                alignment="CENTER_LEFT"
-                spacing="16.0"
-                styleClass="barra-superior">
+        <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="barra-superior">
 
             <padding>
-                <Insets
-                        top="16.0"
-                        right="24.0"
-                        bottom="16.0"
-                        left="24.0"/>
+                <Insets bottom="16.0" left="24.0" right="24.0" top="16.0" />
             </padding>
 
-            <Label
-                    text="FoodsManager"
-                    styleClass="marca"/>
+            <Label styleClass="marca" text="FoodsManager" />
+         <Button fx:id="btnCarrito" mnemonicParsing="false" onAction="#abrirCarrito" styleClass="boton-secundario" text="Ver carrito" />
 
-            <Region HBox.hgrow="ALWAYS"/>
+            <Region HBox.hgrow="ALWAYS" />
 
-            <Button
-                    text="Volver a restaurantes"
-                    onAction="#volverRestaurantes"
-                    styleClass="boton-secundario"/>
+            <Button onAction="#volverRestaurantes" styleClass="boton-secundario" text="Volver a restaurantes" />
 
         </HBox>
     </top>
 
     <center>
 
-        <ScrollPane
-                fitToWidth="true"
-                hbarPolicy="NEVER"
-                styleClass="scroll-transparente">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
 
             <content>
 
-                <VBox
-                        alignment="TOP_CENTER"
-                        spacing="24.0">
+                <VBox alignment="TOP_CENTER" spacing="24.0">
 
                     <padding>
-                        <Insets
-                                top="38.0"
-                                right="35.0"
-                                bottom="38.0"
-                                left="35.0"/>
+                        <Insets bottom="38.0" left="35.0" right="35.0" top="38.0" />
                     </padding>
 
-                    <Label
-                            fx:id="etiquetaRestaurante"
-                            text="Productos"
-                            styleClass="titulo-principal"/>
+                    <Label fx:id="etiquetaRestaurante" styleClass="titulo-principal" text="Productos" />
 
-                    <Label
-                            text="Productos disponibles del restaurante seleccionado."
-                            styleClass="subtitulo"
-                            wrapText="true"/>
+                    <Label styleClass="subtitulo" text="Productos disponibles del restaurante seleccionado." wrapText="true" />
 
-                    <Label
-                            fx:id="etiquetaSinProductos"
-                            text="Este restaurante no tiene productos disponibles."
-                            visible="false"
-                            managed="false"
-                            styleClass="subtitulo"/>
+                    <Label fx:id="etiquetaSinProductos" managed="false" styleClass="subtitulo" text="Este restaurante no tiene productos disponibles." visible="false" />
 
-                    <FlowPane
-                            fx:id="contenedorProductos"
-                            alignment="TOP_CENTER"
-                            hgap="22.0"
-                            vgap="22.0"
-                            prefWrapLength="800.0"/>
+                    <FlowPane fx:id="contenedorProductos" alignment="TOP_CENTER" hgap="22.0" prefWrapLength="800.0" vgap="22.0" />
 
                 </VBox>
 
@@ -102,19 +59,13 @@
 
     <bottom>
 
-        <HBox
-                alignment="CENTER"
-                styleClass="pie-pagina">
+        <HBox alignment="CENTER" styleClass="pie-pagina">
 
             <padding>
-                <Insets
-                        top="14.0"
-                        right="20.0"
-                        bottom="14.0"
-                        left="20.0"/>
+                <Insets bottom="14.0" left="20.0" right="20.0" top="14.0" />
             </padding>
 
-            <Label text="FoodsManager 2026"/>
+            <Label text="FoodsManager 2026" />
 
         </HBox>
 
