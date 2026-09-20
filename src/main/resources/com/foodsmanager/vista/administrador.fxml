@@ -1,119 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox
-        alignment="TOP_LEFT"
-        prefHeight="450.0"
-        prefWidth="650.0"
-        spacing="16.0"
-        styleClass="contenedor-principal"
-        stylesheets="@tema.css"
-        xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.foodsmanager.controlador.ControladorGestionProductos">
-
-    <padding>
-        <Insets top="24.0" right="24.0" bottom="24.0" left="24.0"/>
-    </padding>
-
-    <Label
-            text="Registrar producto"
-            styleClass="titulo"/>
-
-    <Label
-            text="Ingrese los datos del producto y seleccione el restaurante al que pertenece."
-            styleClass="subtitulo"
-            wrapText="true"/>
-
-    <GridPane hgap="12.0" vgap="14.0">
-
-        <columnConstraints>
-            <ColumnConstraints minWidth="120.0"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-        </columnConstraints>
-
-        <Label
-                text="Restaurante:"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="0"/>
-
-        <ComboBox
-                fx:id="comboRestaurante"
-                maxWidth="Infinity"
-                promptText="Seleccione un restaurante"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="0"/>
-
-        <Label
-                text="Nombre:"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="1"/>
-
-        <TextField
-                fx:id="campoNombre"
-                promptText="Nombre del producto"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="1"/>
-
-        <Label
-                text="Descripción:"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="2"/>
-
-        <TextArea
-                fx:id="campoDescripcion"
-                prefRowCount="3"
-                promptText="Descripción del producto"
-                wrapText="true"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="2"/>
-
-        <Label
-                text="Precio:"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="3"/>
-
-        <TextField
-                fx:id="campoPrecio"
-                promptText="Ejemplo: 25.50"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="3"/>
-
-        <Label
-                text="Disponibilidad:"
-                GridPane.columnIndex="0"
-                GridPane.rowIndex="4"/>
-
-        <CheckBox
-                fx:id="campoDisponible"
-                selected="true"
-                text="Producto disponible"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="4"/>
-
-    </GridPane>
-
-        <HBox alignment="CENTER_RIGHT" spacing="12.0">
-
-        <Button
-                text="Cerrar sesión"
-                onAction="#cerrarSesion"
-                styleClass="boton-regresar"/>
-
-        <Button
-                fx:id="botonRegistrar"
-                defaultButton="true"
-                onAction="#registrarDesdeFormulario"
-                styleClass="boton-principal"
-                text="Registrar producto"/>
-
+<BorderPane prefWidth="950" prefHeight="650" styleClass="pantalla-principal"
+            stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.ControladorGestionProductos">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="barra-superior">
+            <padding><Insets top="18" right="28" bottom="18" left="28"/></padding>
+            <Label text="FoodsManager" styleClass="marca"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="boton-secundario"/>
         </HBox>
-
-    <Label
-            fx:id="etiquetaMensaje"
-            minHeight="30.0"
-            wrapText="true"/>
-
-</VBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
+            <content>
+                <VBox alignment="TOP_CENTER" spacing="20">
+                    <padding><Insets top="26" right="28" bottom="28" left="28"/></padding>
+                    <VBox maxWidth="720" spacing="20" styleClass="admin-formulario">
+                        <VBox spacing="8">
+                            <Label text="Registrar producto" styleClass="titulo-principal"/>
+                            <Label text="Completa los datos y selecciona el restaurante al que pertenece."
+                                   styleClass="subtitulo" wrapText="true"/>
+                        </VBox>
+                        <GridPane hgap="16" vgap="16">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="115"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+                            <Label text="Restaurante:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <ComboBox fx:id="comboRestaurante" maxWidth="Infinity" promptText="Seleccione un restaurante"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <TextField fx:id="campoNombre" promptText="Nombre del producto" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            <Label text="Descripción:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                            <TextArea fx:id="campoDescripcion" prefRowCount="3" promptText="Descripción del producto"
+                                      wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            <Label text="Precio:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                            <TextField fx:id="campoPrecio" promptText="Ejemplo: 25.50" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                            <Label text="Disponibilidad:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                            <CheckBox fx:id="campoDisponible" selected="true" text="Producto disponible"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        </GridPane>
+                        <HBox alignment="CENTER_RIGHT" spacing="12">
+                            <Button fx:id="botonVolver" text="Volver a productos" onAction="#volverAProductos" styleClass="boton-regresar"/>
+                            <Button fx:id="botonRegistrar" text="Registrar producto" defaultButton="true"
+                                    onAction="#registrarDesdeFormulario" styleClass="boton-principal"/>
+                        </HBox>
+                        <Label fx:id="etiquetaMensaje" minHeight="26" wrapText="true"/>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

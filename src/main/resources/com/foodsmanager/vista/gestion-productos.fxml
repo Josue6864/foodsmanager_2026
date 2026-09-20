@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="950" prefHeight="650" styleClass="pantalla-principal"
+            stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.ControladorListadoProductos">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="barra-superior">
+            <padding><Insets top="18" right="28" bottom="18" left="28"/></padding>
+            <Label text="FoodsManager" styleClass="marca"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="botonMenu" text="Menú" onAction="#volverAlMenu" styleClass="boton-secundario"/>
+            <Button fx:id="botonCerrarSesion" text="Cerrar sesión" onAction="#cerrarSesion" styleClass="boton-secundario"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="18">
+            <padding><Insets top="28" right="28" bottom="22" left="28"/></padding>
+            <HBox alignment="CENTER_LEFT" spacing="18">
+                <VBox spacing="6" HBox.hgrow="ALWAYS" minWidth="0">
+                    <Label text="Gestionar productos" styleClass="titulo-principal" wrapText="true"/>
+                    <Label text="El catálogo completo de todos los restaurantes." styleClass="subtitulo" wrapText="true"/>
+                </VBox>
+                <Button fx:id="botonAgregar" text="+ Agregar producto" onAction="#agregarProducto"
+                        minWidth="170" styleClass="boton-principal"/>
+            </HBox>
+            <Label fx:id="etiquetaResumen" text="Cargando catálogo..." styleClass="admin-resumen"/>
+            <TableView fx:id="tablaProductos" VBox.vgrow="ALWAYS" minHeight="200" styleClass="admin-tabla">
+                <columns>
+                    <TableColumn fx:id="columnaId" text="ID" prefWidth="58" minWidth="48"/>
+                    <TableColumn fx:id="columnaNombre" text="Producto" prefWidth="270" minWidth="150"/>
+                    <TableColumn fx:id="columnaRestaurante" text="Restaurante" prefWidth="225" minWidth="135"/>
+                    <TableColumn fx:id="columnaPrecio" text="Precio" prefWidth="110" minWidth="85"/>
+                    <TableColumn fx:id="columnaEstado" text="Disponibilidad" prefWidth="175" minWidth="145"/>
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER_LEFT" spacing="14">
+                <Button fx:id="botonActualizar" text="Actualizar" onAction="#cargarProductos" styleClass="boton-regresar"/>
+                <Label text="Selecciona un producto para editarlo." wrapText="true" styleClass="subtitulo" HBox.hgrow="ALWAYS"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="botonEditar" text="Editar producto" onAction="#editarSeleccionado"
+                        disable="true" styleClass="boton-principal"/>
+            </HBox>
+            <Label fx:id="etiquetaMensaje" minHeight="22" wrapText="true"/>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefWidth="950.0" prefHeight="650.0" styleClass="pantalla-principal"
+            stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.ControladorMenuAdministrador">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="18" styleClass="barra-superior">
+            <padding><Insets top="18" right="28" bottom="18" left="28"/></padding>
+            <Label text="FoodsManager" styleClass="marca"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="etiquetaUsuario" maxWidth="200" styleClass="admin-usuario"/>
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="boton-secundario"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
+            <content>
+                <VBox spacing="22" alignment="TOP_CENTER">
+                    <padding><Insets top="40" right="32" bottom="28" left="32"/></padding>
+                    <VBox spacing="10" maxWidth="820">
+                        <Label text="PANEL ADMINISTRATIVO" styleClass="admin-sobretitulo"/>
+                        <Label text="¿Qué quieres gestionar?" styleClass="admin-titulo" wrapText="true"/>
+                        <Label text="Selecciona un área para continuar." styleClass="admin-subtitulo" wrapText="true"/>
+                    </VBox>
+                    <GridPane hgap="22" maxWidth="820">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                            <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        <Button fx:id="botonProductos" onAction="#gestionarProductos"
+                                accessibleText="Gestionar productos"
+                                contentDisplay="GRAPHIC_ONLY" alignment="TOP_LEFT"
+                                maxWidth="Infinity" prefHeight="270" styleClass="admin-tarjeta-menu"
+                                GridPane.columnIndex="0">
+                            <graphic>
+                                <VBox spacing="17" mouseTransparent="true">
+                                    <StackPane maxWidth="54" prefWidth="54" prefHeight="54" styleClass="admin-icono">
+                                        <SVGPath content="M2 4 H22 V8 H2 Z M4 10 H20 V23 H4 Z M9 13 V15 H15 V13 Z" styleClass="admin-icono-trazo"/>
+                                    </StackPane>
+                                    <Label text="Gestionar productos" styleClass="admin-titulo-tarjeta" wrapText="true"/>
+                                    <Label text="Consulta el catálogo, agrega productos y administra su disponibilidad."
+                                           wrapText="true" maxWidth="300" styleClass="admin-descripcion-tarjeta"/>
+                                    <Region VBox.vgrow="ALWAYS"/>
+                                    <Label text="Abrir catálogo  →" styleClass="admin-enlace"/>
+                                </VBox>
+                            </graphic>
+                        </Button>
+                        <Button disable="true" accessibleText="Gestionar restaurantes. Próximamente."
+                                contentDisplay="GRAPHIC_ONLY" alignment="TOP_LEFT"
+                                maxWidth="Infinity" prefHeight="270" styleClass="admin-tarjeta-menu"
+                                GridPane.columnIndex="1">
+                            <graphic>
+                                <VBox spacing="17" mouseTransparent="true">
+                                    <StackPane maxWidth="54" prefWidth="54" prefHeight="54" styleClass="admin-icono-pendiente">
+                                        <SVGPath content="M4 3 H20 L24 10 H0 Z M3 12 H21 V23 H14 V16 H10 V23 H3 Z" styleClass="admin-icono-trazo-pendiente"/>
+                                    </StackPane>
+                                    <Label text="Gestionar restaurantes" styleClass="admin-titulo-tarjeta" wrapText="true"/>
+                                    <Label text="Un espacio para administrar los restaurantes de FoodsManager."
+                                           wrapText="true" maxWidth="300" styleClass="admin-descripcion-tarjeta"/>
+                                    <Region VBox.vgrow="ALWAYS"/>
+                                    <Label text="Próximamente" styleClass="admin-proximamente"/>
+                                </VBox>
+                            </graphic>
+                        </Button>
+                    </GridPane>
+                    <Label fx:id="etiquetaMensaje" wrapText="true" maxWidth="820" styleClass="mensaje-error"/>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" styleClass="pie-pagina">
+            <padding><Insets top="14" right="20" bottom="14" left="20"/></padding>
+            <Label text="FoodsManager · Administración"/>
+        </HBox>
+    </bottom>
+</BorderPane>

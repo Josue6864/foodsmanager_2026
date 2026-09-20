@@ -555,3 +555,168 @@
     -fx-background-color: #2F5D50;
     -fx-text-fill: white;
 }
+
+/* Administración: menú, catálogo y formulario. */
+.admin-usuario {
+    -fx-text-fill: #E4EEE9;
+    -fx-font-size: 13px;
+}
+.admin-sobretitulo {
+    -fx-text-fill: #B66508;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.admin-titulo {
+    -fx-text-fill: #244A40;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+.admin-subtitulo {
+    -fx-text-fill: #5F6368;
+    -fx-font-size: 15px;
+}
+.admin-tarjeta-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 16px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 16px;
+    -fx-padding: 26px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(38,50,56,0.10), 18, 0.10, 0, 5);
+}
+.admin-tarjeta-menu:hover {
+    -fx-background-color: #FAFDFB;
+    -fx-border-color: #2F5D50;
+    -fx-effect: dropshadow(gaussian, rgba(47,93,80,0.17), 22, 0.12, 0, 6);
+}
+.admin-tarjeta-menu:focused {
+    -fx-border-color: #D97706;
+    -fx-border-width: 2px;
+    -fx-padding: 25px;
+}
+.admin-tarjeta-menu:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: #F5F1E9;
+    -fx-border-color: #DDD5C9;
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+.admin-icono, .admin-icono-pendiente {
+    -fx-background-radius: 14px;
+    -fx-background-color: #E6F0EA;
+}
+.admin-icono-pendiente {
+    -fx-background-color: #E9E2D6;
+}
+.admin-icono-trazo {
+    -fx-fill: #2F5D50;
+}
+.admin-icono-trazo-pendiente {
+    -fx-fill: #796B57;
+}
+.admin-titulo-tarjeta {
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #244A40;
+}
+.admin-descripcion-tarjeta {
+    -fx-font-size: 14px;
+    -fx-text-fill: #626866;
+    -fx-line-spacing: 3px;
+}
+.admin-enlace {
+    -fx-text-fill: #2F5D50;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.admin-proximamente {
+    -fx-background-color: #E9E2D6;
+    -fx-background-radius: 16px;
+    -fx-padding: 6px 12px;
+    -fx-text-fill: #685B47;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.admin-resumen {
+    -fx-text-fill: #5A655E;
+    -fx-font-size: 13px;
+}
+.admin-tabla {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #D8CBB8;
+    -fx-padding: 4px;
+    -fx-fixed-cell-size: 48px;
+    -fx-selection-bar: #E3EEE7;
+    -fx-selection-bar-non-focused: #E3EEE7;
+}
+.admin-tabla .column-header-background,
+.admin-tabla .column-header,
+.admin-tabla .filler {
+    -fx-background-color: #F1E8DB;
+    -fx-border-color: transparent;
+}
+.admin-tabla .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 10px;
+    -fx-text-fill: #365249;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.admin-tabla .table-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8px 10px;
+    -fx-text-fill: #263238;
+    -fx-border-color: transparent transparent #F2EEE8 transparent;
+    -fx-font-size: 13px;
+}
+.admin-tabla .table-row-cell {
+    -fx-background-color: white;
+}
+.admin-tabla .table-row-cell:odd {
+    -fx-background-color: #FCFAF6;
+}
+.admin-tabla .table-row-cell:filled:hover {
+    -fx-background-color: #F0F5F1;
+}
+.admin-tabla .table-row-cell:filled:selected {
+    -fx-background-color: #E3EEE7;
+}
+.admin-tabla .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #173C32;
+}
+.admin-estado-disponible, .admin-estado-no-disponible {
+    -fx-background-radius: 14px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.admin-estado-disponible {
+    -fx-background-color: #E6F0EA;
+    -fx-text-fill: #24553E;
+}
+.admin-estado-no-disponible {
+    -fx-background-color: #FFF0D6;
+    -fx-text-fill: #8A5106;
+}
+.admin-formulario {
+    -fx-background-color: white;
+    -fx-background-radius: 14px;
+    -fx-border-color: #D8CBB8;
+    -fx-border-radius: 14px;
+    -fx-padding: 28px;
+}
+.admin-dialogo {
+    -fx-background-color: #FFF8EF;
+    -fx-font-family: "Segoe UI";
+}
+.admin-dialogo:header .header-panel {
+    -fx-background-color: #F1E8DB;
+}
+.admin-dialogo:header .header-panel .label {
+    -fx-text-fill: #2F5D50;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
