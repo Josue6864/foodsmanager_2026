@@ -45,8 +45,8 @@ public class RestauranteDAO {
             """;
 
     /**
-     * Registra un restaurante y devuelve el identificador asignado por SQLite.
-     * El controlador administrativo debe exigir una sesion antes de llamarlo.
+      Registra un restaurante y devuelve el identificador asignado por SQLite.
+      El controlador administrativo debe exigir una sesion antes de llamarlo.
      */
     public int insertar(String nombre, String ubicacion) throws SQLException {
         String nombreValidado = validarTextoObligatorio(
@@ -141,3 +141,4 @@ public class RestauranteDAO {
         return texto.trim();
     }
 }
+
