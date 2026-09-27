@@ -1,25 +1,24 @@
 package com.foodsmanager.modelo;
 
-/*
- Representa un restaurante disponible en FoodsManager.
- 
-  Los restaurantes se encuentran precargados en la base de datos.
-  Los productos asociados se consultaran mediante ProductoDAO utilizando
-  el identificador del restaurante.
- */
+/** Representa un restaurante del catálogo, con una descripción opcional. */
 public class Restaurante {
 
     private int idRestaurante;
     private String nombre;
     private String ubicacion;
+    private String descripcion;
 
-    public Restaurante(
-            int idRestaurante,
-            String nombre,
-            String ubicacion) {
+    /** Conserva la compatibilidad con las llamadas existentes de tres argumentos. */
+    public Restaurante(int idRestaurante, String nombre, String ubicacion) {
+        this(idRestaurante, nombre, ubicacion, "");
+    }
+
+    public Restaurante(int idRestaurante, String nombre, String ubicacion,
+            String descripcion) {
         setIdRestaurante(idRestaurante);
         setNombre(nombre);
         setUbicacion(ubicacion);
+        setDescripcion(descripcion);
     }
 
     public int getIdRestaurante() {
@@ -39,8 +38,7 @@ public class Restaurante {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = validarTextoObligatorio(
-                nombre,
+        this.nombre = validarTextoObligatorio(nombre,
                 "El nombre del restaurante es obligatorio.");
     }
 
@@ -49,14 +47,19 @@ public class Restaurante {
     }
 
     public void setUbicacion(String ubicacion) {
-        this.ubicacion = validarTextoObligatorio(
-                ubicacion,
+        this.ubicacion = validarTextoObligatorio(ubicacion,
                 "La ubicacion del restaurante es obligatoria.");
     }
 
-    private static String validarTextoObligatorio(
-            String texto,
-            String mensaje) {
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion == null ? "" : descripcion.trim();
+    }
+
+    private static String validarTextoObligatorio(String texto, String mensaje) {
         if (texto == null || texto.trim().isEmpty()) {
             throw new IllegalArgumentException(mensaje);
         }

@@ -31,7 +31,8 @@ class RestauranteDAOTest {
                     CREATE TABLE restaurante (
                         id_restaurante INTEGER PRIMARY KEY AUTOINCREMENT,
                         nombre TEXT NOT NULL,
-                        ubicacion TEXT NOT NULL
+                        ubicacion TEXT NOT NULL,
+                        descripcion TEXT NOT NULL DEFAULT ''
                     )
                     """);
         }
@@ -118,5 +119,44 @@ class RestauranteDAOTest {
     void debeRechazarIdentificadoresInvalidos() {
         assertThrows(IllegalArgumentException.class, () -> dao.buscarPorId(0));
         assertThrows(IllegalArgumentException.class, () -> dao.buscarPorId(-1));
+        assertThrows(IllegalArgumentException.class,
+                () -> dao.actualizarDescripcion(0, "Descripción"));
+        assertThrows(SQLException.class, () -> dao.actualizarDescripcion(999, "Descripción"));
+    }
+
+    @Test
+    void debeGuardarYListarLaDescripcionCompleta() throws SQLException {
+        String descripcion = "Especialidades de O'Brien.\nCafé y comida guatemalteca.";
+        int id = dao.insertar("El Comal", "Zona 7", "  " + descripcion + "  ");
+
+        assertEquals(descripcion, dao.buscarPorId(id).getDescripcion());
+        assertEquals(descripcion, dao.listarTodos().get(0).getDescripcion());
+    }
+
+    @Test
+    void debeActualizarSoloLaDescripcion() throws SQLException {
+        int id = dao.insertar("El Comal", "Zona 7", "Comida casera.");
+        dao.actualizarDescripcion(id, "  Desayunos y almuerzos.  ");
+        Restaurante restaurante = dao.buscarPorId(id);
+
+        assertEquals(id, restaurante.getIdRestaurante());
+        assertEquals("El Comal", restaurante.getNombre());
+        assertEquals("Zona 7", restaurante.getUbicacion());
+        assertEquals("Desayunos y almuerzos.", restaurante.getDescripcion());
+        assertEquals(1, dao.listarTodos().size());
+    }
+
+    @Test
+    void debePermitirOmitirYVaciarLaDescripcion() throws SQLException {
+        int idAnterior = dao.insertar("Sin descripción", "Zona 1");
+        int idNulo = dao.insertar("Otro", "Zona 2", null);
+        int idBlanco = dao.insertar("Tercero", "Zona 3", " \t\n ");
+        assertEquals("", dao.buscarPorId(idAnterior).getDescripcion());
+        assertEquals("", dao.buscarPorId(idNulo).getDescripcion());
+        assertEquals("", dao.buscarPorId(idBlanco).getDescripcion());
+
+        dao.actualizarDescripcion(idAnterior, "Temporal");
+        dao.actualizarDescripcion(idAnterior, null);
+        assertEquals("", dao.buscarPorId(idAnterior).getDescripcion());
     }
 }

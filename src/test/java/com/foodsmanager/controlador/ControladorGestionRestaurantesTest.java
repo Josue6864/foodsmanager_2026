@@ -19,8 +19,15 @@ class ControladorGestionRestaurantesTest {
         SesionAdministrador.cerrar();
         controlador = new ControladorGestionRestaurantes(new RestauranteDAO() {
             @Override
-            public int insertar(String nombre, String ubicacion) throws SQLException {
+            public int insertar(String nombre, String ubicacion, String descripcion)
+                    throws SQLException {
                 throw new AssertionError("No se debe insertar sin sesión.");
+            }
+
+            @Override
+            public void actualizarDescripcion(int idRestaurante, String descripcion)
+                    throws SQLException {
+                throw new AssertionError("No se debe actualizar sin sesión.");
             }
 
             @Override
@@ -44,5 +51,17 @@ class ControladorGestionRestaurantesTest {
     @Test
     void debeBloquearElListadoAdministrativoAntesDeAccederAlDao() {
         assertThrows(SecurityException.class, () -> controlador.listarRestaurantes());
+    }
+
+    @Test
+    void debeBloquearElRegistroConDescripcionAntesDeAccederAlDao() {
+        assertThrows(SecurityException.class,
+                () -> controlador.registrarRestaurante("El Comal", "Zona 7", "Comida casera."));
+    }
+
+    @Test
+    void debeBloquearLaEdicionDeDescripcionAntesDeAccederAlDao() {
+        assertThrows(SecurityException.class,
+                () -> controlador.actualizarDescripcion(1, "Nueva descripción."));
     }
 }

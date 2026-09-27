@@ -84,9 +84,9 @@ public class ControladorProducto {
         );
     }
 
-    /*
-      Registra un producto sin acceder a controles de JavaFX. Conserva la firma
-      utilizada por ControladorProductoTest.
+    /**
+     * Registra un producto sin acceder a controles de JavaFX. Conserva la firma
+     * utilizada por ControladorProductoTest.
      */
     public Producto registrarProducto(
             int idRestaurante,

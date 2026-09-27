@@ -59,6 +59,13 @@ public class ControladorRestaurante {
         ubicacion.setMinHeight(Region.USE_PREF_SIZE);
         ubicacion.setMaxWidth(Double.MAX_VALUE);
 
+        Label descripcion = new Label(restaurante.getDescripcion().isEmpty()
+                ? "Descripción pendiente." : restaurante.getDescripcion());
+        descripcion.getStyleClass().add("descripcion-restaurante");
+        descripcion.setWrapText(true);
+        descripcion.setMinHeight(Region.USE_PREF_SIZE);
+        descripcion.setMaxWidth(Double.MAX_VALUE);
+
         Region espacio = new Region();
         VBox.setVgrow(espacio, Priority.ALWAYS);
 
@@ -68,7 +75,7 @@ public class ControladorRestaurante {
         botonProductos.setOnAction(evento -> abrirProductos(
                 evento, restaurante.getIdRestaurante()));
 
-        VBox tarjeta = new VBox(14, nombre, ubicacion, espacio, botonProductos);
+        VBox tarjeta = new VBox(14, nombre, ubicacion, descripcion, espacio, botonProductos);
         tarjeta.getStyleClass().add("tarjeta-restaurante");
         tarjeta.setMinWidth(250);
         tarjeta.setPrefWidth(250);

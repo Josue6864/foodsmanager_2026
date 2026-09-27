@@ -28,27 +28,39 @@ public class RestauranteDAO {
     }
 
     private static final String SQL_INSERTAR = """
-            INSERT INTO restaurante (nombre, ubicacion)
-            VALUES (?, ?)
+            INSERT INTO restaurante (nombre, ubicacion, descripcion)
+            VALUES (?, ?, ?)
             """;
 
     private static final String SQL_BUSCAR_POR_ID = """
-            SELECT id_restaurante, nombre, ubicacion
+            SELECT id_restaurante, nombre, ubicacion, descripcion
             FROM restaurante
             WHERE id_restaurante = ?
             """;
 
     private static final String SQL_LISTAR_TODOS = """
-            SELECT id_restaurante, nombre, ubicacion
+            SELECT id_restaurante, nombre, ubicacion, descripcion
             FROM restaurante
             ORDER BY nombre COLLATE NOCASE, id_restaurante
             """;
 
-    /**
-      Registra un restaurante y devuelve el identificador asignado por SQLite.
-      El controlador administrativo debe exigir una sesion antes de llamarlo.
-     */
+    private static final String SQL_ACTUALIZAR_DESCRIPCION = """
+            UPDATE restaurante
+            SET descripcion = ?
+            WHERE id_restaurante = ?
+            """;
+
+    /** Conserva las llamadas existentes que no proporcionan una descripción. */
     public int insertar(String nombre, String ubicacion) throws SQLException {
+        return insertar(nombre, ubicacion, "");
+    }
+
+    /**
+     * Registra un restaurante y devuelve el identificador asignado por SQLite.
+     * El controlador administrativo debe exigir una sesion antes de llamarlo.
+     */
+    public int insertar(String nombre, String ubicacion, String descripcion)
+            throws SQLException {
         String nombreValidado = validarTextoObligatorio(
                 nombre, "El nombre del restaurante es obligatorio.");
         String ubicacionValidada = validarTextoObligatorio(
@@ -64,6 +76,7 @@ public class RestauranteDAO {
                         SQL_INSERTAR, Statement.RETURN_GENERATED_KEYS)) {
                     sentencia.setString(1, nombreValidado);
                     sentencia.setString(2, ubicacionValidada);
+                    sentencia.setString(3, normalizarDescripcion(descripcion));
 
                     if (sentencia.executeUpdate() != 1) {
                         throw new SQLException("No se pudo registrar el restaurante.");
@@ -94,12 +107,23 @@ public class RestauranteDAO {
         }
     }
 
+    /** Actualiza solo la descripción, conservando el restaurante y sus relaciones. */
+    public void actualizarDescripcion(int idRestaurante, String descripcion)
+            throws SQLException {
+        validarId(idRestaurante);
+        try (Connection conexion = proveedorConexion.abrir();
+             PreparedStatement sentencia = conexion.prepareStatement(SQL_ACTUALIZAR_DESCRIPCION)) {
+            sentencia.setString(1, normalizarDescripcion(descripcion));
+            sentencia.setInt(2, idRestaurante);
+            if (sentencia.executeUpdate() != 1) {
+                throw new SQLException("El restaurante ya no existe o no se pudo actualizar.");
+            }
+        }
+    }
+
     /** Devuelve el restaurante encontrado, o null si el id no existe. */
     public Restaurante buscarPorId(int idRestaurante) throws SQLException {
-        if (idRestaurante <= 0) {
-            throw new IllegalArgumentException(
-                    "El id del restaurante debe ser mayor que cero.");
-        }
+        validarId(idRestaurante);
 
         try (Connection conexion = proveedorConexion.abrir();
              PreparedStatement sentencia = conexion.prepareStatement(SQL_BUSCAR_POR_ID)) {
@@ -130,8 +154,20 @@ public class RestauranteDAO {
         return new Restaurante(
                 resultado.getInt("id_restaurante"),
                 resultado.getString("nombre"),
-                resultado.getString("ubicacion")
+                resultado.getString("ubicacion"),
+                resultado.getString("descripcion")
         );
+    }
+
+    private static void validarId(int idRestaurante) {
+        if (idRestaurante <= 0) {
+            throw new IllegalArgumentException(
+                    "El id del restaurante debe ser mayor que cero.");
+        }
+    }
+
+    private static String normalizarDescripcion(String descripcion) {
+        return descripcion == null ? "" : descripcion.trim();
     }
 
     private static String validarTextoObligatorio(String texto, String mensaje) {
@@ -141,4 +177,3 @@ public class RestauranteDAO {
         return texto.trim();
     }
 }
-

@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS administrador (
 CREATE TABLE IF NOT EXISTS restaurante (
     id_restaurante INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
-    ubicacion TEXT NOT NULL
+    ubicacion TEXT NOT NULL,
+    descripcion TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TABLE IF NOT EXISTS producto (
@@ -27,13 +28,11 @@ CREATE TABLE IF NOT EXISTS producto (
 );
 
 INSERT OR IGNORE INTO restaurante (
-    id_restaurante,
-    nombre,
-    ubicacion
+    id_restaurante, nombre, ubicacion, descripcion
 ) VALUES
-    (1, 'Sabor Chapín', 'Zona 1'),
-    (2, 'Pizzería Central', 'Zona 4'),
-    (3, 'Burger House', 'Zona 10');
+    (1, 'Sabor Chapín', 'Zona 1', 'Comida tradicional guatemalteca.'),
+    (2, 'Pizzería Central', 'Zona 4', 'Pizzas y especialidades para compartir.'),
+    (3, 'Burger House', 'Zona 10', 'Hamburguesas, acompañamientos y bebidas.');
 
 -- Alinea los registros iniciales reconocidos con las pantallas y pruebas.
 -- Conserva las ubicaciones existentes cuando ya contienen información.
@@ -68,21 +67,14 @@ WHERE id_restaurante = 3
   AND nombre IN ('Hamburguesería', 'Burger House');
 
 INSERT OR IGNORE INTO producto (
-    id_producto,
-    id_restaurante,
-    nombre,
-    descripcion,
-    precio,
-    disponible
+    id_producto, id_restaurante, nombre, descripcion, precio, disponible
 ) VALUES
     (1, 1, 'Pepián', 'Platillo tradicional guatemalteco.', 45.00, 1),
     (2, 1, 'Kak ik', 'Caldo tradicional guatemalteco.', 40.00, 1),
     (3, 1, 'Tamal colorado', 'Tamal tradicional con recado.', 18.00, 1),
-
     (4, 2, 'Pizza Pepperoni', 'Pizza con pepperoni y queso.', 65.00, 1),
     (5, 2, 'Pizza Hawaiana', 'Pizza con jamón y piña.', 70.00, 1),
     (6, 2, 'Pizza Suprema', 'Pizza con vegetales y carnes.', 75.00, 1),
-
     (7, 3, 'Hamburguesa Clásica', 'Carne, queso, lechuga y tomate.', 35.00, 1),
     (8, 3, 'Hamburguesa Doble', 'Doble carne y doble queso.', 48.00, 1),
     (9, 3, 'Papas Fritas', 'Porción de papas fritas.', 18.00, 1);

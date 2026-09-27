@@ -6,15 +6,21 @@ import com.foodsmanager.seguridad.SesionAdministrador;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class ControladorGestionRestaurantes {
 
@@ -24,11 +30,14 @@ public class ControladorGestionRestaurantes {
     @FXML private TableColumn<Restaurante, Integer> columnaId;
     @FXML private TableColumn<Restaurante, String> columnaNombre;
     @FXML private TableColumn<Restaurante, String> columnaUbicacion;
+    @FXML private TableColumn<Restaurante, String> columnaDescripcion;
     @FXML private TextField campoNombre;
     @FXML private TextField campoUbicacion;
+    @FXML private TextArea campoDescripcion;
     @FXML private Button botonGuardar;
     @FXML private Button botonActualizar;
     @FXML private Button botonProductos;
+    @FXML private Button botonEditarDescripcion;
     @FXML private Label etiquetaResumen;
     @FXML private Label etiquetaMensaje;
 
@@ -44,8 +53,19 @@ public class ControladorGestionRestaurantes {
     /** Operación administrativa independiente de los controles de la vista. */
     public int registrarRestaurante(String nombre, String ubicacion)
             throws SQLException {
+        return registrarRestaurante(nombre, ubicacion, "");
+    }
+
+    public int registrarRestaurante(String nombre, String ubicacion, String descripcion)
+            throws SQLException {
         SesionAdministrador.exigirSesion();
-        return restauranteDAO.insertar(nombre, ubicacion);
+        return restauranteDAO.insertar(nombre, ubicacion, descripcion);
+    }
+
+    public void actualizarDescripcion(int idRestaurante, String descripcion)
+            throws SQLException {
+        SesionAdministrador.exigirSesion();
+        restauranteDAO.actualizarDescripcion(idRestaurante, descripcion);
     }
 
     /** El catálogo público usa directamente el DAO, sin exigir una sesión. */
@@ -62,6 +82,12 @@ public class ControladorGestionRestaurantes {
                 datos.getValue().getNombre()));
         columnaUbicacion.setCellValueFactory(datos -> new ReadOnlyStringWrapper(
                 datos.getValue().getUbicacion()));
+        columnaDescripcion.setCellValueFactory(datos -> new ReadOnlyStringWrapper(
+                datos.getValue().getDescripcion()));
+        tablaRestaurantes.getSelectionModel().selectedItemProperty().addListener(
+                (observable, anterior, seleccionado) -> botonEditarDescripcion.setDisable(
+                        seleccionado == null || !SesionAdministrador.haySesionActiva()));
+        botonEditarDescripcion.setDisable(true);
         tablaRestaurantes.setPlaceholder(new Label("No hay restaurantes registrados."));
         cargarRestaurantes();
     }
@@ -94,9 +120,11 @@ public class ControladorGestionRestaurantes {
     @FXML
     private void guardarRestaurante() {
         try {
-            int id = registrarRestaurante(campoNombre.getText(), campoUbicacion.getText());
+            int id = registrarRestaurante(campoNombre.getText(), campoUbicacion.getText(),
+                    campoDescripcion.getText());
             campoNombre.clear();
             campoUbicacion.clear();
+            campoDescripcion.clear();
 
             // La inserción ya terminó. Un fallo al refrescar no debe presentarse
             // como un fallo de registro, porque podría provocar un registro duplicado.
@@ -121,12 +149,70 @@ public class ControladorGestionRestaurantes {
         }
     }
 
+    @FXML
+    private void editarDescripcionSeleccionada() {
+        if (!SesionAdministrador.haySesionActiva()) {
+            bloquearAcceso();
+            return;
+        }
+        Restaurante seleccionado = tablaRestaurantes.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            mostrarMensaje("Selecciona un restaurante para editar su descripción.", true);
+            return;
+        }
+
+        TextArea editor = new TextArea(seleccionado.getDescripcion());
+        editor.setWrapText(true);
+        editor.setPrefRowCount(4);
+        editor.setPrefColumnCount(42);
+        Label etiqueta = new Label("Descripción (opcional)");
+        etiqueta.setLabelFor(editor);
+
+        Dialog<String> dialogo = new Dialog<>();
+        dialogo.initOwner(tablaRestaurantes.getScene().getWindow());
+        dialogo.setTitle("Editar descripción");
+        dialogo.setHeaderText(seleccionado.getNombre());
+        dialogo.setResizable(true);
+        dialogo.getDialogPane().setContent(new VBox(10, etiqueta, editor));
+        ButtonType guardar = new ButtonType("Guardar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialogo.getDialogPane().getButtonTypes().addAll(guardar, cancelar);
+        dialogo.setResultConverter(boton -> boton == guardar ? editor.getText() : null);
+        Optional<String> resultado = dialogo.showAndWait();
+        if (resultado.isEmpty()) {
+            return;
+        }
+
+        try {
+            actualizarDescripcion(seleccionado.getIdRestaurante(), resultado.get());
+            try {
+                actualizarListado();
+                mostrarMensaje("Descripción actualizada.", false);
+            } catch (SQLException excepcion) {
+                etiquetaResumen.setText("Listado pendiente de actualizar.");
+                mostrarMensaje("La descripción se guardó, pero no se pudo actualizar"
+                        + " el listado. Pulsa Actualizar.", true);
+                excepcion.printStackTrace();
+            }
+        } catch (SecurityException excepcion) {
+            bloquearAcceso();
+        } catch (IllegalArgumentException excepcion) {
+            mostrarMensaje(excepcion.getMessage(), true);
+        } catch (SQLException excepcion) {
+            mostrarMensaje("No se pudo completar la actualización de la descripción."
+                    + " Actualiza el listado para comprobarla.", true);
+            excepcion.printStackTrace();
+        }
+    }
+
     private void bloquearAcceso() {
         campoNombre.setDisable(true);
         campoUbicacion.setDisable(true);
+        campoDescripcion.setDisable(true);
         botonGuardar.setDisable(true);
         botonActualizar.setDisable(true);
         botonProductos.setDisable(true);
+        botonEditarDescripcion.setDisable(true);
         tablaRestaurantes.getItems().clear();
         tablaRestaurantes.setDisable(true);
         tablaRestaurantes.setPlaceholder(new Label("Acceso administrativo requerido."));
