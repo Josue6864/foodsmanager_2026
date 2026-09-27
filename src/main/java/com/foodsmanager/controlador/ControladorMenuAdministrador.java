@@ -9,16 +9,23 @@ import javafx.scene.control.Label;
 public class ControladorMenuAdministrador {
 
     @FXML private Button botonProductos;
+    @FXML private Button botonRestaurantes;
     @FXML private Label etiquetaUsuario;
     @FXML private Label etiquetaMensaje;
 
     @FXML
     private void initialize() {
+        actualizarEstadoSesion();
+    }
+
+    private void actualizarEstadoSesion() {
         boolean autorizado = SesionAdministrador.haySesionActiva();
         botonProductos.setDisable(!autorizado);
+        botonRestaurantes.setDisable(!autorizado);
         etiquetaUsuario.setText(autorizado
                 ? "Sesión: " + SesionAdministrador.obtenerUsuario() : "Sin sesión");
-        etiquetaMensaje.setText(autorizado ? "" : "Debe iniciar sesión como administrador.");
+        etiquetaMensaje.setText(autorizado
+                ? "" : "Debe iniciar sesión como administrador.");
     }
 
     @FXML
@@ -33,10 +40,20 @@ public class ControladorMenuAdministrador {
     }
 
     @FXML
+    private void gestionarRestaurantes(ActionEvent evento) {
+        if (!SesionAdministrador.haySesionActiva()) {
+            cerrarSesion(evento);
+            return;
+        }
+        NavegadorVistas.cambiarVista(evento,
+                "/com/foodsmanager/vista/gestion-restaurantes.fxml",
+                "FoodsManager - Gestionar restaurantes");
+    }
+
+    @FXML
     private void cerrarSesion(ActionEvent evento) {
         SesionAdministrador.cerrar();
-        botonProductos.setDisable(true);
-        etiquetaUsuario.setText("Sin sesión");
+        actualizarEstadoSesion();
         NavegadorVistas.cambiarVista(evento,
                 "/com/foodsmanager/vista/login.fxml",
                 "FoodsManager - Acceso administrativo");

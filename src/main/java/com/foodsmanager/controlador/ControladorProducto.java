@@ -107,8 +107,8 @@ public class ControladorProducto {
                 disponible
         );
 
-        // Se utiliza el método existente del DAO; no se presupone
-        // un buscarPorId() que RestauranteDAO todavía no tiene.
+        // Se conserva esta consulta para mantener el comportamiento
+        // y las pruebas existentes del registro de productos.
         boolean restauranteExiste = restauranteDAO.listarTodos()
                 .stream()
                 .anyMatch(restaurante
@@ -162,52 +162,41 @@ public class ControladorProducto {
     }
 
     public void cargarProductosPorRestaurante(int idRestaurante) {
-        if (idRestaurante <= 0) {
-            idRestauranteActual = 0;
+        idRestauranteActual = 0;
+        etiquetaRestaurante.setText("Productos");
+        etiquetaRestaurante.setWrapText(true);
+        contenedorProductos.getChildren().clear();
+        etiquetaSinProductos.setVisible(false);
+        etiquetaSinProductos.setManaged(false);
 
-            etiquetaRestaurante.setText(
-                    "Productos"
-            );
-            mostrarSinProductos(
-                    "El restaurante seleccionado no es válido."
-            );
+        if (idRestaurante <= 0) {
+            mostrarSinProductos("El restaurante seleccionado no es válido.");
             return;
         }
-        idRestauranteActual = idRestaurante;
 
-        contextoNavegacion.setIdUltimoRestaurante(
-                idRestaurante
-        );
-        colocarNombreRestaurante(idRestaurante);
-        contenedorProductos.getChildren().clear();
         try {
-            List<Producto> productos
-                    = listarProductosPorRestaurante(
-                            idRestaurante
-                    );
-
-            if (productos.isEmpty()) {
-                mostrarSinProductos(
-                        "Este restaurante no tiene "
-                        + "productos registrados."
-                );
-
+            Restaurante restaurante = restauranteDAO.buscarPorId(idRestaurante);
+            if (restaurante == null) {
+                mostrarSinProductos("El restaurante seleccionado ya no existe.");
                 return;
             }
-            etiquetaSinProductos.setVisible(false);
-            etiquetaSinProductos.setManaged(false);
+
+            idRestauranteActual = restaurante.getIdRestaurante();
+            contextoNavegacion.setIdUltimoRestaurante(idRestauranteActual);
+            etiquetaRestaurante.setText("Productos - " + restaurante.getNombre());
+
+            List<Producto> productos = listarProductosPorRestaurante(idRestauranteActual);
+            if (productos.isEmpty()) {
+                mostrarSinProductos("Este restaurante no tiene productos registrados.");
+                return;
+            }
+
             for (Producto producto : productos) {
-                contenedorProductos
-                        .getChildren()
-                        .add(
-                                crearTarjetaProducto(producto)
-                        );
+                contenedorProductos.getChildren().add(crearTarjetaProducto(producto));
             }
         } catch (SQLException excepcion) {
-            mostrarSinProductos(
-                    "No se pudieron cargar los productos."
-            );
-
+            mostrarSinProductos("No se pudo cargar el catálogo del restaurante."
+                    + " Vuelve a restaurantes e inténtalo de nuevo.");
             excepcion.printStackTrace();
         }
     }
@@ -302,23 +291,6 @@ public class ControladorProducto {
             return;
         }
         carrito.agregarProducto(producto);
-    }
-
-    private void colocarNombreRestaurante(int idRestaurante) {
-        switch (idRestaurante) {
-            case 1:
-                etiquetaRestaurante.setText("Productos - Sabor Chapín");
-                break;
-            case 2:
-                etiquetaRestaurante.setText("Productos - Pizzería Central");
-                break;
-            case 3:
-                etiquetaRestaurante.setText("Productos - Burger House");
-                break;
-            default:
-                etiquetaRestaurante.setText("Productos");
-                break;
-        }
     }
 
     private void mostrarSinProductos(String mensaje) {
