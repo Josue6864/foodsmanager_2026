@@ -49,20 +49,21 @@
                                 </VBox>
                             </graphic>
                         </Button>
-                        <Button disable="true" accessibleText="Gestionar restaurantes. Próximamente."
+                        <Button fx:id="botonRestaurantes" onAction="#gestionarRestaurantes"
+                                accessibleText="Gestionar restaurantes"
                                 contentDisplay="GRAPHIC_ONLY" alignment="TOP_LEFT"
                                 maxWidth="Infinity" prefHeight="270" styleClass="admin-tarjeta-menu"
                                 GridPane.columnIndex="1">
                             <graphic>
                                 <VBox spacing="17" mouseTransparent="true">
-                                    <StackPane maxWidth="54" prefWidth="54" prefHeight="54" styleClass="admin-icono-pendiente">
-                                        <SVGPath content="M4 3 H20 L24 10 H0 Z M3 12 H21 V23 H14 V16 H10 V23 H3 Z" styleClass="admin-icono-trazo-pendiente"/>
+                                    <StackPane maxWidth="54" prefWidth="54" prefHeight="54" styleClass="admin-icono">
+                                        <SVGPath content="M4 3 H20 L24 10 H0 Z M3 12 H21 V23 H14 V16 H10 V23 H3 Z" styleClass="admin-icono-trazo"/>
                                     </StackPane>
                                     <Label text="Gestionar restaurantes" styleClass="admin-titulo-tarjeta" wrapText="true"/>
-                                    <Label text="Un espacio para administrar los restaurantes de FoodsManager."
+                                    <Label text="Consulta los restaurantes registrados y agrega nuevos al catálogo."
                                            wrapText="true" maxWidth="300" styleClass="admin-descripcion-tarjeta"/>
                                     <Region VBox.vgrow="ALWAYS"/>
-                                    <Label text="Próximamente" styleClass="admin-proximamente"/>
+                                    <Label text="Abrir restaurantes  →" styleClass="admin-enlace"/>
                                 </VBox>
                             </graphic>
                         </Button>
