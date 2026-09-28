@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="950" prefHeight="650" styleClass="pantalla-principal"
+            stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.ControladorGestionRestaurantes">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="barra-superior">
+            <padding><Insets top="18" right="28" bottom="18" left="28"/></padding>
+            <Label text="FoodsManager" styleClass="marca"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Menú" onAction="#volverAlMenu" styleClass="boton-secundario"/>
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="boton-secundario"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
+            <content>
+                <VBox spacing="18">
+                    <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+                    <Label text="Gestionar restaurantes" styleClass="titulo-principal" wrapText="true"/>
+                    <Label text="Consulta los restaurantes y registra uno nuevo." styleClass="subtitulo" wrapText="true"/>
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <Label fx:id="etiquetaResumen" text="Cargando restaurantes..." styleClass="admin-resumen" wrapText="true"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="botonActualizar" text="Actualizar" onAction="#cargarRestaurantes" styleClass="boton-regresar"/>
+                    </HBox>
+                    <TableView fx:id="tablaRestaurantes" prefHeight="230" minHeight="180" styleClass="admin-tabla">
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="columnaId" text="ID" prefWidth="65" minWidth="50" maxWidth="90"/>
+                            <TableColumn fx:id="columnaNombre" text="Restaurante" prefWidth="250" minWidth="150"/>
+                            <TableColumn fx:id="columnaUbicacion" text="Ubicación" prefWidth="200" minWidth="110"/>
+                            <TableColumn fx:id="columnaDescripcion" text="Descripción" prefWidth="340" minWidth="180"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="14" alignment="CENTER_LEFT">
+                        <Button fx:id="botonEditarDescripcion" text="Editar descripción" disable="true"
+                                onAction="#editarDescripcionSeleccionada" styleClass="boton-regresar"/>
+                        <Label text="Selecciona un restaurante para cambiar su descripción."
+                               styleClass="subtitulo" wrapText="true"/>
+                    </HBox>
+                    <VBox spacing="14" styleClass="tarjeta-restaurante">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="Agregar restaurante" styleClass="admin-titulo-tarjeta" wrapText="true"/>
+                        <Label text="Nombre y ubicación son obligatorios. Puedes agregar una descripción."
+                               styleClass="subtitulo" wrapText="true"/>
+                        <GridPane hgap="18" vgap="8">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                                <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                            </columnConstraints>
+                            <TextField fx:id="campoNombre" promptText="Ejemplo: El Comal" minWidth="0"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <TextField fx:id="campoUbicacion" promptText="Ejemplo: Zona 7" minWidth="0"
+                                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            <Label text="Nombre" labelFor="$campoNombre" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Label text="Ubicación" labelFor="$campoUbicacion" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            <TextArea fx:id="campoDescripcion" promptText="Ejemplo: Comida casera y desayunos tradicionales."
+                                      wrapText="true" prefRowCount="3" minWidth="0"
+                                      GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+                            <Label text="Descripción (opcional)" labelFor="$campoDescripcion"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+                        </GridPane>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Button fx:id="botonGuardar" text="Guardar restaurante" onAction="#guardarRestaurante"
+                                    styleClass="boton-principal"/>
+                        </HBox>
+                    </VBox>
+                    <Label fx:id="etiquetaMensaje" wrapText="true" visible="false" managed="false"/>
+                    <Separator/>
+                    <Label text="Para agregar productos al restaurante registrado, abre Gestionar productos."
+                           styleClass="subtitulo" wrapText="true"/>
+                    <HBox>
+                        <Button fx:id="botonProductos" text="Gestionar productos" onAction="#gestionarProductos"
+                                styleClass="boton-secundario"/>
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>
