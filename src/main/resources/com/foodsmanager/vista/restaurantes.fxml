@@ -1,174 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane
-        prefHeight="600.0"
-        prefWidth="950.0"
-        styleClass="pantalla-principal"
-        stylesheets="@tema.css"
-        xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.foodsmanager.controlador.ControladorRestaurante">
-
+<BorderPane prefWidth="950" prefHeight="650" styleClass="pantalla-principal"
+            stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.ControladorGestionRestaurantes">
     <top>
-        <HBox
-                alignment="CENTER_LEFT"
-                spacing="16.0"
-                styleClass="barra-superior">
-
-            <padding>
-                <Insets top="16.0" right="24.0" bottom="16.0" left="24.0"/>
-            </padding>
-
-            <Label
-                    text="FoodsManager"
-                    styleClass="marca"/>
-
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="barra-superior">
+            <padding><Insets top="18" right="28" bottom="18" left="28"/></padding>
+            <Label text="FoodsManager" styleClass="marca"/>
             <Region HBox.hgrow="ALWAYS"/>
-
-            <Button
-                    fx:id="botonIniciarSesion"
-                    onAction="#abrirLogin"
-                    text="Iniciar sesión como administrador"
-                    styleClass="boton-secundario"/>
+            <Button text="Menú" onAction="#volverAlMenu" styleClass="boton-secundario"/>
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="boton-secundario"/>
         </HBox>
     </top>
-
     <center>
-        <ScrollPane
-                fitToWidth="true"
-                hbarPolicy="NEVER"
-                styleClass="scroll-transparente">
-
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
             <content>
-                <VBox
-                        alignment="TOP_CENTER"
-                        spacing="24.0"
-                        styleClass="seccion-restaurantes">
-
-                    <padding>
-                        <Insets top="38.0" right="35.0" bottom="38.0" left="35.0"/>
-                    </padding>
-
-                    <Label
-                            text="Restaurantes disponibles"
-                            styleClass="titulo-principal"/>
-
-                    <Label
-                            text="Selecciona un restaurante para consultar sus productos."
-                            styleClass="subtitulo"
-                            wrapText="true"/>
-
-                    <TilePane
-                            fx:id="contenedorRestaurantes"
-                            alignment="CENTER"
-                            hgap="22.0"
-                            prefColumns="3"
-                            vgap="22.0">
-
-                        <VBox
-                                prefHeight="230.0"
-                                prefWidth="250.0"
-                                spacing="14.0"
-                                styleClass="tarjeta-restaurante">
-
-                            <Label
-                                    text="Sabor Chapín"
-                                    styleClass="nombre-restaurante"/>
-
-                            <Label
-                                    text="Zona 1"
-                                    styleClass="ubicacion-restaurante"/>
-
-                            <Label
-                                    text="Comida tradicional guatemalteca."
-                                    styleClass="descripcion-restaurante"
-                                    wrapText="true"/>
-
-                            <Region VBox.vgrow="ALWAYS"/>
-
-                            <Button
-                                    maxWidth="Infinity"
-                                    text="Ver productos"
-                                    onAction="#verProductosSaborChapin"
+                <VBox spacing="18">
+                    <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+                    <Label text="Gestionar restaurantes" styleClass="titulo-principal" wrapText="true"/>
+                    <Label text="Consulta los restaurantes y registra uno nuevo." styleClass="subtitulo" wrapText="true"/>
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <Label fx:id="etiquetaResumen" text="Cargando restaurantes..." styleClass="admin-resumen" wrapText="true"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="botonActualizar" text="Actualizar" onAction="#cargarRestaurantes" styleClass="boton-regresar"/>
+                    </HBox>
+                    <TableView fx:id="tablaRestaurantes" prefHeight="230" minHeight="180" styleClass="admin-tabla">
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="columnaId" text="ID" prefWidth="65" minWidth="50" maxWidth="90"/>
+                            <TableColumn fx:id="columnaNombre" text="Restaurante" prefWidth="250" minWidth="150"/>
+                            <TableColumn fx:id="columnaUbicacion" text="Ubicación" prefWidth="200" minWidth="110"/>
+                            <TableColumn fx:id="columnaDescripcion" text="Descripción" prefWidth="340" minWidth="180"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="14" alignment="CENTER_LEFT">
+                        <Button fx:id="botonEditarDescripcion" text="Editar descripción" disable="true"
+                                onAction="#editarDescripcionSeleccionada" styleClass="boton-regresar"/>
+                        <Label text="Selecciona un restaurante para cambiar su descripción."
+                               styleClass="subtitulo" wrapText="true"/>
+                    </HBox>
+                    <VBox spacing="14" styleClass="tarjeta-restaurante">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="Agregar restaurante" styleClass="admin-titulo-tarjeta" wrapText="true"/>
+                        <Label text="Nombre y ubicación son obligatorios. Puedes agregar una descripción."
+                               styleClass="subtitulo" wrapText="true"/>
+                        <GridPane hgap="18" vgap="8">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                                <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                            </columnConstraints>
+                            <TextField fx:id="campoNombre" promptText="Ejemplo: El Comal" minWidth="0"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <TextField fx:id="campoUbicacion" promptText="Ejemplo: Zona 7" minWidth="0"
+                                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            <Label text="Nombre" labelFor="$campoNombre" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Label text="Ubicación" labelFor="$campoUbicacion" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            <TextArea fx:id="campoDescripcion" promptText="Ejemplo: Comida casera y desayunos tradicionales."
+                                      wrapText="true" prefRowCount="3" minWidth="0"
+                                      GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+                            <Label text="Descripción (opcional)" labelFor="$campoDescripcion"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+                        </GridPane>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Button fx:id="botonGuardar" text="Guardar restaurante" onAction="#guardarRestaurante"
                                     styleClass="boton-principal"/>
-                        </VBox>
-
-                        <VBox
-                                prefHeight="230.0"
-                                prefWidth="250.0"
-                                spacing="14.0"
-                                styleClass="tarjeta-restaurante">
-
-                            <Label
-                                    text="Pizzería Central"
-                                    styleClass="nombre-restaurante"/>
-
-                            <Label
-                                    text="Zona 4"
-                                    styleClass="ubicacion-restaurante"/>
-
-                            <Label
-                                    text="Pizzas y especialidades para compartir."
-                                    styleClass="descripcion-restaurante"
-                                    wrapText="true"/>
-
-                            <Region VBox.vgrow="ALWAYS"/>
-
-                            <Button
-                                    maxWidth="Infinity"
-                                    text="Ver productos"
-                                    onAction="#verProductosPizzeriaCentral"
-                                    styleClass="boton-principal"/>
-                        </VBox>
-
-                        <VBox
-                                prefHeight="230.0"
-                                prefWidth="250.0"
-                                spacing="14.0"
-                                styleClass="tarjeta-restaurante">
-
-                            <Label
-                                    text="Burger House"
-                                    styleClass="nombre-restaurante"/>
-
-                            <Label
-                                    text="Zona 10"
-                                    styleClass="ubicacion-restaurante"/>
-
-                            <Label
-                                    text="Hamburguesas, acompañamientos y bebidas."
-                                    styleClass="descripcion-restaurante"
-                                    wrapText="true"/>
-
-                            <Region VBox.vgrow="ALWAYS"/>
-
-                            <Button
-                                    maxWidth="Infinity"
-                                    text="Ver productos"
-                                    onAction="#verProductosBurgerHouse"
-                                    styleClass="boton-principal"/>
-                        </VBox>
-
-                    </TilePane>
+                        </HBox>
+                    </VBox>
+                    <Label fx:id="etiquetaMensaje" wrapText="true" visible="false" managed="false"/>
+                    <Separator/>
+                    <Label text="Para agregar productos al restaurante registrado, abre Gestionar productos."
+                           styleClass="subtitulo" wrapText="true"/>
+                    <HBox>
+                        <Button fx:id="botonProductos" text="Gestionar productos" onAction="#gestionarProductos"
+                                styleClass="boton-secundario"/>
+                    </HBox>
                 </VBox>
             </content>
         </ScrollPane>
     </center>
-
-    <bottom>
-        <HBox
-                alignment="CENTER"
-                styleClass="pie-pagina">
-
-            <padding>
-                <Insets top="14.0" right="20.0" bottom="14.0" left="20.0"/>
-            </padding>
-
-            <Label text="FoodsManager 2026"/>
-        </HBox>
-    </bottom>
-
 </BorderPane>
