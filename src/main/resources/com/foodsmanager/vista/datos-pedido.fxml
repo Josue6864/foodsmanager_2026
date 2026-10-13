@@ -12,41 +12,141 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="806.0" styleClass="contenedor-principal" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.foodsmanager.controlador.DatosPedidoController">
-   <center>
-      <StackPane prefHeight="646.0" prefWidth="809.0" styleClass="pantalla-login" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="551.0" prefWidth="610.0" spacing="18.0" styleClass="tarjeta-login">
-               <children>
-                  <Label styleClass="marca-login" text="FoodsManager" />
-                  <VBox prefHeight="405.0" prefWidth="540.0">
-                     <children>
-                        <Label styleClass="etiqueta-formulario" text="Datos para recoger el pedido" />
-                        <Label styleClass="subtitulo" text="No necesitas crear una cuenta" />
-                        <Separator prefHeight="24.0" prefWidth="530.0" />
-                        <Label prefHeight="28.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Nombre" />
-                        <TextField fx:id="txtNombre" promptText="Nombre completo:" styleClass="campo-login" stylesheets="@tema.css" />
-                        <Label prefHeight="34.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Teléfono" />
-                        <TextField fx:id="txtTelefono" promptText="Teléfono:" styleClass="campo-login" />
-                        <Label prefHeight="30.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Nombre de quien recogerá" />
-                        <TextField fx:id="txtPersonaRecoge" promptText="Nombre de quien recogerá:" styleClass="campo-login" />
-                        <Label prefHeight="30.0" prefWidth="184.0" styleClass="etiqueta-formulario" text="Hora aprocimada de recogida" />
-                        <ComboBox fx:id="cmbHoraRecogida" prefHeight="25.0" prefWidth="242.0" promptText="hora aproximada de recogida" />
-                        <Label prefHeight="27.0" prefWidth="164.0" styleClass="etiqueta-formulario" text="Indicaciones adicionales" />
-                        <TextArea fx:id="txtIndicaciones" prefHeight="187.0" prefWidth="540.0" promptText="Indicaciones adicionales" styleClass="campo-login" />
-                     </children>
-                  </VBox>
-                  <HBox prefHeight="42.0" prefWidth="530.0">
-                     <children>
-                        <Region prefHeight="102.0" prefWidth="222.0" />
-                        <Button fx:id="btnRegresarCarrito" mnemonicParsing="false" onAction="#volverCarrito" styleClass="boton-regresar" text="Regresar al carrito" />
-                        <Region prefHeight="102.0" prefWidth="27.0" />
-                        <Button fx:id="btnConfirmarPago" mnemonicParsing="false" onAction="#confirmarPedido" styleClass="boton-pagar" stylesheets="@tema.css" text="Confirmar Pago" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </StackPane>
-   </center>
+<BorderPane maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="641.0"
+            prefWidth="806.0"
+            styleClass="contenedor-principal"
+            stylesheets="@tema.css"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.DatosPedidoController">
+
+    <center>
+        <StackPane prefHeight="646.0"
+                   prefWidth="809.0"
+                   styleClass="pantalla-login"
+                   style="-fx-background-color: linear-gradient(to bottom right, #FF6B35, #F72585, #7209B7);"
+                   BorderPane.alignment="CENTER">
+
+            <children>
+                <VBox alignment="TOP_CENTER"
+                      maxHeight="-Infinity"
+                      maxWidth="-Infinity"
+                      prefHeight="551.0"
+                      prefWidth="610.0"
+                      spacing="18.0"
+                      styleClass="tarjeta-login"
+                      style="-fx-background-color: #FFFFFF; -fx-background-radius: 24px; -fx-border-color: #FFBE0B; -fx-border-width: 4px; -fx-border-radius: 24px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 30, 0.2, 0, 10);">
+
+                    <children>
+                        <Label styleClass="marca-login"
+                               style="-fx-text-fill: #F72585; -fx-font-size: 30px; -fx-font-weight: bold;"
+                               text="FoodsManager" />
+
+                        <VBox prefHeight="405.0" prefWidth="540.0">
+                            <children>
+                                <Label styleClass="etiqueta-formulario"
+                                       style="-fx-text-fill: #7209B7; -fx-font-size: 18px; -fx-font-weight: bold;"
+                                       text="Datos para recoger el pedido" />
+
+                                <Label styleClass="subtitulo"
+                                       style="-fx-text-fill: #FF6B35; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       text="No necesitas crear una cuenta" />
+
+                                <Separator prefHeight="24.0"
+                                           prefWidth="530.0" />
+
+                                <Label prefHeight="28.0"
+                                       prefWidth="164.0"
+                                       styleClass="etiqueta-formulario"
+                                       style="-fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       text="Nombre" />
+
+                                <TextField fx:id="txtNombre"
+                                           promptText="Nombre completo:"
+                                           styleClass="campo-login"
+                                           stylesheets="@tema.css"
+                                           style="-fx-background-color: #FFF3E0; -fx-background-radius: 10px; -fx-border-color: #FF9F1C; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-padding: 4 10 4 10;" />
+
+                                <Label prefHeight="34.0"
+                                       prefWidth="164.0"
+                                       styleClass="etiqueta-formulario"
+                                       style="-fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       text="Teléfono" />
+
+                                <TextField fx:id="txtTelefono"
+                                           promptText="Teléfono:"
+                                           styleClass="campo-login"
+                                           style="-fx-background-color: #FFF3E0; -fx-background-radius: 10px; -fx-border-color: #FF9F1C; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-padding: 4 10 4 10;" />
+
+                                <Label prefHeight="30.0"
+                                       prefWidth="260.0"
+                                       styleClass="etiqueta-formulario"
+                                       style="-fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       text="Nombre de quien recogerá" />
+
+                                <TextField fx:id="txtPersonaRecoge"
+                                           promptText="Nombre de quien recogerá:"
+                                           styleClass="campo-login"
+                                           style="-fx-background-color: #FFF3E0; -fx-background-radius: 10px; -fx-border-color: #FF9F1C; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-padding: 4 10 4 10;" />
+
+                                <Label prefHeight="30.0"
+                                       prefWidth="260.0"
+                                       styleClass="etiqueta-formulario"
+                                       style="-fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       text="Hora aproximada de recogida" />
+
+                                <ComboBox fx:id="cmbHoraRecogida"
+                                          prefHeight="25.0"
+                                          prefWidth="242.0"
+                                          promptText="hora aproximada de recogida"
+                                          style="-fx-background-color: #E0F7FA; -fx-background-radius: 10px; -fx-border-color: #00B4D8; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-font-size: 13px;" />
+
+                                <Label prefHeight="27.0"
+                                       prefWidth="164.0"
+                                       styleClass="etiqueta-formulario"
+                                       style="-fx-text-fill: #3A0CA3; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       text="Indicaciones adicionales" />
+
+                                <TextArea fx:id="txtIndicaciones"
+                                          prefHeight="187.0"
+                                          prefWidth="540.0"
+                                          promptText="Indicaciones adicionales"
+                                          styleClass="campo-login"
+                                          style="-fx-control-inner-background: #FFF3E0; -fx-background-color: #FF9F1C, #FFF3E0; -fx-background-insets: 0, 2; -fx-background-radius: 10px, 8px; -fx-text-fill: #3A0CA3; -fx-font-size: 13px;" />
+                            </children>
+                        </VBox>
+
+                        <HBox prefHeight="42.0" prefWidth="530.0">
+                            <children>
+                                <Region prefHeight="102.0"
+                                        prefWidth="222.0" />
+
+                                <Button fx:id="btnRegresarCarrito"
+                                        mnemonicParsing="false"
+                                        onAction="#volverCarrito"
+                                        styleClass="boton-regresar"
+                                        style="-fx-background-color: linear-gradient(to right, #3A86FF, #00B4D8); -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 8 16 8 16; -fx-cursor: hand;"
+                                        text="Regresar al carrito" />
+
+                                <Region prefHeight="102.0"
+                                        prefWidth="27.0" />
+
+                                <Button fx:id="btnConfirmarPago"
+                                        mnemonicParsing="false"
+                                        onAction="#confirmarPedido"
+                                        styleClass="boton-pagar"
+                                        stylesheets="@tema.css"
+                                        style="-fx-background-color: linear-gradient(to right, #06D6A0, #00B84A); -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 8 16 8 16; -fx-cursor: hand;"
+                                        text="Confirmar Pago" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
 </BorderPane>
