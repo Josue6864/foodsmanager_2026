@@ -9,6 +9,10 @@ import com.foodsmanager.modelo.DetallePedido;
 import com.foodsmanager.modelo.ItemCarrito;
 import com.foodsmanager.modelo.Pedido;
 import com.foodsmanager.persistencia.PedidoDAO;
+import com.foodsmanager.modelo.UsuarioEstandar;
+import com.foodsmanager.controlador.ControladorUsuarioEstandar;
+import java.io.IOException;
+import java.util.Optional;
 
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -51,14 +55,14 @@ public class DatosPedidoController {
     @FXML
     private Button btnConfirmarPago;
 
-    private final List<ItemCarrito> items =
-            new ArrayList<>();
+    private final List<ItemCarrito> items
+            = new ArrayList<>();
 
-    private final PedidoDAO pedidoDAO =
-            new PedidoDAO();
+    private final PedidoDAO pedidoDAO
+            = new PedidoDAO();
 
-    private final CarritoCompra carrito =
-            CarritoCompra.getInstancia();
+    private final CarritoCompra carrito
+            = CarritoCompra.getInstancia();
 
     private double total;
 
@@ -74,8 +78,7 @@ public class DatosPedidoController {
                 .addListener((
                         observable,
                         textoAnterior,
-                        textoNuevo
-                ) -> {
+                        textoNuevo) -> {
                     if (!textoNuevo.matches("\\d{0,8}")) {
                         txtTelefono.setText(textoAnterior);
                     }
@@ -103,8 +106,8 @@ public class DatosPedidoController {
                 .withSecond(0)
                 .withNano(0);
 
-        int minutosRestantes =
-                primeraHora.getMinute() % 15;
+        int minutosRestantes
+                = primeraHora.getMinute() % 15;
 
         if (minutosRestantes != 0) {
             primeraHora = primeraHora.plusMinutes(
@@ -112,12 +115,12 @@ public class DatosPedidoController {
             );
         }
 
-        DateTimeFormatter formato =
-                DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formato
+                = DateTimeFormatter.ofPattern("HH:mm");
 
         for (int i = 0; i < 12; i++) {
-            LocalTime horaDisponible =
-                    primeraHora.plusMinutes(i * 15L);
+            LocalTime horaDisponible
+                    = primeraHora.plusMinutes(i * 15L);
 
             cmbHoraRecogida.getItems().add(
                     horaDisponible.format(formato)
@@ -138,6 +141,7 @@ public class DatosPedidoController {
     private void confirmarPedido(ActionEvent evento) {
         limpiarEstilosDeError();
 
+        // 1. Validar los datos antes de abrir el acceso.
         if (!validarFormulario()) {
             return;
         }
@@ -147,24 +151,80 @@ public class DatosPedidoController {
                     "Carrito vacío",
                     "No hay productos para registrar."
             );
+
             return;
         }
 
-        String nombre =
-                txtNombre.getText().trim();
+        /*
+     * 2. Abrir la ventana obligatoria de inicio
+     * de sesión o creación de cuenta.
+         */
+        Optional<UsuarioEstandar> resultadoAcceso;
 
-        String telefono =
-                txtTelefono.getText().trim();
+        try {
+            resultadoAcceso
+                    = ControladorUsuarioEstandar.mostrar(
+                            txtNombre
+                                    .getScene()
+                                    .getWindow(),
+                            txtNombre
+                                    .getText()
+                                    .trim(),
+                            txtTelefono
+                                    .getText()
+                                    .trim()
+                    );
 
-        String personaRecoge =
-                txtPersonaRecoge.getText().trim();
+        } catch (IOException excepcion) {
+            mostrarError(
+                    "No se pudo abrir la ventana "
+                    + "de inicio de sesión.\n"
+                    + excepcion.getMessage()
+            );
 
-        String horaRecogida =
-                cmbHoraRecogida.getValue();
+            excepcion.printStackTrace();
+            return;
+        }
 
-        String indicaciones =
-                txtIndicaciones.getText().trim();
+        /*
+     * Si el usuario cerró o canceló la ventana,
+     * el pago no debe continuar.
+         */
+        if (resultadoAcceso.isEmpty()) {
+            return;
+        }
 
+        UsuarioEstandar usuarioAutenticado
+                = resultadoAcceso.get();
+
+        /*
+     * 3. Usar los datos de la cuenta autenticada.
+     * Esto evita registrar el pedido con datos
+     * distintos a los de la cuenta.
+         */
+        String nombre
+                = usuarioAutenticado.getNombre();
+
+        String telefono
+                = usuarioAutenticado.getTelefono();
+
+        String personaRecoge
+                = txtPersonaRecoge
+                        .getText()
+                        .trim();
+
+        String horaRecogida
+                = cmbHoraRecogida.getValue();
+
+        String indicaciones
+                = txtIndicaciones
+                        .getText()
+                        .trim();
+
+        /*
+     * 4. Crear el pedido solamente después
+     * de autenticar al usuario.
+         */
         Pedido pedido = new Pedido(
                 nombre,
                 telefono,
@@ -174,8 +234,8 @@ public class DatosPedidoController {
         );
 
         for (ItemCarrito item : items) {
-            DetallePedido detalle =
-                    new DetallePedido(
+            DetallePedido detalle
+                    = new DetallePedido(
                             item.getProducto(),
                             item.getCantidad(),
                             item.getProducto().getPrecio()
@@ -184,11 +244,17 @@ public class DatosPedidoController {
             pedido.agregarDetalle(detalle);
         }
 
-        btnConfirmarPago.setDisable(true);
+        Button botonPresionado
+                = (Button) evento.getSource();
 
+        botonPresionado.setDisable(true);
+
+        /*
+     * 5. Registrar el pedido después del acceso.
+         */
         try {
-            int idPedido =
-                    pedidoDAO.registrarPedido(pedido);
+            int idPedido
+                    = pedidoDAO.registrarPedido(pedido);
 
             carrito.vaciar();
 
@@ -204,7 +270,7 @@ public class DatosPedidoController {
             );
 
         } catch (SQLException excepcion) {
-            btnConfirmarPago.setDisable(false);
+            botonPresionado.setDisable(false);
 
             mostrarError(
                     "No se pudo registrar el pedido.\n"
@@ -216,14 +282,14 @@ public class DatosPedidoController {
     }
 
     private boolean validarFormulario() {
-        String nombre =
-                txtNombre.getText().trim();
+        String nombre
+                = txtNombre.getText().trim();
 
-        String telefono =
-                txtTelefono.getText().trim();
+        String telefono
+                = txtTelefono.getText().trim();
 
-        String personaRecoge =
-                txtPersonaRecoge.getText().trim();
+        String personaRecoge
+                = txtPersonaRecoge.getText().trim();
 
         if (nombre.isEmpty()) {
             marcarError(txtNombre);

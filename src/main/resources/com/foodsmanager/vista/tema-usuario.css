@@ -1,0 +1,70 @@
+.selector-cuenta {
+    -fx-background-color: #F1E8DB;
+    -fx-background-radius: 8px;
+    -fx-padding: 4px;
+    -fx-spacing: 4px;
+}
+
+.selector-cuenta-boton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #5F6368;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 18px;
+    -fx-cursor: hand;
+}
+
+.selector-cuenta-boton:hover {
+    -fx-background-color: rgba(47, 93, 80, 0.10);
+    -fx-background-radius: 6px;
+}
+
+.selector-cuenta-boton.selector-activo {
+    -fx-background-color: white;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #2F5D50;
+    -fx-effect: dropshadow(gaussian, rgba(38, 50, 56, 0.12), 6, 0.1, 0, 2);
+}
+
+.campo-solo-lectura {
+    -fx-background-color: #F4F1EB;
+    -fx-text-fill: #2F5D50;
+    -fx-font-weight: bold;
+}
+
+.scroll-acceso {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-acceso > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-acceso > .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-acceso .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 11px;
+}
+
+.scroll-acceso .scroll-bar:vertical .thumb {
+    -fx-background-color: #D8CBB8;
+    -fx-background-radius: 6px;
+}
+
+.scroll-acceso .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #D97706;
+}
+
+.scroll-acceso .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-acceso .increment-button,
+.scroll-acceso .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2px;
+}

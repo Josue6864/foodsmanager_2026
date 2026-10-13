@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+        prefHeight="690.0"
+        prefWidth="760.0"
+        minHeight="450.0"
+        minWidth="600.0"
+        styleClass="pantalla-login"
+        stylesheets="@tema.css,@tema-usuario.css"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.foodsmanager.controlador.ControladorUsuarioEstandar">
+
+    <center>
+        <ScrollPane
+                fx:id="scrollContenido"
+                fitToWidth="true"
+                hbarPolicy="NEVER"
+                vbarPolicy="AS_NEEDED"
+                pannable="true"
+                styleClass="scroll-acceso">
+
+            <content>
+                <StackPane>
+                    <padding>
+                        <Insets
+                                top="30"
+                                right="38"
+                                bottom="30"
+                                left="38"/>
+                    </padding>
+
+                    <VBox
+                            alignment="TOP_CENTER"
+                            maxWidth="570"
+                            spacing="15"
+                            styleClass="tarjeta-login">
+
+                        <Label
+                                text="FoodsManager"
+                                styleClass="marca-login"/>
+
+                        <Label
+                                text="Inicio de sesión requerido"
+                                styleClass="titulo-login"
+                                wrapText="true"
+                                textAlignment="CENTER"/>
+
+                        <Label
+                                text="Para confirmar el pago, inicia sesión o crea una cuenta con los datos que acabas de ingresar."
+                                alignment="CENTER"
+                                textAlignment="CENTER"
+                                wrapText="true"
+                                styleClass="subtitulo"/>
+
+                        <HBox
+                                alignment="CENTER"
+                                maxWidth="Infinity"
+                                styleClass="selector-cuenta">
+
+                            <Button
+                                    fx:id="botonTengoCuenta"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"
+                                    onAction="#mostrarInicioSesion"
+                                    text="Ya tengo cuenta"
+                                    styleClass="selector-cuenta-boton"/>
+
+                            <Button
+                                    fx:id="botonCrearCuenta"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"
+                                    onAction="#mostrarRegistro"
+                                    text="Crear cuenta"
+                                    styleClass="selector-cuenta-boton"/>
+                        </HBox>
+
+                        <StackPane maxWidth="Infinity">
+
+                            <!-- Inicio de sesión -->
+                            <VBox
+                                    fx:id="panelInicioSesion"
+                                    maxWidth="Infinity"
+                                    spacing="12">
+
+                                <Label
+                                        text="Usuario"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <TextField
+                                        fx:id="campoUsuarioLogin"
+                                        maxWidth="Infinity"
+                                        promptText="nombre-número de teléfono"
+                                        styleClass="campo-login"/>
+
+                                <Label
+                                        text="Contraseña"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <PasswordField
+                                        fx:id="campoContrasenaLogin"
+                                        maxWidth="Infinity"
+                                        promptText="Ingresa tu contraseña"
+                                        styleClass="campo-login"/>
+
+                                <Button
+                                        defaultButton="true"
+                                        maxWidth="Infinity"
+                                        onAction="#iniciarSesion"
+                                        text="Iniciar sesión y continuar"
+                                        styleClass="boton-principal"/>
+                            </VBox>
+
+                            <!-- Creación de cuenta -->
+                            <VBox
+                                    fx:id="panelRegistro"
+                                    maxWidth="Infinity"
+                                    spacing="9"
+                                    visible="false"
+                                    managed="false">
+
+                                <Label
+                                        text="Nombre"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <TextField
+                                        fx:id="campoNombreRegistro"
+                                        maxWidth="Infinity"
+                                        styleClass="campo-login"/>
+
+                                <Label
+                                        text="Teléfono (único por cuenta)"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <TextField
+                                        fx:id="campoTelefonoRegistro"
+                                        maxWidth="Infinity"
+                                        styleClass="campo-login"/>
+
+                                <Label
+                                        text="Tu usuario será"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <TextField
+                                        fx:id="campoUsuarioGenerado"
+                                        editable="false"
+                                        maxWidth="Infinity"
+                                        styleClass="campo-login, campo-solo-lectura"/>
+
+                                <Label
+                                        text="Contraseña"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <PasswordField
+                                        fx:id="campoContrasenaRegistro"
+                                        maxWidth="Infinity"
+                                        promptText="Mínimo 8 caracteres"
+                                        styleClass="campo-login"/>
+
+                                <Label
+                                        text="Confirmar contraseña"
+                                        styleClass="etiqueta-formulario"/>
+
+                                <PasswordField
+                                        fx:id="campoConfirmarContrasena"
+                                        maxWidth="Infinity"
+                                        promptText="Repite la contraseña"
+                                        styleClass="campo-login"/>
+
+                                <Button
+                                        maxWidth="Infinity"
+                                        onAction="#crearCuenta"
+                                        text="Crear cuenta y continuar"
+                                        styleClass="boton-principal"/>
+                            </VBox>
+                        </StackPane>
+
+                        <Label
+                                fx:id="etiquetaMensaje"
+                                alignment="CENTER"
+                                minHeight="26"
+                                textAlignment="CENTER"
+                                wrapText="true"/>
+
+                        <Separator/>
+
+                        <Button
+                                onAction="#cancelar"
+                                text="Cancelar y volver"
+                                styleClass="boton-regresar"/>
+
+                        <Label
+                                text="Tu contraseña se almacena de forma segura y nunca como texto visible."
+                                alignment="CENTER"
+                                textAlignment="CENTER"
+                                wrapText="true"
+                                styleClass="nota-seguridad"/>
+
+                    </VBox>
+                </StackPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

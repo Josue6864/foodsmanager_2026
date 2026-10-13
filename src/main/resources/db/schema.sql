@@ -106,3 +106,14 @@ CREATE TABLE IF NOT EXISTS detalle_pedido (
     FOREIGN KEY (id_producto)
         REFERENCES producto(id_producto)
 );
+
+CREATE TABLE IF NOT EXISTS usuario_estandar (
+    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    telefono TEXT NOT NULL UNIQUE,
+    usuario TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    contrasena_hash TEXT NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_usuario_estandar_telefono
+ON usuario_estandar(telefono);
