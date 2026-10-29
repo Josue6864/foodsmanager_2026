@@ -81,6 +81,7 @@ INSERT OR IGNORE INTO producto (
 
 CREATE TABLE IF NOT EXISTS pedido (
     id_pedido INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER REFERENCES usuario_estandar(id_usuario),
     nombre_cliente TEXT NOT NULL,
     telefono TEXT NOT NULL,
     persona_recoge TEXT NOT NULL,
