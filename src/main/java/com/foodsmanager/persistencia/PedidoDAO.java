@@ -6,17 +6,50 @@ package com.foodsmanager.persistencia;
 
 import com.foodsmanager.modelo.DetallePedido;
 import com.foodsmanager.modelo.Pedido;
+import com.foodsmanager.modelo.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  *
  * @author certe
  */
 public class PedidoDAO {
+
+    @FunctionalInterface
+    interface ProveedorConexion {
+        Connection abrir() throws SQLException;
+    }
+
+    private final ProveedorConexion proveedorConexion;
+
+    public PedidoDAO() {
+        this(ConexionSQLite::abrirConexion);
+    }
+
+    PedidoDAO(ProveedorConexion proveedorConexion) {
+        this.proveedorConexion = Objects.requireNonNull(proveedorConexion);
+    }
+
+    private static final String LISTAR_POR_USUARIO = """
+        SELECT p.*, d.id_detalle, d.id_producto, d.cantidad, d.precio_unitario,
+               pr.id_restaurante, pr.nombre AS nombre_producto,
+               pr.descripcion AS descripcion_producto, pr.disponible
+        FROM pedido p
+        LEFT JOIN detalle_pedido d ON d.id_pedido = p.id_pedido
+        LEFT JOIN producto pr ON pr.id_producto = d.id_producto
+        WHERE p.id_usuario = ?
+        ORDER BY p.fecha_pedido DESC, p.id_pedido DESC, d.id_detalle
+        """;
 
     private static final String INSERTAR_PEDIDO = """
         INSERT INTO pedido (
@@ -27,8 +60,9 @@ public class PedidoDAO {
             indicaciones,
             fecha_pedido,
             total,
-            estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            estado,
+            id_usuario
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
     private static final String INSERTAR_DETALLE = """
@@ -50,10 +84,14 @@ public class PedidoDAO {
             );
         }
 
+        if (pedido.getIdUsuario() <= 0) {
+            throw new IllegalArgumentException("El pedido debe estar asociado al cliente autenticado.");
+        }
+
         pedido.calcularTotal();
 
         try (Connection conexion
-                = ConexionSQLite.abrirConexion()) {
+                = proveedorConexion.abrir()) {
 
             // SQLite necesita activar las claves foráneas
             // en cada conexión.
@@ -142,6 +180,7 @@ public class PedidoDAO {
                             8,
                             pedido.getEstado()
                     );
+                    sentencia.setInt(9, pedido.getIdUsuario());
 
                     sentencia.executeUpdate();
 
@@ -200,5 +239,49 @@ public class PedidoDAO {
 
                     sentencia.executeBatch();
                 }
+    }
+
+    /** Consulta exclusivamente los pedidos de la cuenta indicada por la sesión. */
+    public List<Pedido> listarPorUsuario(int idUsuario) throws SQLException {
+        if (idUsuario <= 0) {
+            throw new IllegalArgumentException("El identificador del cliente no es válido.");
+        }
+
+        Map<Integer, Pedido> pedidos = new LinkedHashMap<>();
+        try (Connection conexion = proveedorConexion.abrir();
+             PreparedStatement sentencia = conexion.prepareStatement(LISTAR_POR_USUARIO)) {
+            sentencia.setInt(1, idUsuario);
+            try (ResultSet fila = sentencia.executeQuery()) {
+                while (fila.next()) {
+                    int idPedido = fila.getInt("id_pedido");
+                    Pedido pedido = pedidos.get(idPedido);
+                    if (pedido == null) {
+                        pedido = new Pedido(fila.getString("nombre_cliente"),
+                                fila.getString("telefono"), fila.getString("persona_recoge"),
+                                fila.getString("hora_recogida"), fila.getString("indicaciones"));
+                        pedido.setIdPedido(idPedido);
+                        pedido.setIdUsuario(fila.getInt("id_usuario"));
+                        pedido.setFechaPedido(LocalDateTime.parse(fila.getString("fecha_pedido")));
+                        pedido.setEstado(fila.getString("estado"));
+                        pedidos.put(idPedido, pedido);
+                    }
+                    int idDetalle = fila.getInt("id_detalle");
+                    if (!fila.wasNull()) {
+                        Producto producto = new Producto(fila.getInt("id_producto"),
+                                fila.getInt("id_restaurante"), fila.getString("nombre_producto"),
+                                fila.getString("descripcion_producto"), fila.getDouble("precio_unitario"),
+                                fila.getInt("disponible") == 1);
+                        DetallePedido detalle = new DetallePedido(producto,
+                                fila.getInt("cantidad"), fila.getDouble("precio_unitario"));
+                        detalle.setIdDetalle(idDetalle);
+                        detalle.setIdPedido(idPedido);
+                        pedido.agregarDetalle(detalle);
+                    }
+                    // Mostrar el importe histórico, no el precio actual del catálogo.
+                    pedido.setTotal(fila.getDouble("total"));
+                }
+            }
+        }
+        return new ArrayList<>(pedidos.values());
     }
 }

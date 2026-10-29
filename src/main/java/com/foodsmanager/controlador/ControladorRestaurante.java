@@ -2,6 +2,7 @@ package com.foodsmanager.controlador;
 
 import com.foodsmanager.modelo.Restaurante;
 import com.foodsmanager.persistencia.RestauranteDAO;
+import com.foodsmanager.seguridad.SesionUsuarioEstandar;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -19,9 +20,12 @@ public class ControladorRestaurante {
 
     @FXML private TilePane contenedorRestaurantes;
     @FXML private Label etiquetaMensaje;
+    @FXML private Button botonCliente;
 
     @FXML
     private void initialize() {
+        botonCliente.setText(SesionUsuarioEstandar.haySesionActiva()
+                ? "Mis pedidos" : "Iniciar sesión como cliente");
         cargarRestaurantes();
     }
 
@@ -90,6 +94,15 @@ public class ControladorRestaurante {
         etiquetaMensaje.getStyleClass().add(error ? "mensaje-error" : "subtitulo");
         etiquetaMensaje.setVisible(!mensaje.isEmpty());
         etiquetaMensaje.setManaged(!mensaje.isEmpty());
+    }
+
+    @FXML
+    private void abrirAccesoCliente(ActionEvent evento) {
+        boolean autenticado = SesionUsuarioEstandar.haySesionActiva();
+        NavegadorVistas.cambiarVista(evento,
+                autenticado ? "/com/foodsmanager/vista/mis-pedidos.fxml"
+                        : "/com/foodsmanager/vista/acceso-usuario.fxml",
+                autenticado ? "FoodsManager - Mis pedidos" : "FoodsManager - Acceso de cliente");
     }
 
     @FXML

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.Normalizer;
 import java.util.Optional;
 import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -50,6 +51,10 @@ public class ControladorUsuarioEstandar {
     private Label etiquetaMensaje;
     @FXML
     private ScrollPane scrollContenido;
+    @FXML private Label tituloAcceso;
+    @FXML private Label descripcionAcceso;
+    @FXML private Button botonAcceder;
+    @FXML private Button botonRegistrar;
 
     private final UsuarioEstandarDAO usuarioDAO = new UsuarioEstandarDAO();
     private UsuarioEstandar usuarioAutenticado;
@@ -77,6 +82,11 @@ public class ControladorUsuarioEstandar {
 
         ControladorUsuarioEstandar controlador = cargador.getController();
         controlador.prepararDatos(nombre, telefono);
+        controlador.tituloAcceso.setText("Inicio de sesión requerido");
+        controlador.descripcionAcceso.setText(
+                "Para confirmar tu pedido, inicia sesión o crea una cuenta.");
+        controlador.botonAcceder.setText("Iniciar sesión y continuar la compra");
+        controlador.botonRegistrar.setText("Crear cuenta y continuar la compra");
 
         Stage ventana = new Stage();
         controlador.ventana = ventana;
@@ -114,6 +124,8 @@ public class ControladorUsuarioEstandar {
 
         panelRegistro.setVisible(!inicioSesion);
         panelRegistro.setManaged(!inicioSesion);
+        botonAcceder.setDefaultButton(inicioSesion);
+        botonRegistrar.setDefaultButton(!inicioSesion);
 
         botonTengoCuenta
                 .getStyleClass()
@@ -141,7 +153,7 @@ public class ControladorUsuarioEstandar {
     }
 
     @FXML
-    private void iniciarSesion() {
+    private void iniciarSesion(ActionEvent evento) {
         String usuario = campoUsuarioLogin.getText().trim();
         String contrasena = campoContrasenaLogin.getText();
 
@@ -159,14 +171,14 @@ public class ControladorUsuarioEstandar {
                 return;
             }
 
-            completarAcceso(resultado.get());
+            completarAcceso(resultado.get(), evento);
         } catch (Exception excepcion) {
             mostrarError("No se pudo iniciar sesión: " + excepcion.getMessage());
         }
     }
 
     @FXML
-    private void crearCuenta() {
+    private void crearCuenta(ActionEvent evento) {
         String nombre = campoNombreRegistro.getText().trim();
         String telefono = campoTelefonoRegistro.getText().trim();
         String usuario = campoUsuarioGenerado.getText().trim();
@@ -202,22 +214,36 @@ public class ControladorUsuarioEstandar {
                     usuario,
                     Contrasenas.crearHash(contrasena));
 
-            completarAcceso(usuarioDAO.insertar(nuevo));
+            completarAcceso(usuarioDAO.insertar(nuevo), evento);
         } catch (Exception excepcion) {
             mostrarError("No se pudo crear la cuenta: " + excepcion.getMessage());
         }
     }
 
-    private void completarAcceso(UsuarioEstandar usuario) {
+    private void completarAcceso(UsuarioEstandar usuario, ActionEvent evento) {
         usuarioAutenticado = usuario;
         SesionUsuarioEstandar.iniciar(usuario);
-        ventana.close();
+        if (ventana != null) {
+            // Acceso solicitado por DatosPedidoController: este continuará la compra.
+            ventana.close();
+        } else {
+            // Acceso desde restaurantes: consultar pedidos nunca registra una compra.
+            NavegadorVistas.cambiarVista(evento,
+                    "/com/foodsmanager/vista/mis-pedidos.fxml",
+                    "FoodsManager - Mis pedidos");
+        }
     }
 
     @FXML
-    private void cancelar() {
+    private void cancelar(ActionEvent evento) {
         usuarioAutenticado = null;
-        ventana.close();
+        if (ventana != null) {
+            ventana.close();
+        } else {
+            NavegadorVistas.cambiarVista(evento,
+                    "/com/foodsmanager/vista/restaurantes.fxml",
+                    "FoodsManager - Restaurantes");
+        }
     }
 
     private void actualizarUsuarioGenerado() {

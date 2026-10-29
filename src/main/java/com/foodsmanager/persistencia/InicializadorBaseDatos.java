@@ -12,6 +12,30 @@ public final class InicializadorBaseDatos {
 
     private static final String RUTA_ESQUEMA = "/db/schema.sql";
 
+    private static final String SQL_AGREGAR_USUARIO_PEDIDO = """
+            ALTER TABLE pedido
+            ADD COLUMN id_usuario INTEGER REFERENCES usuario_estandar(id_usuario)
+            """;
+
+    // El flujo anterior copiaba nombre y teléfono de la cuenta autenticada.
+    // Solo se recuperan coincidencias exactas y únicas durante esta migración.
+    private static final String SQL_VINCULAR_PEDIDOS_ANTERIORES = """
+            UPDATE pedido
+            SET id_usuario = (
+                SELECT u.id_usuario FROM usuario_estandar u
+                WHERE u.telefono = pedido.telefono AND u.nombre = pedido.nombre_cliente
+            )
+            WHERE id_usuario IS NULL AND (
+                SELECT COUNT(*) FROM usuario_estandar u
+                WHERE u.telefono = pedido.telefono AND u.nombre = pedido.nombre_cliente
+            ) = 1
+            """;
+
+    private static final String SQL_INDICE_PEDIDOS_USUARIO = """
+            CREATE INDEX IF NOT EXISTS idx_pedido_usuario_fecha
+            ON pedido(id_usuario, fecha_pedido DESC, id_pedido DESC)
+            """;
+
     private static final String SQL_AGREGAR_UBICACION = """
             ALTER TABLE restaurante
             ADD COLUMN ubicacion TEXT NOT NULL DEFAULT 'Ubicación pendiente'
@@ -78,6 +102,7 @@ public final class InicializadorBaseDatos {
                         }
                     }
                 }
+                actualizarTablaPedido(conexion);
                 conexion.commit();
             } catch (SQLException excepcion) {
                 try {
@@ -133,6 +158,27 @@ public final class InicializadorBaseDatos {
             return new String(entrada.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException excepcion) {
             throw new SQLException("No se pudo leer el esquema de la base de datos.", excepcion);
+        }
+    }
+
+    private static void actualizarTablaPedido(Connection conexion) throws SQLException {
+        boolean tieneUsuario = false;
+        try (Statement sentencia = conexion.createStatement();
+             ResultSet columnas = sentencia.executeQuery("PRAGMA table_info(pedido)")) {
+            while (columnas.next()) {
+                if ("id_usuario".equalsIgnoreCase(columnas.getString("name"))) {
+                    tieneUsuario = true;
+                }
+            }
+        }
+        try (Statement sentencia = conexion.createStatement()) {
+            if (!tieneUsuario) {
+                sentencia.execute(SQL_AGREGAR_USUARIO_PEDIDO);
+                sentencia.execute(SQL_VINCULAR_PEDIDOS_ANTERIORES);
+            }
+            // Los pedidos sin coincidencia quedan conservados, sin asignarse a otra cuenta.
+            // La vinculación no se repite al crear cuentas nuevas ni en futuros arranques.
+            sentencia.execute(SQL_INDICE_PEDIDOS_USUARIO);
         }
     }
 }

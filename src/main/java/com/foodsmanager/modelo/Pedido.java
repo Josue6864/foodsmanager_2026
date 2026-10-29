@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Pedido {
     private int idPedido;
+    private int idUsuario;
     private String nombreCliente;
     private String telefono;
     private String personaRecoge;
@@ -71,6 +72,38 @@ public class Pedido {
 
     public String getNombreCliente() {
         return nombreCliente;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        if (idUsuario <= 0) {
+            throw new IllegalArgumentException("El pedido debe pertenecer a una cuenta válida.");
+        }
+        this.idUsuario = idUsuario;
+    }
+
+    public void setFechaPedido(LocalDateTime fechaPedido) {
+        if (fechaPedido == null) {
+            throw new IllegalArgumentException("La fecha del pedido es obligatoria.");
+        }
+        this.fechaPedido = fechaPedido;
+    }
+
+    public void setEstado(String estado) {
+        if (estado == null || estado.isBlank()) {
+            throw new IllegalArgumentException("El estado del pedido es obligatorio.");
+        }
+        this.estado = estado;
+    }
+
+    public void setTotal(double total) {
+        if (!Double.isFinite(total) || total < 0) {
+            throw new IllegalArgumentException("El total del pedido no es válido.");
+        }
+        this.total = total;
     }
 
     public String getTelefono() {

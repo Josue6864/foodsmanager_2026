@@ -10,7 +10,7 @@ import com.foodsmanager.modelo.ItemCarrito;
 import com.foodsmanager.modelo.Pedido;
 import com.foodsmanager.persistencia.PedidoDAO;
 import com.foodsmanager.modelo.UsuarioEstandar;
-import com.foodsmanager.controlador.ControladorUsuarioEstandar;
+import com.foodsmanager.seguridad.SesionUsuarioEstandar;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -69,6 +69,13 @@ public class DatosPedidoController {
     @FXML
     private void initialize() {
         cargarHorarios();
+        if (SesionUsuarioEstandar.haySesionActiva()) {
+            UsuarioEstandar usuario = SesionUsuarioEstandar.obtenerUsuario();
+            txtNombre.setText(usuario.getNombre());
+            txtTelefono.setText(usuario.getTelefono());
+            txtNombre.setEditable(false);
+            txtTelefono.setEditable(false);
+        }
 
         /*
          * Permite escribir solamente números
@@ -156,14 +163,14 @@ public class DatosPedidoController {
         }
 
         /*
-     * 2. Abrir la ventana obligatoria de inicio
-     * de sesión o creación de cuenta.
+     * 2. Reutilizar la sesión activa o solicitar acceso antes de guardar.
          */
         Optional<UsuarioEstandar> resultadoAcceso;
 
         try {
-            resultadoAcceso
-                    = ControladorUsuarioEstandar.mostrar(
+            resultadoAcceso = SesionUsuarioEstandar.haySesionActiva()
+                    ? Optional.of(SesionUsuarioEstandar.obtenerUsuario())
+                    : ControladorUsuarioEstandar.mostrar(
                             txtNombre
                                     .getScene()
                                     .getWindow(),
@@ -232,6 +239,7 @@ public class DatosPedidoController {
                 horaRecogida,
                 indicaciones
         );
+        pedido.setIdUsuario(usuarioAutenticado.getIdUsuario());
 
         for (ItemCarrito item : items) {
             DetallePedido detalle
