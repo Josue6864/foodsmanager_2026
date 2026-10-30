@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="950" prefHeight="700" styleClass="pantalla-principal"
+            stylesheets="@tema.css,@tema-usuario.css" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.foodsmanager.controlador.ControladorMisPedidos">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="barra-superior">
+            <padding><Insets top="16" right="24" bottom="16" left="24"/></padding>
+            <Label text="FoodsManager" styleClass="marca"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <FlowPane alignment="CENTER_RIGHT" hgap="10" vgap="8" prefWrapLength="340"
+                      HBox.hgrow="ALWAYS">
+                <Button text="Ver restaurantes" onAction="#volverRestaurantes" styleClass="boton-secundario"/>
+                <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="boton-secundario"/>
+            </FlowPane>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
+            <content>
+                <VBox spacing="18">
+                    <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+                    <Label text="Mis pedidos" styleClass="titulo-principal"/>
+                    <Label fx:id="etiquetaCliente" styleClass="subtitulo" wrapText="true"/>
+                    <FlowPane hgap="16" vgap="10" alignment="CENTER_LEFT">
+                        <Button fx:id="botonActualizar" text="Actualizar pedidos"
+                                onAction="#actualizarPedidos" styleClass="boton-principal"/>
+                        <Label fx:id="etiquetaActualizacion" styleClass="subtitulo" wrapText="true"/>
+                    </FlowPane>
+                    <Label fx:id="etiquetaMensaje" wrapText="true"/>
+                    <TableView fx:id="tablaPedidos" prefHeight="230" minHeight="180" styleClass="admin-tabla">
+                        <columns>
+                            <TableColumn fx:id="columnaNumero" text="Pedido" prefWidth="100"/>
+                            <TableColumn fx:id="columnaFecha" text="Fecha" prefWidth="210"/>
+                            <TableColumn fx:id="columnaEstado" text="Estado" prefWidth="220"/>
+                            <TableColumn fx:id="columnaTotal" text="Total" prefWidth="130"/>
+                        </columns>
+                    </TableView>
+                    <VBox fx:id="panelDetalle" spacing="14" styleClass="mis-pedidos-detalle"
+                          visible="false" managed="false">
+                        <Label fx:id="etiquetaDetalle" styleClass="titulo" wrapText="true"/>
+                        <Label fx:id="etiquetaEstado" styleClass="mis-pedidos-estado" wrapText="true"/>
+                        <Label fx:id="etiquetaRecogida" wrapText="true"/>
+                        <Label fx:id="etiquetaIndicaciones" wrapText="true"/>
+                        <TableView fx:id="tablaDetalles" prefHeight="190" minHeight="150" styleClass="admin-tabla">
+                            <columns>
+                                <TableColumn fx:id="columnaProducto" text="Producto" prefWidth="260"/>
+                                <TableColumn fx:id="columnaCantidad" text="Cantidad" prefWidth="90"/>
+                                <TableColumn fx:id="columnaPrecio" text="Precio" prefWidth="120"/>
+                                <TableColumn fx:id="columnaSubtotal" text="Subtotal" prefWidth="120"/>
+                            </columns>
+                        </TableView>
+                        <Label fx:id="etiquetaTotal" styleClass="titulo" wrapText="true"/>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

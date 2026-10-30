@@ -44,13 +44,15 @@
                                 styleClass="marca-login"/>
 
                         <Label
-                                text="Inicio de sesión requerido"
+                                fx:id="tituloAcceso"
+                                text="Iniciar sesión como cliente"
                                 styleClass="titulo-login"
                                 wrapText="true"
                                 textAlignment="CENTER"/>
 
                         <Label
-                                text="Para confirmar el pago, inicia sesión o crea una cuenta con los datos que acabas de ingresar."
+                                fx:id="descripcionAcceso"
+                                text="Ingresa a tu cuenta para consultar tus pedidos y su estado."
                                 alignment="CENTER"
                                 textAlignment="CENTER"
                                 wrapText="true"
@@ -107,10 +109,11 @@
                                         styleClass="campo-login"/>
 
                                 <Button
+                                        fx:id="botonAcceder"
                                         defaultButton="true"
                                         maxWidth="Infinity"
                                         onAction="#iniciarSesion"
-                                        text="Iniciar sesión y continuar"
+                                        text="Iniciar sesión y ver mis pedidos"
                                         styleClass="boton-principal"/>
                             </VBox>
 
@@ -171,9 +174,10 @@
                                         styleClass="campo-login"/>
 
                                 <Button
+                                        fx:id="botonRegistrar"
                                         maxWidth="Infinity"
                                         onAction="#crearCuenta"
-                                        text="Crear cuenta y continuar"
+                                        text="Crear cuenta y ver mis pedidos"
                                         styleClass="boton-principal"/>
                             </VBox>
                         </StackPane>
