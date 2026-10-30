@@ -22,7 +22,7 @@ public final class SesionUsuarioEstandar {
 
     public static UsuarioEstandar obtenerUsuario() {
         if (!haySesionActiva()) {
-            throw new SecurityException("Debe iniciar sesión para pagar.");
+            throw new SecurityException("Debe iniciar sesión como cliente.");
         }
         return usuarioActual;
     }
