@@ -13,6 +13,11 @@
             <Region HBox.hgrow="ALWAYS"/>
             <FlowPane alignment="CENTER_RIGHT" hgap="10" vgap="8" prefWrapLength="520"
                       HBox.hgrow="ALWAYS">
+                <Button
+                        fx:id="btnCarrito"
+                        text="Ver carrito"
+                        onAction="#abrirCarrito"
+                        styleClass="boton-principal"/>
                 <Button fx:id="botonCliente" onAction="#abrirAccesoCliente"
                         text="Iniciar sesión como cliente" styleClass="boton-secundario"
                         style="-fx-background-color: linear-gradient(to bottom right, #fb923c, #f97316); -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 22; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(249,115,22,0.45), 10, 0.2, 0, 3);"/>

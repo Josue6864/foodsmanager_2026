@@ -50,6 +50,15 @@ public class ControladorRestaurante {
         }
     }
 
+    @FXML
+    private void abrirCarrito(ActionEvent evento) {
+        NavegadorVistas.cambiarVista(
+                evento,
+                "/com/foodsmanager/vista/carrito.fxml",
+                "FoodsManager - Carrito"
+        );
+    }
+
     private VBox crearTarjeta(Restaurante restaurante) {
         Label nombre = new Label(restaurante.getNombre());
         nombre.getStyleClass().add("nombre-restaurante");
