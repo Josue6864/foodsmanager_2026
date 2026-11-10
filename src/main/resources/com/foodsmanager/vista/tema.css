@@ -1345,3 +1345,210 @@
 .admin-catalogo-moderno .admin-tabla .corner {
     -fx-background-color: #FFFFFF;
 }
+
+
+/* Catálogo público: presentación de los productos del restaurante. */
+.productos-cliente-moderno {
+    -fx-background-color: #F4F6FC;
+    -fx-font-family: "Segoe UI";
+    -fx-focus-color: #6366F1;
+    -fx-faint-focus-color: rgba(99, 102, 241, 0.14);
+}
+
+.productos-cliente-moderno .barra-superior {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E2E8F0 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.productos-cliente-moderno .marca {
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.productos-cliente-moderno .titulo-principal {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.productos-cliente-moderno .subtitulo {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13px;
+}
+
+.productos-cliente-moderno .scroll-transparente,
+.productos-cliente-moderno .scroll-transparente > .viewport,
+.productos-cliente-moderno .scroll-transparente > .corner {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.productos-cliente-moderno .boton-secundario {
+    -fx-background-color: #F8FAFC;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: #CBD5E1;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #475569;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 15px;
+    -fx-cursor: hand;
+}
+
+.productos-cliente-moderno .boton-secundario:hover {
+    -fx-background-color: #EEF2FF;
+    -fx-border-color: #C7D2FE;
+    -fx-text-fill: #4338CA;
+}
+
+.productos-cliente-moderno .boton-secundario:pressed {
+    -fx-background-color: #E0E7FF;
+}
+
+.productos-cliente-moderno .boton-secundario:focused {
+    -fx-border-color: #818CF8;
+}
+
+.productos-cliente-moderno .productos-boton-carrito {
+    -fx-background-color: #EEF2FF;
+    -fx-border-color: #C7D2FE;
+    -fx-text-fill: #4338CA;
+}
+
+.productos-cliente-moderno .productos-boton-carrito:hover {
+    -fx-background-color: #E0E7FF;
+    -fx-border-color: #A5B4FC;
+}
+
+.productos-cliente-moderno .producto-cliente-tarjeta {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(30, 41, 59, 0.09), 18, 0.08, 0, 5);
+}
+
+.productos-cliente-moderno .producto-cliente-tarjeta:hover {
+    -fx-border-color: #A5B4FC;
+}
+
+.productos-cliente-moderno .producto-cliente-nombre {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.productos-cliente-moderno .producto-cliente-descripcion {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 2px;
+}
+
+.productos-cliente-moderno .producto-cliente-precio {
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.productos-cliente-moderno .producto-cliente-disponibilidad {
+    -fx-background-radius: 12px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+}
+
+.productos-cliente-moderno .producto-cliente-disponible {
+    -fx-background-color: #ECFDF5;
+    -fx-text-fill: #047857;
+}
+
+.productos-cliente-moderno .producto-cliente-no-disponible {
+    -fx-background-color: #FFF1F2;
+    -fx-text-fill: #BE123C;
+}
+
+.productos-cliente-moderno .boton-principal {
+    -fx-background-color: #4F46E5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 14px;
+    -fx-cursor: hand;
+}
+
+.productos-cliente-moderno .boton-principal:hover {
+    -fx-background-color: #4338CA;
+}
+
+.productos-cliente-moderno .boton-principal:pressed {
+    -fx-background-color: #3730A3;
+}
+
+.productos-cliente-moderno .boton-principal:focused {
+    -fx-border-color: #C7D2FE;
+}
+
+.productos-cliente-moderno .boton-principal:disabled {
+    -fx-background-color: #E2E8F0;
+    -fx-text-fill: #64748B;
+    -fx-opacity: 1;
+    -fx-cursor: default;
+}
+
+.productos-cliente-moderno #etiquetaSinProductos {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 12px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #64748B;
+    -fx-padding: 14px 18px;
+}
+
+.productos-cliente-moderno .pie-pagina {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E2E8F0 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.productos-cliente-moderno .pie-pagina .label {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 12px;
+}
+
+.productos-cliente-moderno .scroll-transparente .scroll-bar:vertical {
+    -fx-background-color: #F4F6FC;
+    -fx-pref-width: 12px;
+}
+
+.productos-cliente-moderno .scroll-transparente .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.productos-cliente-moderno .scroll-transparente .scroll-bar:vertical .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 8px;
+    -fx-background-insets: 2px;
+}
+
+.productos-cliente-moderno .scroll-transparente .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #A5B4FC;
+}
+
+
+/* Prueba: quitar efectos del carrito, conservando sus colores. */
+.carrito-moderno .card-carrito,
+.carrito-moderno .carrito-superficie,
+.carrito-moderno .carrito-imagen {
+    -fx-effect: none;
+}

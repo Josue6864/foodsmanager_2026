@@ -57,6 +57,9 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>com.foodsmanager.FoodsManagerApp</mainClass>
+                    <options>
+                        <option>-Dprism.dirtyopts=false</option>
+                    </options>
                 </configuration>
             </plugin>
         </plugins>

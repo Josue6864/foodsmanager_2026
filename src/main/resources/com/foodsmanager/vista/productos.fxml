@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="950.0" styleClass="pantalla-principal" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.foodsmanager.controlador.ControladorProducto">
+<BorderPane prefHeight="600.0" prefWidth="950.0" styleClass="pantalla-principal, productos-cliente-moderno" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.foodsmanager.controlador.ControladorProducto">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="barra-superior">
@@ -20,7 +20,7 @@
             </padding>
 
             <Label styleClass="marca" text="FoodsManager" />
-         <Button fx:id="btnCarrito" mnemonicParsing="false" onAction="#abrirCarrito" styleClass="boton-secundario" text="Ver carrito" />
+         <Button fx:id="btnCarrito" mnemonicParsing="false" onAction="#abrirCarrito" styleClass="boton-secundario, productos-boton-carrito" text="Ver carrito" />
 
             <Region HBox.hgrow="ALWAYS" />
 

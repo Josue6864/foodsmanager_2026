@@ -192,34 +192,12 @@ public class CarritoController {
     }
 
     private void configurarTamanoTarjetas() {
-        if (scrollCarrito == null) {
+        if (contenedorCarrito == null) {
             return;
         }
 
-        scrollCarrito.viewportBoundsProperty()
-                .addListener((
-                        observable,
-                        limitesAnteriores,
-                        limitesNuevos) -> {
-                    double anchoDisponible
-                            = limitesNuevos.getWidth();
-
-                    double paddingHorizontal = 40;
-                    double separaciones = 36;
-
-                    double anchoTarjeta
-                            = (anchoDisponible
-                            - paddingHorizontal
-                            - separaciones) / 3.0;
-
-                    if (anchoTarjeta < 240) {
-                        anchoTarjeta = 240;
-                    }
-
-                    contenedorCarrito.setPrefTileWidth(
-                            anchoTarjeta
-                    );
-                });
+        contenedorCarrito.setPrefTileWidth(310);
+        contenedorCarrito.setPrefTileHeight(240);
     }
 
     private void actualizarVista() {

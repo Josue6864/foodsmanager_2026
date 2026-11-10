@@ -207,16 +207,14 @@ public class ControladorProducto {
                 producto.getNombre()
         );
 
-        nombre.setStyle(
-                "-fx-font-size: 18px;"
-                + "-fx-font-weight: bold;"
-        );
+        nombre.getStyleClass().add("producto-cliente-nombre");
 
         Label descripcion = new Label(
                 producto.getDescripcion()
         );
 
         descripcion.setWrapText(true);
+        descripcion.getStyleClass().add("producto-cliente-descripcion");
 
         Label precio = new Label(
                 String.format(
@@ -225,16 +223,20 @@ public class ControladorProducto {
                 )
         );
 
-        precio.setStyle(
-                "-fx-font-size: 16px;"
-                + "-fx-font-weight: bold;"
-        );
+        precio.getStyleClass().add("producto-cliente-precio");
 
         Label disponibilidad = new Label(
                 producto.isDisponible()
                 ? "Disponible"
                 : "No disponible"
         );
+        disponibilidad.getStyleClass().addAll(
+                "producto-cliente-disponibilidad",
+                producto.isDisponible()
+                        ? "producto-cliente-disponible"
+                        : "producto-cliente-no-disponible"
+        );
+
         Button botonAgregar
                 = new Button("Agregar al carrito");
 
@@ -243,13 +245,7 @@ public class ControladorProducto {
         botonAgregar.setDisable(
                 !producto.isDisponible()
         );
-        botonAgregar.setStyle(
-                "-fx-background-color: #173c32;"
-                + "-fx-text-fill: white;"
-                + "-fx-font-weight: bold;"
-                + "-fx-background-radius: 8;"
-                + "-fx-cursor: hand;"
-        );
+        botonAgregar.getStyleClass().add("boton-principal");
 
         botonAgregar.setOnAction(evento -> {
             agregarAlCarrito(producto);
@@ -270,13 +266,7 @@ public class ControladorProducto {
         tarjeta.setPrefWidth(250);
         tarjeta.setMinHeight(230);
 
-        tarjeta.setStyle(
-                "-fx-background-color: white;"
-                + "-fx-background-radius: 12;"
-                + "-fx-border-color: #dddddd;"
-                + "-fx-border-radius: 12;"
-                + "-fx-border-width: 1;"
-        );
+        tarjeta.getStyleClass().add("producto-cliente-tarjeta");
 
         return tarjeta;
     }
