@@ -9,7 +9,7 @@
         prefWidth="760.0"
         minHeight="450.0"
         minWidth="600.0"
-        styleClass="pantalla-login"
+        styleClass="pantalla-login, acceso-cliente"
         stylesheets="@tema.css,@tema-usuario.css"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.foodsmanager.controlador.ControladorUsuarioEstandar">
@@ -209,3 +209,4 @@
         </ScrollPane>
     </center>
 </BorderPane>
+
