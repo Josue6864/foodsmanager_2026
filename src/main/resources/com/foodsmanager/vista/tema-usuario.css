@@ -102,7 +102,7 @@
     -fx-border-radius: 22px;
     -fx-border-width: 1px;
     -fx-padding: 32px;
-    -fx-effect: dropshadow(gaussian, rgba(30, 41, 59, 0.11), 28, 0.08, 0, 8);
+    -fx-effect: dropshadow(gaussian, rgba(30, 41, 59, 0.14), 30, 0.08, 0, 9);
 }
 
 .acceso-cliente .marca-login {
