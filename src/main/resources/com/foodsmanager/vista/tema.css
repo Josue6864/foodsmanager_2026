@@ -720,3 +720,383 @@
     -fx-font-size: 22px;
     -fx-font-weight: bold;
 }
+
+
+/* Tarjetas del carrito: diseño aislado del resto de las pantallas. */
+.carrito-tarjeta-moderna {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-focus-color: #6366F1;
+    -fx-faint-focus-color: rgba(99, 102, 241, 0.14);
+}
+
+.carrito-tarjeta-moderna .carrito-superficie {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 20px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-padding: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(30, 41, 59, 0.10), 20, 0.08, 0, 5);
+}
+
+.carrito-tarjeta-moderna .carrito-superficie:hover {
+    -fx-border-color: #C7D2FE;
+}
+
+.carrito-tarjeta-moderna .carrito-imagen {
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.10), 8, 0.08, 0, 2);
+}
+
+.carrito-tarjeta-moderna .carrito-informacion {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.carrito-tarjeta-moderna .carrito-nombre {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.carrito-tarjeta-moderna .carrito-descripcion {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 2px;
+}
+
+.carrito-tarjeta-moderna .carrito-precio {
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.carrito-tarjeta-moderna .carrito-controles {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 14px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px;
+}
+
+.carrito-tarjeta-moderna .boton-cantidad {
+    -fx-background-color: #4F46E5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-min-width: 32px;
+    -fx-pref-width: 32px;
+    -fx-max-width: 32px;
+    -fx-min-height: 32px;
+    -fx-pref-height: 32px;
+    -fx-max-height: 32px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.carrito-tarjeta-moderna .boton-cantidad:hover {
+    -fx-background-color: #4338CA;
+}
+
+.carrito-tarjeta-moderna .boton-cantidad:pressed {
+    -fx-background-color: #3730A3;
+}
+
+.carrito-tarjeta-moderna .boton-cantidad:focused {
+    -fx-border-color: #C7D2FE;
+}
+
+.carrito-tarjeta-moderna .boton-cantidad:disabled {
+    -fx-opacity: 0.45;
+}
+
+.carrito-tarjeta-moderna .carrito-cantidad {
+    -fx-text-fill: #334155;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.carrito-tarjeta-moderna .carrito-subtotal {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.carrito-tarjeta-moderna .boton-eliminar {
+    -fx-background-color: #FFF1F2;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9px;
+    -fx-border-color: #FECDD3;
+    -fx-border-width: 1px;
+    -fx-border-radius: 9px;
+    -fx-text-fill: #BE123C;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 13px;
+    -fx-cursor: hand;
+}
+
+.carrito-tarjeta-moderna .boton-eliminar:hover {
+    -fx-background-color: #FFE4E6;
+    -fx-border-color: #FDA4AF;
+}
+
+.carrito-tarjeta-moderna .boton-eliminar:pressed {
+    -fx-background-color: #FECDD3;
+}
+
+.carrito-tarjeta-moderna .boton-eliminar:focused {
+    -fx-border-color: #BE123C;
+}
+
+.carrito-tarjeta-moderna .boton-eliminar:disabled {
+    -fx-opacity: 0.45;
+}
+
+/* Carrito completo: incluye tarjetas creadas con la clase card-carrito. */
+.carrito-moderno {
+    -fx-background-color: #F4F6FC;
+    -fx-font-family: "Segoe UI";
+    -fx-focus-color: #6366F1;
+    -fx-faint-focus-color: rgba(99, 102, 241, 0.14);
+}
+
+.carrito-moderno .encabezado-carrito {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E2E8F0 transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 22px 28px;
+}
+
+.carrito-moderno .marca {
+    -fx-text-fill: #0F172A;
+}
+
+.carrito-moderno .carrito-marca {
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+
+.carrito-moderno .carrito-titulo {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+}
+
+.carrito-moderno .carrito-total {
+    -fx-background-color: #EEF2FF;
+    -fx-background-radius: 12px;
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 14px;
+}
+
+.carrito-moderno .scroll-carrito,
+.carrito-moderno .scroll-carrito > .viewport,
+.carrito-moderno .scroll-carrito > .corner,
+.carrito-moderno .contenedor-cards-carrito {
+    -fx-background-color: #F4F6FC;
+}
+
+.carrito-moderno .card-carrito {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(30, 41, 59, 0.10), 16, 0.08, 0, 4);
+}
+
+.carrito-moderno .card-carrito:hover {
+    -fx-border-color: #A5B4FC;
+    -fx-border-width: 1px;
+}
+
+.carrito-moderno .nombre-producto-carrito {
+    -fx-text-fill: #0F172A;
+}
+
+.carrito-moderno .descripcion-producto-carrito {
+    -fx-text-fill: #64748B;
+}
+
+.carrito-moderno .precio-producto-carrito,
+.carrito-moderno .subtotal-producto-carrito {
+    -fx-text-fill: #4338CA;
+}
+
+.carrito-moderno .cantidad-producto {
+    -fx-text-fill: #334155;
+}
+
+.carrito-moderno .boton-cantidad {
+    -fx-background-color: #4F46E5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #FFFFFF;
+    -fx-cursor: hand;
+}
+
+.carrito-moderno .boton-cantidad:hover {
+    -fx-background-color: #4338CA;
+}
+
+.carrito-moderno .boton-cantidad:pressed {
+    -fx-background-color: #3730A3;
+}
+
+.carrito-moderno .boton-cantidad:focused {
+    -fx-border-color: #C7D2FE;
+}
+
+.carrito-moderno .boton-cantidad:disabled {
+    -fx-opacity: 0.45;
+}
+
+.carrito-moderno .boton-eliminar {
+    -fx-background-color: #FFF1F2;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9px;
+    -fx-border-color: #FECDD3;
+    -fx-border-radius: 9px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #BE123C;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.carrito-moderno .boton-eliminar:hover {
+    -fx-background-color: #FFE4E6;
+    -fx-border-color: #FDA4AF;
+}
+
+.carrito-moderno .boton-eliminar:pressed {
+    -fx-background-color: #FECDD3;
+}
+
+.carrito-moderno .boton-eliminar:focused {
+    -fx-border-color: #BE123C;
+}
+
+.carrito-moderno .boton-eliminar:disabled {
+    -fx-opacity: 0.45;
+}
+
+.carrito-moderno .carrito-pie {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E2E8F0 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+    -fx-padding: 16px 28px;
+}
+
+.carrito-moderno .boton-pagar {
+    -fx-background-color: #4F46E5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 11px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 11px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-padding: 11px 22px;
+    -fx-cursor: hand;
+}
+
+.carrito-moderno .boton-pagar:hover {
+    -fx-background-color: #4338CA;
+}
+
+.carrito-moderno .boton-pagar:pressed {
+    -fx-background-color: #3730A3;
+}
+
+.carrito-moderno .boton-pagar:focused {
+    -fx-border-color: #C7D2FE;
+}
+
+.carrito-moderno .boton-pagar:disabled {
+    -fx-opacity: 0.55;
+}
+
+.carrito-moderno .combo-navegacion {
+    -fx-background-color: #F8FAFC;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+}
+
+.carrito-moderno .combo-navegacion .list-cell {
+    -fx-text-fill: #4338CA;
+}
+
+.carrito-moderno .combo-navegacion .arrow-button {
+    -fx-background-color: #EEF2FF;
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.carrito-moderno .combo-navegacion .arrow {
+    -fx-background-color: #4F46E5;
+}
+
+.carrito-moderno .combo-navegacion:hover,
+.carrito-moderno .combo-navegacion:focused {
+    -fx-border-color: #818CF8;
+    -fx-border-width: 1px;
+}
+
+.carrito-moderno .combo-navegacion .combo-box-popup .list-view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 10px;
+}
+
+.carrito-moderno .combo-navegacion .combo-box-popup .list-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #334155;
+}
+
+.carrito-moderno .combo-navegacion .combo-box-popup .list-cell:filled:hover {
+    -fx-background-color: #EEF2FF;
+    -fx-text-fill: #4338CA;
+}
+
+.carrito-moderno .combo-navegacion .combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #4F46E5;
+    -fx-text-fill: #FFFFFF;
+}
+
+.carrito-moderno .scroll-carrito .scroll-bar:vertical {
+    -fx-background-color: #F4F6FC;
+    -fx-pref-width: 12px;
+}
+
+.carrito-moderno .scroll-carrito .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.carrito-moderno .scroll-carrito .scroll-bar:vertical .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 8px;
+    -fx-background-insets: 2px;
+}
+
+.carrito-moderno .scroll-carrito .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #A5B4FC;
+}
