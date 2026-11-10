@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefWidth="950" prefHeight="650" styleClass="pantalla-principal"
+<BorderPane prefWidth="950" prefHeight="650" styleClass="pantalla-principal, admin-catalogo-moderno"
             stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.foodsmanager.controlador.ControladorListadoProductos">
     <top>
@@ -47,3 +47,4 @@
         </VBox>
     </center>
 </BorderPane>
+

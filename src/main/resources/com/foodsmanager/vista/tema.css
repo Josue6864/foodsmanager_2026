@@ -1100,3 +1100,248 @@
 .carrito-moderno .scroll-carrito .scroll-bar:vertical .thumb:hover {
     -fx-background-color: #A5B4FC;
 }
+
+
+/* Catálogo administrativo: estilos limitados a la gestión de productos. */
+.admin-catalogo-moderno {
+    -fx-background-color: #F4F6FC;
+    -fx-font-family: "Segoe UI";
+    -fx-focus-color: #6366F1;
+    -fx-faint-focus-color: rgba(99, 102, 241, 0.14);
+}
+
+.admin-catalogo-moderno .barra-superior {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E2E8F0 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.admin-catalogo-moderno .marca {
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.admin-catalogo-moderno .titulo-principal {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.admin-catalogo-moderno .subtitulo {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13px;
+}
+
+.admin-catalogo-moderno .admin-resumen {
+    -fx-background-color: #EEF2FF;
+    -fx-background-radius: 12px;
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 12px;
+}
+
+.admin-catalogo-moderno .boton-secundario {
+    -fx-background-color: #F8FAFC;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #475569;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 15px;
+    -fx-cursor: hand;
+}
+
+.admin-catalogo-moderno .boton-secundario:hover {
+    -fx-background-color: #EEF2FF;
+    -fx-border-color: #C7D2FE;
+    -fx-text-fill: #4338CA;
+}
+
+.admin-catalogo-moderno .boton-secundario:pressed {
+    -fx-background-color: #E0E7FF;
+}
+
+.admin-catalogo-moderno .boton-secundario:focused {
+    -fx-border-color: #818CF8;
+}
+
+.admin-catalogo-moderno .boton-principal {
+    -fx-background-color: #4F46E5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 11px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 11px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 11px 18px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(79, 70, 229, 0.15), 8, 0.08, 0, 2);
+}
+
+.admin-catalogo-moderno .boton-principal:hover {
+    -fx-background-color: #4338CA;
+}
+
+.admin-catalogo-moderno .boton-principal:pressed {
+    -fx-background-color: #3730A3;
+    -fx-effect: none;
+}
+
+.admin-catalogo-moderno .boton-principal:focused {
+    -fx-border-color: #C7D2FE;
+}
+
+.admin-catalogo-moderno .boton-principal:disabled {
+    -fx-background-color: #E2E8F0;
+    -fx-text-fill: #64748B;
+    -fx-opacity: 1;
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+
+.admin-catalogo-moderno .boton-regresar {
+    -fx-background-color: #FFFFFF;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-color: #CBD5E1;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #475569;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 17px;
+    -fx-cursor: hand;
+}
+
+.admin-catalogo-moderno .boton-regresar:hover {
+    -fx-background-color: #F1F5F9;
+    -fx-border-color: #94A3B8;
+    -fx-text-fill: #0F172A;
+}
+
+.admin-catalogo-moderno .boton-regresar:pressed {
+    -fx-background-color: #E2E8F0;
+}
+
+.admin-catalogo-moderno .boton-regresar:focused {
+    -fx-border-color: #818CF8;
+}
+
+.admin-catalogo-moderno .admin-tabla {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 14px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 14px;
+    -fx-padding: 4px;
+    -fx-selection-bar: #E0E7FF;
+    -fx-selection-bar-non-focused: #EEF2FF;
+    -fx-effect: dropshadow(gaussian, rgba(30, 41, 59, 0.06), 14, 0.06, 0, 3);
+}
+
+.admin-catalogo-moderno .admin-tabla:focused {
+    -fx-border-color: #A5B4FC;
+}
+
+.admin-catalogo-moderno .admin-tabla .column-header-background,
+.admin-catalogo-moderno .admin-tabla .column-header,
+.admin-catalogo-moderno .admin-tabla .filler {
+    -fx-background-color: #EEF2FF;
+    -fx-border-color: transparent;
+}
+
+.admin-catalogo-moderno .admin-tabla .column-header .label {
+    -fx-text-fill: #4338CA;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.admin-catalogo-moderno .admin-tabla .arrow {
+    -fx-background-color: #6366F1;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-cell {
+    -fx-text-fill: #334155;
+    -fx-border-color: transparent transparent #F1F5F9 transparent;
+    -fx-font-size: 13px;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-row-cell {
+    -fx-background-color: #FFFFFF;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-row-cell:odd {
+    -fx-background-color: #F8FAFC;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-row-cell:filled:hover {
+    -fx-background-color: #EEF2FF;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-row-cell:filled:selected {
+    -fx-background-color: #E0E7FF;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #312E81;
+}
+
+.admin-catalogo-moderno .admin-tabla .table-row-cell:empty .table-cell {
+    -fx-border-color: transparent;
+}
+
+.admin-catalogo-moderno .admin-tabla .placeholder .label {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13px;
+}
+
+.admin-catalogo-moderno .admin-estado-disponible {
+    -fx-background-color: #ECFDF5;
+    -fx-text-fill: #047857;
+    -fx-background-radius: 14px;
+}
+
+.admin-catalogo-moderno .admin-estado-no-disponible {
+    -fx-background-color: #FFFBEB;
+    -fx-text-fill: #92400E;
+    -fx-background-radius: 14px;
+}
+
+.admin-catalogo-moderno .mensaje-error {
+    -fx-text-fill: #B91C1C;
+    -fx-font-weight: bold;
+}
+
+.admin-catalogo-moderno .mensaje-exito {
+    -fx-text-fill: #047857;
+    -fx-font-weight: bold;
+}
+
+.admin-catalogo-moderno .admin-tabla .scroll-bar {
+    -fx-background-color: #FFFFFF;
+}
+
+.admin-catalogo-moderno .admin-tabla .scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+.admin-catalogo-moderno .admin-tabla .scroll-bar .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 8px;
+    -fx-background-insets: 2px;
+}
+
+.admin-catalogo-moderno .admin-tabla .scroll-bar .thumb:hover {
+    -fx-background-color: #A5B4FC;
+}
+
+.admin-catalogo-moderno .admin-tabla .corner {
+    -fx-background-color: #FFFFFF;
+}
