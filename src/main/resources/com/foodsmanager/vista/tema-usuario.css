@@ -186,7 +186,7 @@
 }
 
 .acceso-cliente .campo-login:hover {
-    -fx-border-color: #94A3B8;
+    -fx-border-color: #A5B4FC;
 }
 
 .acceso-cliente .campo-login:focused {
