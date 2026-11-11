@@ -1,4 +1,4 @@
-﻿/* Estilos exclusivos de la pantalla de acceso administrativo. */
+/* Estilos exclusivos de la pantalla de acceso administrativo. */
 .pantalla-login {
     -fx-background-color: linear-gradient(to bottom right, #EFF6FF, #DBEAFE);
 }
@@ -31,4 +31,22 @@
     -fx-border-width: 2px;
 }
 
+.pantalla-login .boton-principal {
+    -fx-background-color: #2563EB;
+    -fx-background-radius: 7px;
+}
 
+.pantalla-login .boton-principal:hover {
+    -fx-background-color: #1D4ED8;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.25), 12, 0.12, 0, 4);
+}
+
+.pantalla-login .boton-regresar {
+    -fx-border-color: #2563EB;
+    -fx-text-fill: #1E3A8A;
+    -fx-border-radius: 7px;
+}
+
+.pantalla-login .boton-regresar:hover {
+    -fx-background-color: #EFF6FF;
+}
