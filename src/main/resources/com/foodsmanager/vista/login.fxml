@@ -8,7 +8,7 @@
         prefHeight="600.0"
         prefWidth="950.0"
         styleClass="pantalla-login"
-        stylesheets="@tema.css"
+        stylesheets="@tema.css,@tema-administrador.css"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.foodsmanager.controlador.ControladorAdministrador">
 
