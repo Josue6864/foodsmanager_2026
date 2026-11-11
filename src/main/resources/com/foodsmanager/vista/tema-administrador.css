@@ -1,0 +1,34 @@
+﻿/* Estilos exclusivos de la pantalla de acceso administrativo. */
+.pantalla-login {
+    -fx-background-color: linear-gradient(to bottom right, #EFF6FF, #DBEAFE);
+}
+
+.pantalla-login .tarjeta-login {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BFDBFE;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(30, 58, 138, 0.16), 22, 0.12, 0, 8);
+}
+
+.pantalla-login .marca-login {
+    -fx-text-fill: #2563EB;
+}
+
+.pantalla-login .titulo-login {
+    -fx-text-fill: #1E3A8A;
+}
+
+.pantalla-login .campo-login {
+    -fx-border-color: #BFDBFE;
+    -fx-background-color: #F8FAFC;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+}
+
+.pantalla-login .campo-login:focused {
+    -fx-border-color: #2563EB;
+    -fx-border-width: 2px;
+}
+
+
