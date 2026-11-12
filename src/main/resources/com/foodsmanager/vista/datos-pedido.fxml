@@ -28,7 +28,7 @@
         <StackPane prefHeight="646.0"
                    prefWidth="809.0"
                    styleClass="pantalla-login"
-                   style="-fx-background-color: #FFF7EC;"
+                   style="-fx-background-color: #f4f5fa;"
                    BorderPane.alignment="CENTER">
 
             <children>
@@ -39,21 +39,21 @@
                       prefWidth="610.0"
                       spacing="18.0"
                       styleClass="tarjeta-login"
-                      style="-fx-background-color: #FFFFFF; -fx-background-radius: 16px; -fx-border-color: #E5D5C5; -fx-border-width: 1px; -fx-border-radius: 16px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 18, 0.1, 0, 6);">
+                      style="-fx-background-color: #FFFFFF; -fx-background-radius: 18px; -fx-border-color: #e5e7eb; -fx-border-width: 1px; -fx-border-radius: 18px; -fx-effect: dropshadow(gaussian, rgba(79,70,229,0.12), 18, 0.1, 0, 5);">
 
                     <children>
                         <Label styleClass="marca-login"
-                               style="-fx-text-fill: #2F5D50; -fx-font-size: 30px; -fx-font-weight: bold;"
+                               style="-fx-text-fill: #4338ca; -fx-font-size: 30px; -fx-font-weight: bold;"
                                text="FoodsManager" />
 
                         <VBox prefHeight="405.0" prefWidth="540.0">
                             <children>
                                 <Label styleClass="etiqueta-formulario"
-                                       style="-fx-text-fill: #2F5D50; -fx-font-size: 18px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #111827; -fx-font-size: 18px; -fx-font-weight: bold;"
                                        text="Datos para recoger el pedido" />
 
                                 <Label styleClass="subtitulo"
-                                       style="-fx-text-fill: #D97706; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-font-weight: bold;"
                                        text="No necesitas crear una cuenta" />
 
                                 <Separator prefHeight="24.0"
@@ -62,53 +62,53 @@
                                 <Label prefHeight="28.0"
                                        prefWidth="164.0"
                                        styleClass="etiqueta-formulario"
-                                       style="-fx-text-fill: #4B4B4B; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #374151; -fx-font-size: 13px; -fx-font-weight: bold;"
                                        text="Nombre" />
 
                                 <TextField fx:id="txtNombre"
                                            promptText="Nombre completo:"
                                            styleClass="campo-login"
                                            stylesheets="@tema.css"
-                                           style="-fx-background-color: #FFFFFF; -fx-background-radius: 8px; -fx-border-color: #D9C7B4; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-text-fill: #2F2F2F; -fx-font-size: 13px; -fx-padding: 4 10 4 10;" />
+                                           style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-text-fill: #111827; -fx-font-size: 13px; -fx-padding: 4 10 4 10; -fx-focus-color: #818cf8; -fx-faint-focus-color: transparent;" />
 
                                 <Label prefHeight="34.0"
                                        prefWidth="164.0"
                                        styleClass="etiqueta-formulario"
-                                       style="-fx-text-fill: #4B4B4B; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #374151; -fx-font-size: 13px; -fx-font-weight: bold;"
                                        text="Teléfono" />
 
                                 <TextField fx:id="txtTelefono"
                                            promptText="Teléfono:"
                                            styleClass="campo-login"
-                                           style="-fx-background-color: #FFFFFF; -fx-background-radius: 8px; -fx-border-color: #D9C7B4; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-text-fill: #2F2F2F; -fx-font-size: 13px; -fx-padding: 4 10 4 10;" />
+                                           style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-text-fill: #111827; -fx-font-size: 13px; -fx-padding: 4 10 4 10; -fx-focus-color: #818cf8; -fx-faint-focus-color: transparent;" />
 
                                 <Label prefHeight="30.0"
                                        prefWidth="260.0"
                                        styleClass="etiqueta-formulario"
-                                       style="-fx-text-fill: #4B4B4B; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #374151; -fx-font-size: 13px; -fx-font-weight: bold;"
                                        text="Nombre de quien recogerá" />
 
                                 <TextField fx:id="txtPersonaRecoge"
                                            promptText="Nombre de quien recogerá:"
                                            styleClass="campo-login"
-                                           style="-fx-background-color: #FFFFFF; -fx-background-radius: 8px; -fx-border-color: #D9C7B4; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-text-fill: #2F2F2F; -fx-font-size: 13px; -fx-padding: 4 10 4 10;" />
+                                           style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-text-fill: #111827; -fx-font-size: 13px; -fx-padding: 4 10 4 10; -fx-focus-color: #818cf8; -fx-faint-focus-color: transparent;" />
 
                                 <Label prefHeight="30.0"
                                        prefWidth="260.0"
                                        styleClass="etiqueta-formulario"
-                                       style="-fx-text-fill: #4B4B4B; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #374151; -fx-font-size: 13px; -fx-font-weight: bold;"
                                        text="Hora aproximada de recogida" />
 
                                 <ComboBox fx:id="cmbHoraRecogida"
                                           prefHeight="25.0"
                                           prefWidth="242.0"
                                           promptText="hora aproximada de recogida"
-                                          style="-fx-background-color: #FFFFFF; -fx-background-radius: 8px; -fx-border-color: #D9C7B4; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-font-size: 13px;" />
+                                          style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #d1d5db; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-font-size: 13px; -fx-focus-color: #818cf8; -fx-faint-focus-color: transparent;" />
 
                                 <Label prefHeight="27.0"
                                        prefWidth="164.0"
                                        styleClass="etiqueta-formulario"
-                                       style="-fx-text-fill: #4B4B4B; -fx-font-size: 13px; -fx-font-weight: bold;"
+                                       style="-fx-text-fill: #374151; -fx-font-size: 13px; -fx-font-weight: bold;"
                                        text="Indicaciones adicionales" />
 
                                 <TextArea fx:id="txtIndicaciones"
@@ -116,7 +116,7 @@
                                           prefWidth="540.0"
                                           promptText="Indicaciones adicionales"
                                           styleClass="campo-login"
-                                          style="-fx-control-inner-background: #FFFFFF; -fx-background-color: #D9C7B4, #FFFFFF; -fx-background-insets: 0, 1; -fx-background-radius: 8px, 7px; -fx-text-fill: #2F2F2F; -fx-font-size: 13px;" />
+                                          style="-fx-control-inner-background: #FFFFFF; -fx-background-color: #d1d5db, #FFFFFF; -fx-background-insets: 0, 1; -fx-background-radius: 10px, 9px; -fx-text-fill: #111827; -fx-font-size: 13px; -fx-focus-color: #818cf8; -fx-faint-focus-color: transparent;" />
                             </children>
                         </VBox>
 
@@ -129,7 +129,7 @@
                                         mnemonicParsing="false"
                                         onAction="#volverCarrito"
                                         styleClass="boton-regresar"
-                                        style="-fx-background-color: #FFFFFF; -fx-text-fill: #2F5D50; -fx-border-color: #2F5D50; -fx-border-width: 1.5px; -fx-border-radius: 8px; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 16 8 16; -fx-cursor: hand;"
+                                        style="-fx-background-color: #eef2ff; -fx-text-fill: #4338ca; -fx-border-color: #a5b4fc; -fx-border-width: 1.5px; -fx-border-radius: 12px; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12px; -fx-padding: 8 16 8 16; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
                                         text="Regresar al carrito" />
 
                                 <Region prefHeight="102.0"
@@ -140,7 +140,7 @@
                                         onAction="#confirmarPedido"
                                         styleClass="boton-pagar"
                                         stylesheets="@tema.css"
-                                        style="-fx-background-color: #2F5D50; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 16 8 16; -fx-cursor: hand;"
+                                        style="-fx-background-color: linear-gradient(to bottom right, #4f46e5, #4338ca); -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12px; -fx-padding: 8 16 8 16; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
                                         text="Confirmar Pago" />
                             </children>
                         </HBox>

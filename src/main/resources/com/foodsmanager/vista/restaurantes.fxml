@@ -5,36 +5,43 @@
 
 <BorderPane prefHeight="600" prefWidth="950" styleClass="pantalla-principal"
             stylesheets="@tema.css" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.foodsmanager.controlador.ControladorRestaurante">
+            fx:controller="com.foodsmanager.controlador.ControladorRestaurante"
+            style="-fx-background-color: #f4f5fa;">
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="barra-superior">
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="barra-superior"
+              style="-fx-background-color: white; -fx-border-color: transparent transparent #e5e7eb transparent; -fx-border-width: 0 0 1 0;">
             <padding><Insets top="16" right="24" bottom="16" left="24"/></padding>
-            <Label text="FoodsManager" styleClass="marca"/>
+            <Label text="FoodsManager" styleClass="marca"
+                   style="-fx-text-fill: #4338ca; -fx-font-size: 24px; -fx-font-weight: bold;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <FlowPane alignment="CENTER_RIGHT" hgap="10" vgap="8" prefWrapLength="520"
                       HBox.hgrow="ALWAYS">
-                <Button
-                        fx:id="btnCarrito"
-                        text="Ver carrito"
-                        onAction="#abrirCarrito"
-                        styleClass="boton-principal"/>
+                <Button fx:id="btnCarrito" onAction="#abrirCarrito"
+                        text="Ver carrito" styleClass="boton-secundario"
+                        style="-fx-background-color: #eef2ff; -fx-text-fill: #4338ca; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #a5b4fc; -fx-border-width: 1.5; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
                 <Button fx:id="botonCliente" onAction="#abrirAccesoCliente"
                         text="Iniciar sesión como cliente" styleClass="boton-secundario"
-                        style="-fx-background-color: #eef2ff; -fx-text-fill: #4338ca; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #818cf8; -fx-border-width: 1.5; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                        style="-fx-background-color: #eef2ff; -fx-text-fill: #4338ca; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #a5b4fc; -fx-border-width: 1.5; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
                 <Button fx:id="botonIniciarSesion" onAction="#abrirLogin"
                         text="Iniciar sesión como administrador" styleClass="boton-secundario"
-                        style="-fx-background-color: #eef2ff; -fx-text-fill: #4338ca; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #818cf8; -fx-border-width: 1.5; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                        style="-fx-background-color: #eef2ff; -fx-text-fill: #4338ca; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #a5b4fc; -fx-border-width: 1.5; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
             </FlowPane>
         </HBox>
     </top>
     <center>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-transparente"
+                    style="-fx-background: transparent; -fx-background-color: transparent;">
             <content>
-                <VBox alignment="TOP_CENTER" spacing="24" styleClass="seccion-restaurantes">
+                <VBox alignment="TOP_CENTER" spacing="24" styleClass="seccion-restaurantes"
+                      style="-fx-background-color: transparent;">
                     <padding><Insets top="38" right="35" bottom="38" left="35"/></padding>
-                    <Label text="Restaurantes disponibles" styleClass="titulo-principal" wrapText="true"/>
-                    <Label text="Selecciona un restaurante para consultar sus productos." styleClass="subtitulo" wrapText="true"/>
-                    <Button text="Actualizar restaurantes" onAction="#cargarRestaurantes" styleClass="boton-secundario"/>
+                    <Label text="Restaurantes disponibles" styleClass="titulo-principal" wrapText="true"
+                           style="-fx-text-fill: #111827; -fx-font-size: 32px; -fx-font-weight: bold;"/>
+                    <Label text="Selecciona un restaurante para consultar sus productos."
+                           styleClass="subtitulo" wrapText="true"
+                           style="-fx-text-fill: #6b7280; -fx-font-size: 14px;"/>
+                    <Button text="Actualizar restaurantes" onAction="#cargarRestaurantes" styleClass="boton-secundario"
+                            style="-fx-background-color: #f8fafc; -fx-text-fill: #374151; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #d1d5db; -fx-border-width: 1.5; -fx-padding: 10 22 10 22; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
                     <Label fx:id="etiquetaMensaje" wrapText="true" visible="false" managed="false"/>
                     <TilePane fx:id="contenedorRestaurantes" alignment="CENTER"
                               hgap="22" prefColumns="3" vgap="22"/>
@@ -43,9 +50,10 @@
         </ScrollPane>
     </center>
     <bottom>
-        <HBox alignment="CENTER" styleClass="pie-pagina">
+        <HBox alignment="CENTER" styleClass="pie-pagina"
+              style="-fx-background-color: white; -fx-border-color: #e5e7eb transparent transparent transparent; -fx-border-width: 1 0 0 0;">
             <padding><Insets top="14" right="20" bottom="14" left="20"/></padding>
-            <Label text="FoodsManager 2026"/>
+            <Label text="FoodsManager 2026" style="-fx-text-fill: #64748b;"/>
         </HBox>
     </bottom>
 </BorderPane>
