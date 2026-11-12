@@ -60,42 +60,59 @@ public class ControladorRestaurante {
     }
 
     private VBox crearTarjeta(Restaurante restaurante) {
-        Label nombre = new Label(restaurante.getNombre());
-        nombre.getStyleClass().add("nombre-restaurante");
-        nombre.setWrapText(true);
-        nombre.setMinHeight(Region.USE_PREF_SIZE);
-        nombre.setMaxWidth(Double.MAX_VALUE);
+    Label nombre = new Label(restaurante.getNombre());
+    nombre.getStyleClass().add("nombre-restaurante");
+    nombre.setWrapText(true);
+    nombre.setMinHeight(Region.USE_PREF_SIZE);
+    nombre.setMaxWidth(Double.MAX_VALUE);
+    nombre.setStyle("-fx-text-fill: #111827; -fx-font-weight: bold;");
 
-        Label ubicacion = new Label(restaurante.getUbicacion());
-        ubicacion.getStyleClass().add("ubicacion-restaurante");
-        ubicacion.setWrapText(true);
-        ubicacion.setMinHeight(Region.USE_PREF_SIZE);
-        ubicacion.setMaxWidth(Double.MAX_VALUE);
+    Label ubicacion = new Label(restaurante.getUbicacion());
+    ubicacion.getStyleClass().add("ubicacion-restaurante");
+    ubicacion.setWrapText(true);
+    ubicacion.setMinHeight(Region.USE_PREF_SIZE);
+    ubicacion.setMaxWidth(Double.MAX_VALUE);
+    ubicacion.setStyle("-fx-text-fill: #4338ca; -fx-font-weight: bold;");
 
-        Label descripcion = new Label(restaurante.getDescripcion().isEmpty()
-                ? "Descripción pendiente." : restaurante.getDescripcion());
-        descripcion.getStyleClass().add("descripcion-restaurante");
-        descripcion.setWrapText(true);
-        descripcion.setMinHeight(Region.USE_PREF_SIZE);
-        descripcion.setMaxWidth(Double.MAX_VALUE);
+    Label descripcion = new Label(restaurante.getDescripcion().isEmpty()
+            ? "Descripción pendiente." : restaurante.getDescripcion());
+    descripcion.getStyleClass().add("descripcion-restaurante");
+    descripcion.setWrapText(true);
+    descripcion.setMinHeight(Region.USE_PREF_SIZE);
+    descripcion.setMaxWidth(Double.MAX_VALUE);
+    descripcion.setStyle("-fx-text-fill: #6b7280;");
 
-        Region espacio = new Region();
-        VBox.setVgrow(espacio, Priority.ALWAYS);
+    Region espacio = new Region();
+    VBox.setVgrow(espacio, Priority.ALWAYS);
 
-        Button botonProductos = new Button("Ver productos");
-        botonProductos.getStyleClass().add("boton-principal");
-        botonProductos.setMaxWidth(Double.MAX_VALUE);
-        botonProductos.setOnAction(evento -> abrirProductos(
-                evento, restaurante.getIdRestaurante()));
+    Button botonProductos = new Button("Ver productos");
+    botonProductos.getStyleClass().add("boton-principal");
+    botonProductos.setMaxWidth(Double.MAX_VALUE);
+    botonProductos.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f46e5, #4338ca);"
+            + " -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12;"
+            + " -fx-padding: 10 20 10 20; -fx-cursor: hand;"
+            + " -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+    botonProductos.setOnAction(evento -> abrirProductos(
+            evento, restaurante.getIdRestaurante()));
 
-        VBox tarjeta = new VBox(14, nombre, ubicacion, descripcion, espacio, botonProductos);
-        tarjeta.getStyleClass().add("tarjeta-restaurante");
-        tarjeta.setMinWidth(250);
-        tarjeta.setPrefWidth(250);
-        tarjeta.setMaxWidth(250);
-        tarjeta.setMinHeight(230);
-        return tarjeta;
-    }
+    VBox tarjeta = new VBox(14, nombre, ubicacion, descripcion, espacio, botonProductos);
+    tarjeta.getStyleClass().add("tarjeta-restaurante");
+    tarjeta.setMinWidth(250);
+    tarjeta.setPrefWidth(250);
+    tarjeta.setMaxWidth(250);
+    tarjeta.setMinHeight(230);
+
+    final String estiloNormal = "-fx-background-color: white; -fx-background-radius: 24;"
+            + " -fx-border-color: #e5e7eb; -fx-border-radius: 24; -fx-border-width: 1;"
+            + " -fx-effect: dropshadow(gaussian, rgba(79,70,229,0.12), 18, 0.1, 0, 5);";
+    final String estiloResaltado = "-fx-background-color: white; -fx-background-radius: 24;"
+            + " -fx-border-color: #a5b4fc; -fx-border-radius: 24; -fx-border-width: 1;"
+            + " -fx-effect: dropshadow(gaussian, rgba(79,70,229,0.20), 20, 0.1, 0, 6);";
+    tarjeta.setStyle(estiloNormal);
+    tarjeta.setOnMouseEntered(e -> tarjeta.setStyle(estiloResaltado));
+    tarjeta.setOnMouseExited(e -> tarjeta.setStyle(estiloNormal));
+    return tarjeta;
+}
 
     private void mostrarMensaje(String mensaje, boolean error) {
         etiquetaMensaje.setText(mensaje);
